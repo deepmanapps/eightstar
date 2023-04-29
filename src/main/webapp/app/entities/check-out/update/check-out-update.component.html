@@ -1,0 +1,115 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="es-check-out-heading" data-cy="CheckOutCreateUpdateHeading" esTranslate="eightStarApp.checkOut.home.createOrEditLabel">
+        Create or edit a Check Out
+      </h2>
+
+      <div>
+        <es-alert-error></es-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" esTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" esTranslate="eightStarApp.checkOut.roomClearance" for="field_roomClearance">Room Clearance</label>
+          <textarea
+            class="form-control"
+            name="roomClearance"
+            id="field_roomClearance"
+            data-cy="roomClearance"
+            formControlName="roomClearance"
+          ></textarea>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" esTranslate="eightStarApp.checkOut.customerReview" for="field_customerReview">Customer Review</label>
+          <textarea
+            class="form-control"
+            name="customerReview"
+            id="field_customerReview"
+            data-cy="customerReview"
+            formControlName="customerReview"
+          ></textarea>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" esTranslate="eightStarApp.checkOut.miniBarClearance" for="field_miniBarClearance"
+            >Mini Bar Clearance</label
+          >
+          <textarea
+            class="form-control"
+            name="miniBarClearance"
+            id="field_miniBarClearance"
+            data-cy="miniBarClearance"
+            formControlName="miniBarClearance"
+          ></textarea>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" esTranslate="eightStarApp.checkOut.lateCheckOut" for="field_lateCheckOut">Late Check Out</label>
+          <div class="d-flex">
+            <input
+              id="field_lateCheckOut"
+              data-cy="lateCheckOut"
+              type="datetime-local"
+              class="form-control"
+              name="lateCheckOut"
+              formControlName="lateCheckOut"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" esTranslate="eightStarApp.checkOut.isLate" for="field_isLate">Is Late</label>
+          <input type="checkbox" class="form-check" name="isLate" id="field_isLate" data-cy="isLate" formControlName="isLate" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" esTranslate="eightStarApp.checkOut.isCollectedDepositAmount" for="field_isCollectedDepositAmount"
+            >Is Collected Deposit Amount</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="isCollectedDepositAmount"
+            id="field_isCollectedDepositAmount"
+            data-cy="isCollectedDepositAmount"
+            formControlName="isCollectedDepositAmount"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" esTranslate="eightStarApp.checkOut.collectedAmount" for="field_collectedAmount">Collected Amount</label>
+          <input
+            type="number"
+            class="form-control"
+            name="collectedAmount"
+            id="field_collectedAmount"
+            data-cy="collectedAmount"
+            formControlName="collectedAmount"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span esTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span esTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

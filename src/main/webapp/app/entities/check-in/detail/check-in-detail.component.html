@@ -1,0 +1,90 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="checkIn">
+      <h2 data-cy="checkInDetailsHeading"><span esTranslate="eightStarApp.checkIn.detail.title">Check In</span></h2>
+
+      <hr />
+
+      <es-alert-error></es-alert-error>
+
+      <es-alert></es-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span esTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ checkIn.id }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.checkIn.identityPath">Identity Path</span></dt>
+        <dd>
+          <span>{{ checkIn.identityPath }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.checkIn.status">Status</span></dt>
+        <dd>
+          <span esTranslate="{{ 'eightStarApp.Status.' + checkIn.status }}">{{ checkIn.status }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.checkIn.depositAmount">Deposit Amount</span></dt>
+        <dd>
+          <span>{{ checkIn.depositAmount }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.checkIn.paymentMethod">Payment Method</span></dt>
+        <dd>
+          <span esTranslate="{{ 'eightStarApp.PaymentMethod.' + checkIn.paymentMethod }}">{{ checkIn.paymentMethod }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.checkIn.arrivalDate">Arrival Date</span></dt>
+        <dd>
+          <span>{{ checkIn.arrivalDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.checkIn.departureDate">Departure Date</span></dt>
+        <dd>
+          <span>{{ checkIn.departureDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.checkIn.roomType">Room Type</span></dt>
+        <dd>
+          <span>{{ checkIn.roomType }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.checkIn.smooking">Smooking</span></dt>
+        <dd>
+          <span>{{ checkIn.smooking }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.checkIn.adults">Adults</span></dt>
+        <dd>
+          <span>{{ checkIn.adults }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.checkIn.children">Children</span></dt>
+        <dd>
+          <span>{{ checkIn.children }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.checkIn.notes">Notes</span></dt>
+        <dd>
+          <span>{{ checkIn.notes }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.checkIn.checkOut">Check Out</span></dt>
+        <dd>
+          <div *ngIf="checkIn.checkOut">
+            <a [routerLink]="['/check-out', checkIn.checkOut.id, 'view']">{{ checkIn.checkOut.id }}</a>
+          </div>
+        </dd>
+        <dt><span esTranslate="eightStarApp.checkIn.hotel">Hotel</span></dt>
+        <dd>
+          <div *ngIf="checkIn.hotel">
+            <a [routerLink]="['/hotel', checkIn.hotel.id, 'view']">{{ checkIn.hotel.id }}</a>
+          </div>
+        </dd>
+        <dt><span esTranslate="eightStarApp.checkIn.customer">Customer</span></dt>
+        <dd>
+          <div *ngIf="checkIn.customer">
+            <a [routerLink]="['/customer', checkIn.customer.id, 'view']">{{ checkIn.customer.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span esTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/check-in', checkIn.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span esTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

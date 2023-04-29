@@ -1,0 +1,42 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="services">
+      <h2 data-cy="servicesDetailsHeading"><span esTranslate="eightStarApp.services.detail.title">Services</span></h2>
+
+      <hr />
+
+      <es-alert-error></es-alert-error>
+
+      <es-alert></es-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span esTranslate="eightStarApp.services.id">Id</span></dt>
+        <dd>
+          <span>{{ services.id }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.services.nom">Nom</span></dt>
+        <dd>
+          <span>{{ services.nom }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.services.description">Description</span></dt>
+        <dd>
+          <span>{{ services.description }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.services.parentService">Parent Service</span></dt>
+        <dd>
+          <div *ngIf="services.parentService">
+            <a [routerLink]="['/services', services.parentService.id, 'view']">{{ services.parentService.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span esTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/services', services.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span esTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

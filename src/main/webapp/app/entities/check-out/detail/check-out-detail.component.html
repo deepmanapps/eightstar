@@ -1,0 +1,56 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="checkOut">
+      <h2 data-cy="checkOutDetailsHeading"><span esTranslate="eightStarApp.checkOut.detail.title">Check Out</span></h2>
+
+      <hr />
+
+      <es-alert-error></es-alert-error>
+
+      <es-alert></es-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span esTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ checkOut.id }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.checkOut.roomClearance">Room Clearance</span></dt>
+        <dd>
+          <span>{{ checkOut.roomClearance }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.checkOut.customerReview">Customer Review</span></dt>
+        <dd>
+          <span>{{ checkOut.customerReview }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.checkOut.miniBarClearance">Mini Bar Clearance</span></dt>
+        <dd>
+          <span>{{ checkOut.miniBarClearance }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.checkOut.lateCheckOut">Late Check Out</span></dt>
+        <dd>
+          <span>{{ checkOut.lateCheckOut | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.checkOut.isLate">Is Late</span></dt>
+        <dd>
+          <span>{{ checkOut.isLate }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.checkOut.isCollectedDepositAmount">Is Collected Deposit Amount</span></dt>
+        <dd>
+          <span>{{ checkOut.isCollectedDepositAmount }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.checkOut.collectedAmount">Collected Amount</span></dt>
+        <dd>
+          <span>{{ checkOut.collectedAmount }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span esTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/check-out', checkOut.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span esTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+{
+  "eightStarApp": {
+    "productRequest": {
+      "home": {
+        "title": "Product Requests",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Product Request",
+        "createOrEditLabel": "Create or edit a Product Request",
+        "notFound": "No Product Requests found"
+      },
+      "created": "A new Product Request is created with identifier {{ param }}",
+      "updated": "A Product Request is updated with identifier {{ param }}",
+      "deleted": "A Product Request is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Product Request {{ id }}?"
+      },
+      "detail": {
+        "title": "Product Request"
+      },
+      "id": "ID",
+      "productName": "Product Name",
+      "productUnitPrice": "Product Unit Price",
+      "productTotalPrice": "Product Total Price",
+      "requestedQuantity": "Requested Quantity",
+      "serviceRequest": "Service Request"
+    }
+  }
+}

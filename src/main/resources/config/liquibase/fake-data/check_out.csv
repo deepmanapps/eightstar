@@ -1,0 +1,11 @@
+id;room_clearance;customer_review;mini_bar_clearance;late_check_out;is_late;is_collected_deposit_amount;collected_amount
+1;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;2023-04-28T18:17:37;false;false;10395
+2;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;2023-04-28T21:55:38;true;true;95467
+3;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;2023-04-28T23:18:31;true;true;84565
+4;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;2023-04-28T19:36:23;true;true;59066
+5;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;2023-04-28T19:55:56;false;true;14828
+6;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;2023-04-29T06:31:27;true;true;80336
+7;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;2023-04-29T07:42:11;true;false;18490
+8;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;2023-04-28T19:28:59;false;true;19094
+9;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;2023-04-29T07:59:16;true;false;63225
+10;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;../fake-data/blob/hipster.txt;2023-04-28T23:44:00;false;true;55525

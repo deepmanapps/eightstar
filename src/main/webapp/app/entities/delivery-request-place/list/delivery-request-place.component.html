@@ -1,0 +1,99 @@
+<div>
+  <h2 id="page-heading" data-cy="DeliveryRequestPlaceHeading">
+    <span esTranslate="eightStarApp.deliveryRequestPlace.home.title">Delivery Request Places</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span esTranslate="eightStarApp.deliveryRequestPlace.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-delivery-request-place"
+        [routerLink]="['/delivery-request-place/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span esTranslate="eightStarApp.deliveryRequestPlace.home.createLabel"> Create a new Delivery Request Place </span>
+      </button>
+    </div>
+  </h2>
+
+  <es-alert-error></es-alert-error>
+
+  <es-alert></es-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="deliveryRequestPlaces?.length === 0">
+    <span esTranslate="eightStarApp.deliveryRequestPlace.home.notFound">No Delivery Request Places found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="deliveryRequestPlaces && deliveryRequestPlaces.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr esSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" esSortBy="id">
+            <div class="d-flex">
+              <span esTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" esSortBy="name">
+            <div class="d-flex">
+              <span esTranslate="eightStarApp.deliveryRequestPlace.name">Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" esSortBy="hotel.id">
+            <div class="d-flex">
+              <span esTranslate="eightStarApp.deliveryRequestPlace.hotel">Hotel</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let deliveryRequestPlace of deliveryRequestPlaces; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/delivery-request-place', deliveryRequestPlace.id, 'view']">{{ deliveryRequestPlace.id }}</a>
+          </td>
+          <td>{{ deliveryRequestPlace.name }}</td>
+          <td>
+            <div *ngIf="deliveryRequestPlace.hotel">
+              <a [routerLink]="['/hotel', deliveryRequestPlace.hotel.id, 'view']">{{ deliveryRequestPlace.hotel.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/delivery-request-place', deliveryRequestPlace.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" esTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/delivery-request-place', deliveryRequestPlace.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" esTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(deliveryRequestPlace)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" esTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

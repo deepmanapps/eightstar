@@ -1,0 +1,110 @@
+<div>
+  <h2 id="page-heading" data-cy="ParkingAllHeading">
+    <span esTranslate="eightStarApp.parkingAll.home.title">Parking Alls</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span esTranslate="eightStarApp.parkingAll.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-parking-all"
+        [routerLink]="['/parking-all/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span esTranslate="eightStarApp.parkingAll.home.createLabel"> Create a new Parking All </span>
+      </button>
+    </div>
+  </h2>
+
+  <es-alert-error></es-alert-error>
+
+  <es-alert></es-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="parkingAlls?.length === 0">
+    <span esTranslate="eightStarApp.parkingAll.home.notFound">No Parking Alls found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="parkingAlls && parkingAlls.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr esSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" esSortBy="id">
+            <div class="d-flex">
+              <span esTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" esSortBy="name">
+            <div class="d-flex">
+              <span esTranslate="eightStarApp.parkingAll.name">Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" esSortBy="location.id">
+            <div class="d-flex">
+              <span esTranslate="eightStarApp.parkingAll.location">Location</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" esSortBy="hotel.id">
+            <div class="d-flex">
+              <span esTranslate="eightStarApp.parkingAll.hotel">Hotel</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let parkingAll of parkingAlls; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/parking-all', parkingAll.id, 'view']">{{ parkingAll.id }}</a>
+          </td>
+          <td>{{ parkingAll.name }}</td>
+          <td>
+            <div *ngIf="parkingAll.location">
+              <a [routerLink]="['/location', parkingAll.location.id, 'view']">{{ parkingAll.location.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="parkingAll.hotel">
+              <a [routerLink]="['/hotel', parkingAll.hotel.id, 'view']">{{ parkingAll.hotel.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/parking-all', parkingAll.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" esTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/parking-all', parkingAll.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" esTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(parkingAll)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" esTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

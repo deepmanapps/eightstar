@@ -1,0 +1,27 @@
+{
+  "eightStarApp": {
+    "parkingAll": {
+      "home": {
+        "title": "Parking Alls",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Parking All",
+        "createOrEditLabel": "Crear o editar Parking All",
+        "notFound": "Ningún Parking Alls encontrado"
+      },
+      "created": "Un nuevo Parking All ha sido creado con el identificador {{ param }}",
+      "updated": "Un Parking All ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Parking All ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Parking All {{ id }}?"
+      },
+      "detail": {
+        "title": "Parking All"
+      },
+      "id": "ID",
+      "name": "Name",
+      "location": "Location",
+      "serviceRequest": "Service Request",
+      "hotel": "Hotel"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "eightStarApp": {
+    "productRequest": {
+      "home": {
+        "title": "ProductRequests",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Product Request",
+        "createOrEditLabel": "Créer ou éditer un Product Request",
+        "notFound": "Aucun Product Request trouvé"
+      },
+      "created": "Un nouveau Product Request a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Product Request avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Product Request avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Product Request {{ id }} ?"
+      },
+      "detail": {
+        "title": "Product Request"
+      },
+      "id": "ID",
+      "productName": "Product Name",
+      "productUnitPrice": "Product Unit Price",
+      "productTotalPrice": "Product Total Price",
+      "requestedQuantity": "Requested Quantity",
+      "serviceRequest": "Service Request"
+    }
+  }
+}

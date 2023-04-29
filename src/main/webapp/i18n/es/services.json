@@ -1,0 +1,29 @@
+{
+  "eightStarApp": {
+    "services": {
+      "home": {
+        "title": "Services",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Services",
+        "createOrEditLabel": "Crear o editar Services",
+        "notFound": "Ningún Services encontrado"
+      },
+      "created": "Un nuevo Services ha sido creado con el identificador {{ param }}",
+      "updated": "Un Services ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Services ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Services {{ id }}?"
+      },
+      "detail": {
+        "title": "Services"
+      },
+      "id": "Id",
+      "nom": "Nom",
+      "description": "Description",
+      "childService": "Child Service",
+      "hotelServices": "Hotel Services",
+      "parentService": "Parent Service",
+      "serviceRequest": "Service Request"
+    }
+  }
+}

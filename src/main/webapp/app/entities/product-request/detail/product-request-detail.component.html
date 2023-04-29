@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="productRequest">
+      <h2 data-cy="productRequestDetailsHeading"><span esTranslate="eightStarApp.productRequest.detail.title">Product Request</span></h2>
+
+      <hr />
+
+      <es-alert-error></es-alert-error>
+
+      <es-alert></es-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span esTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ productRequest.id }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.productRequest.productName">Product Name</span></dt>
+        <dd>
+          <span>{{ productRequest.productName }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.productRequest.productUnitPrice">Product Unit Price</span></dt>
+        <dd>
+          <span>{{ productRequest.productUnitPrice }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.productRequest.productTotalPrice">Product Total Price</span></dt>
+        <dd>
+          <span>{{ productRequest.productTotalPrice }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.productRequest.requestedQuantity">Requested Quantity</span></dt>
+        <dd>
+          <span>{{ productRequest.requestedQuantity }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.productRequest.serviceRequest">Service Request</span></dt>
+        <dd>
+          <div *ngIf="productRequest.serviceRequest">
+            <a [routerLink]="['/service-request', productRequest.serviceRequest.id, 'view']">{{ productRequest.serviceRequest.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span esTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/product-request', productRequest.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span esTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

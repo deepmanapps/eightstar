@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'jhi-docs',
+  selector: 'es-docs',
   templateUrl: './docs.component.html',
   styleUrls: ['./docs.component.scss'],
 })

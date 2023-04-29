@@ -1,0 +1,55 @@
+{
+  "applications": "*",
+  "changelogDate": "20230429111824",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "check_out",
+  "fields": [
+    {
+      "fieldName": "roomClearance",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "customerReview",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "miniBarClearance",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "lateCheckOut",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "isLate",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "isCollectedDepositAmount",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "collectedAmount",
+      "fieldType": "Double"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "CheckOut",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "checkIn",
+      "otherEntityRelationshipName": "checkOut",
+      "ownerSide": false,
+      "relationshipName": "checkIn",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

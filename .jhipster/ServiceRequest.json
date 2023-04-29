@@ -1,0 +1,86 @@
+{
+  "applications": "*",
+  "changelogDate": "20230429111819",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "service_request",
+  "fields": [
+    {
+      "fieldName": "requestDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "requestThruDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "statusRequest",
+      "fieldType": "RQStatus",
+      "fieldValues": "OK,NOK,INPROGRESS"
+    },
+    {
+      "fieldName": "rejecttReason",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "requestDescription",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "objectNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "guest",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "quantity",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "totalPrice",
+      "fieldType": "Float"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "ServiceRequest",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "parkingAll",
+      "otherEntityRelationshipName": "serviceRequest",
+      "ownerSide": true,
+      "relationshipName": "parkingAll",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "deliveryRequestPlace",
+      "otherEntityRelationshipName": "serviceRequest",
+      "ownerSide": true,
+      "relationshipName": "deliveryRequestPlace",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "productRequest",
+      "otherEntityRelationshipName": "serviceRequest",
+      "relationshipName": "productRequest",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "services",
+      "otherEntityRelationshipName": "serviceRequest",
+      "relationshipName": "services",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "checkIn",
+      "otherEntityRelationshipName": "serviceRequest",
+      "relationshipName": "checkIn",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

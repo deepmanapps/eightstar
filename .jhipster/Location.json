@@ -1,0 +1,43 @@
+{
+  "applications": "*",
+  "changelogDate": "20230429111816",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "location",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "longitude",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "latitude",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Location",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "hotel",
+      "otherEntityRelationshipName": "location",
+      "ownerSide": false,
+      "relationshipName": "hotel",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "parkingAll",
+      "otherEntityRelationshipName": "location",
+      "ownerSide": false,
+      "relationshipName": "parkingAll",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

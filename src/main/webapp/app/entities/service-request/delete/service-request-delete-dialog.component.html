@@ -1,0 +1,28 @@
+<form *ngIf="serviceRequest" name="deleteForm" (ngSubmit)="confirmDelete(serviceRequest.id!)">
+  <div class="modal-header">
+    <h4 class="modal-title" data-cy="serviceRequestDeleteDialogHeading" esTranslate="entity.delete.title">Confirm delete operation</h4>
+
+    <button type="button" class="btn-close" data-dismiss="modal" aria-hidden="true" (click)="cancel()">&times;</button>
+  </div>
+
+  <div class="modal-body">
+    <es-alert-error></es-alert-error>
+    <p
+      id="es-delete-serviceRequest-heading"
+      esTranslate="eightStarApp.serviceRequest.delete.question"
+      [translateValues]="{ id: serviceRequest.id }"
+    >
+      Are you sure you want to delete Service Request {{ serviceRequest.id }}?
+    </p>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+      <fa-icon icon="ban"></fa-icon>&nbsp;<span esTranslate="entity.action.cancel">Cancel</span>
+    </button>
+
+    <button id="es-confirm-delete-serviceRequest" data-cy="entityConfirmDeleteButton" type="submit" class="btn btn-danger">
+      <fa-icon icon="times"></fa-icon>&nbsp;<span esTranslate="entity.action.delete">Delete</span>
+    </button>
+  </div>
+</form>

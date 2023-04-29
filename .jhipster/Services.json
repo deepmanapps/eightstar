@@ -1,0 +1,53 @@
+{
+  "applications": "*",
+  "changelogDate": "20230429111818",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "services",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "nom",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Services",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "services",
+      "otherEntityRelationshipName": "parentService",
+      "relationshipName": "childService",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "hotelServices",
+      "otherEntityRelationshipName": "services",
+      "relationshipName": "hotelServices",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "services",
+      "otherEntityRelationshipName": "childService",
+      "relationshipName": "parentService",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "serviceRequest",
+      "otherEntityRelationshipName": "services",
+      "relationshipName": "serviceRequest",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

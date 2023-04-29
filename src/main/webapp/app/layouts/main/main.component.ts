@@ -8,7 +8,7 @@ import { AccountService } from 'app/core/auth/account.service';
 import { FindLanguageFromKeyPipe } from 'app/shared/language/find-language-from-key.pipe';
 
 @Component({
-  selector: 'jhi-main',
+  selector: 'es-main',
   templateUrl: './main.component.html',
 })
 export class MainComponent implements OnInit {

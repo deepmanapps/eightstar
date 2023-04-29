@@ -1,9 +1,9 @@
 package com.altair.eightstar.repository;
 
 import com.altair.eightstar.domain.Authority;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
- * Spring Data MongoDB repository for the {@link Authority} entity.
+ * Spring Data JPA repository for the {@link Authority} entity.
  */
-public interface AuthorityRepository extends MongoRepository<Authority, String> {}
+public interface AuthorityRepository extends JpaRepository<Authority, String> {}

@@ -1,0 +1,90 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="serviceRequest">
+      <h2 data-cy="serviceRequestDetailsHeading"><span esTranslate="eightStarApp.serviceRequest.detail.title">Service Request</span></h2>
+
+      <hr />
+
+      <es-alert-error></es-alert-error>
+
+      <es-alert></es-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span esTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ serviceRequest.id }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.serviceRequest.requestDate">Request Date</span></dt>
+        <dd>
+          <span>{{ serviceRequest.requestDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.serviceRequest.requestThruDate">Request Thru Date</span></dt>
+        <dd>
+          <span>{{ serviceRequest.requestThruDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.serviceRequest.statusRequest">Status Request</span></dt>
+        <dd>
+          <span esTranslate="{{ 'eightStarApp.RQStatus.' + serviceRequest.statusRequest }}">{{ serviceRequest.statusRequest }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.serviceRequest.rejecttReason">Rejectt Reason</span></dt>
+        <dd>
+          <span>{{ serviceRequest.rejecttReason }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.serviceRequest.requestDescription">Request Description</span></dt>
+        <dd>
+          <span>{{ serviceRequest.requestDescription }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.serviceRequest.objectNumber">Object Number</span></dt>
+        <dd>
+          <span>{{ serviceRequest.objectNumber }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.serviceRequest.guest">Guest</span></dt>
+        <dd>
+          <span>{{ serviceRequest.guest }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.serviceRequest.quantity">Quantity</span></dt>
+        <dd>
+          <span>{{ serviceRequest.quantity }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.serviceRequest.totalPrice">Total Price</span></dt>
+        <dd>
+          <span>{{ serviceRequest.totalPrice }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.serviceRequest.parkingAll">Parking All</span></dt>
+        <dd>
+          <div *ngIf="serviceRequest.parkingAll">
+            <a [routerLink]="['/parking-all', serviceRequest.parkingAll.id, 'view']">{{ serviceRequest.parkingAll.id }}</a>
+          </div>
+        </dd>
+        <dt><span esTranslate="eightStarApp.serviceRequest.deliveryRequestPlace">Delivery Request Place</span></dt>
+        <dd>
+          <div *ngIf="serviceRequest.deliveryRequestPlace">
+            <a [routerLink]="['/delivery-request-place', serviceRequest.deliveryRequestPlace.id, 'view']">{{
+              serviceRequest.deliveryRequestPlace.id
+            }}</a>
+          </div>
+        </dd>
+        <dt><span esTranslate="eightStarApp.serviceRequest.services">Services</span></dt>
+        <dd>
+          <div *ngIf="serviceRequest.services">
+            <a [routerLink]="['/services', serviceRequest.services.id, 'view']">{{ serviceRequest.services.id }}</a>
+          </div>
+        </dd>
+        <dt><span esTranslate="eightStarApp.serviceRequest.checkIn">Check In</span></dt>
+        <dd>
+          <div *ngIf="serviceRequest.checkIn">
+            <a [routerLink]="['/check-in', serviceRequest.checkIn.id, 'view']">{{ serviceRequest.checkIn.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span esTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/service-request', serviceRequest.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span esTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

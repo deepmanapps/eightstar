@@ -1,0 +1,39 @@
+{
+  "applications": "*",
+  "changelogDate": "20230429111820",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "product_request",
+  "fields": [
+    {
+      "fieldName": "productName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "productUnitPrice",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "productTotalPrice",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "requestedQuantity",
+      "fieldType": "Float"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "ProductRequest",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "serviceRequest",
+      "otherEntityRelationshipName": "productRequest",
+      "relationshipName": "serviceRequest",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

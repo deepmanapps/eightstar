@@ -1,0 +1,10 @@
+{
+  "eightStarApp": {
+    "Status": {
+      "null": "",
+      "CONFIRMED": "CONFIRMED",
+      "CANCELLED": "CANCELLED",
+      "COMPLETED": "COMPLETED"
+    }
+  }
+}

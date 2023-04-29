@@ -1,0 +1,37 @@
+{
+  "eightStarApp": {
+    "serviceRequest": {
+      "home": {
+        "title": "ServiceRequests",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Service Request",
+        "createOrEditLabel": "Créer ou éditer un Service Request",
+        "notFound": "Aucun Service Request trouvé"
+      },
+      "created": "Un nouveau Service Request a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Service Request avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Service Request avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Service Request {{ id }} ?"
+      },
+      "detail": {
+        "title": "Service Request"
+      },
+      "id": "ID",
+      "requestDate": "Request Date",
+      "requestThruDate": "Request Thru Date",
+      "statusRequest": "Status Request",
+      "rejecttReason": "Rejectt Reason",
+      "requestDescription": "Request Description",
+      "objectNumber": "Object Number",
+      "guest": "Guest",
+      "quantity": "Quantity",
+      "totalPrice": "Total Price",
+      "parkingAll": "Parking All",
+      "deliveryRequestPlace": "Delivery Request Place",
+      "productRequest": "Product Request",
+      "services": "Services",
+      "checkIn": "Check In"
+    }
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "applications": "*",
+  "changelogDate": "20230429111815",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "hotel",
+  "fields": [
+    {
+      "fieldName": "hotelId",
+      "fieldType": "Long",
+      "javadoc": "Minimum d'info sur l'hotel"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "adresse",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "starsNumber",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "emergencyNumber",
+      "fieldType": "Double"
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "The Entity entity.\\n@author A true hipster",
+  "jpaMetamodelFiltering": false,
+  "name": "Hotel",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "location",
+      "otherEntityRelationshipName": "hotel",
+      "ownerSide": true,
+      "relationshipName": "location",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "checkIn",
+      "otherEntityRelationshipName": "hotel",
+      "relationshipName": "checkIn",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "parkingAll",
+      "otherEntityRelationshipName": "hotel",
+      "relationshipName": "parkingAll",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "hotelServices",
+      "otherEntityRelationshipName": "hotel",
+      "relationshipName": "hotelServices",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "deliveryRequestPlace",
+      "otherEntityRelationshipName": "hotel",
+      "relationshipName": "deliveryRequestPlace",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

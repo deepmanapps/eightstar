@@ -1,0 +1,40 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="deliveryRequestPlace">
+      <h2 data-cy="deliveryRequestPlaceDetailsHeading">
+        <span esTranslate="eightStarApp.deliveryRequestPlace.detail.title">Delivery Request Place</span>
+      </h2>
+
+      <hr />
+
+      <es-alert-error></es-alert-error>
+
+      <es-alert></es-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span esTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ deliveryRequestPlace.id }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.deliveryRequestPlace.name">Name</span></dt>
+        <dd>
+          <span>{{ deliveryRequestPlace.name }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.deliveryRequestPlace.hotel">Hotel</span></dt>
+        <dd>
+          <div *ngIf="deliveryRequestPlace.hotel">
+            <a [routerLink]="['/hotel', deliveryRequestPlace.hotel.id, 'view']">{{ deliveryRequestPlace.hotel.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span esTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/delivery-request-place', deliveryRequestPlace.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span esTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

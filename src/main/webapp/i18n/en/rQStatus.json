@@ -1,0 +1,10 @@
+{
+  "eightStarApp": {
+    "RQStatus": {
+      "null": "",
+      "OK": "OK",
+      "NOK": "NOK",
+      "INPROGRESS": "INPROGRESS"
+    }
+  }
+}

@@ -1,0 +1,191 @@
+<div>
+  <h2 id="page-heading" data-cy="CheckInHeading">
+    <span esTranslate="eightStarApp.checkIn.home.title">Check Ins</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span esTranslate="eightStarApp.checkIn.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-check-in"
+        [routerLink]="['/check-in/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span esTranslate="eightStarApp.checkIn.home.createLabel"> Create a new Check In </span>
+      </button>
+    </div>
+  </h2>
+
+  <es-alert-error></es-alert-error>
+
+  <es-alert></es-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="checkIns?.length === 0">
+    <span esTranslate="eightStarApp.checkIn.home.notFound">No Check Ins found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="checkIns && checkIns.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr esSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" esSortBy="id">
+            <div class="d-flex">
+              <span esTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" esSortBy="identityPath">
+            <div class="d-flex">
+              <span esTranslate="eightStarApp.checkIn.identityPath">Identity Path</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" esSortBy="status">
+            <div class="d-flex">
+              <span esTranslate="eightStarApp.checkIn.status">Status</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" esSortBy="depositAmount">
+            <div class="d-flex">
+              <span esTranslate="eightStarApp.checkIn.depositAmount">Deposit Amount</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" esSortBy="paymentMethod">
+            <div class="d-flex">
+              <span esTranslate="eightStarApp.checkIn.paymentMethod">Payment Method</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" esSortBy="arrivalDate">
+            <div class="d-flex">
+              <span esTranslate="eightStarApp.checkIn.arrivalDate">Arrival Date</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" esSortBy="departureDate">
+            <div class="d-flex">
+              <span esTranslate="eightStarApp.checkIn.departureDate">Departure Date</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" esSortBy="roomType">
+            <div class="d-flex">
+              <span esTranslate="eightStarApp.checkIn.roomType">Room Type</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" esSortBy="smooking">
+            <div class="d-flex">
+              <span esTranslate="eightStarApp.checkIn.smooking">Smooking</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" esSortBy="adults">
+            <div class="d-flex">
+              <span esTranslate="eightStarApp.checkIn.adults">Adults</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" esSortBy="children">
+            <div class="d-flex">
+              <span esTranslate="eightStarApp.checkIn.children">Children</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" esSortBy="notes">
+            <div class="d-flex">
+              <span esTranslate="eightStarApp.checkIn.notes">Notes</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" esSortBy="checkOut.id">
+            <div class="d-flex">
+              <span esTranslate="eightStarApp.checkIn.checkOut">Check Out</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" esSortBy="hotel.id">
+            <div class="d-flex">
+              <span esTranslate="eightStarApp.checkIn.hotel">Hotel</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" esSortBy="customer.id">
+            <div class="d-flex">
+              <span esTranslate="eightStarApp.checkIn.customer">Customer</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let checkIn of checkIns; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/check-in', checkIn.id, 'view']">{{ checkIn.id }}</a>
+          </td>
+          <td>{{ checkIn.identityPath }}</td>
+          <td esTranslate="{{ 'eightStarApp.Status.' + checkIn.status }}">{{ checkIn.status }}</td>
+          <td>{{ checkIn.depositAmount }}</td>
+          <td esTranslate="{{ 'eightStarApp.PaymentMethod.' + checkIn.paymentMethod }}">{{ checkIn.paymentMethod }}</td>
+          <td>{{ checkIn.arrivalDate | formatMediumDatetime }}</td>
+          <td>{{ checkIn.departureDate | formatMediumDatetime }}</td>
+          <td>{{ checkIn.roomType }}</td>
+          <td>{{ checkIn.smooking }}</td>
+          <td>{{ checkIn.adults }}</td>
+          <td>{{ checkIn.children }}</td>
+          <td>{{ checkIn.notes }}</td>
+          <td>
+            <div *ngIf="checkIn.checkOut">
+              <a [routerLink]="['/check-out', checkIn.checkOut.id, 'view']">{{ checkIn.checkOut.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="checkIn.hotel">
+              <a [routerLink]="['/hotel', checkIn.hotel.id, 'view']">{{ checkIn.hotel.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="checkIn.customer">
+              <a [routerLink]="['/customer', checkIn.customer.id, 'view']">{{ checkIn.customer.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/check-in', checkIn.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" esTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/check-in', checkIn.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" esTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(checkIn)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" esTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

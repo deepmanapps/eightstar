@@ -1,0 +1,72 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="customer">
+      <h2 data-cy="customerDetailsHeading"><span esTranslate="eightStarApp.customer.detail.title">Customer</span></h2>
+
+      <hr />
+
+      <es-alert-error></es-alert-error>
+
+      <es-alert></es-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span esTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ customer.id }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.customer.customerId">Customer Id</span></dt>
+        <dd>
+          <span>{{ customer.customerId }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.customer.firstName">First Name</span></dt>
+        <dd>
+          <span>{{ customer.firstName }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.customer.lastName">Last Name</span></dt>
+        <dd>
+          <span>{{ customer.lastName }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.customer.email">Email</span></dt>
+        <dd>
+          <span>{{ customer.email }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.customer.phoneNumber">Phone Number</span></dt>
+        <dd>
+          <span>{{ customer.phoneNumber }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.customer.streetAdress">Street Adress</span></dt>
+        <dd>
+          <span>{{ customer.streetAdress }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.customer.line1">Line 1</span></dt>
+        <dd>
+          <span>{{ customer.line1 }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.customer.line2">Line 2</span></dt>
+        <dd>
+          <span>{{ customer.line2 }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.customer.city">City</span></dt>
+        <dd>
+          <span>{{ customer.city }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.customer.state">State</span></dt>
+        <dd>
+          <span>{{ customer.state }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.customer.zipCode">Zip Code</span></dt>
+        <dd>
+          <span>{{ customer.zipCode }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span esTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/customer', customer.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span esTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+{
+  "applications": "*",
+  "changelogDate": "20230429111821",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "parking_all",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "ParkingAll",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "location",
+      "otherEntityRelationshipName": "parkingAll",
+      "ownerSide": true,
+      "relationshipName": "location",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "serviceRequest",
+      "otherEntityRelationshipName": "parkingAll",
+      "ownerSide": false,
+      "relationshipName": "serviceRequest",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "hotel",
+      "otherEntityRelationshipName": "parkingAll",
+      "relationshipName": "hotel",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

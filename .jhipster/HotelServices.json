@@ -1,0 +1,41 @@
+{
+  "applications": "*",
+  "changelogDate": "20230429111825",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "hotel_services",
+  "fields": [
+    {
+      "fieldName": "active",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "forGuest",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "servicePrice",
+      "fieldType": "Float"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "HotelServices",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "hotel",
+      "otherEntityRelationshipName": "hotelServices",
+      "relationshipName": "hotel",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "services",
+      "otherEntityRelationshipName": "hotelServices",
+      "relationshipName": "services",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

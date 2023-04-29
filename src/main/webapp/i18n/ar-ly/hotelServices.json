@@ -1,0 +1,28 @@
+{
+  "eightStarApp": {
+    "hotelServices": {
+      "home": {
+        "title": "Hotel Services",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Hotel Services",
+        "createOrEditLabel": "Create or edit a Hotel Services",
+        "notFound": "No Hotel Services found"
+      },
+      "created": "A new Hotel Services is created with identifier {{ param }}",
+      "updated": "A Hotel Services is updated with identifier {{ param }}",
+      "deleted": "A Hotel Services is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Hotel Services {{ id }}?"
+      },
+      "detail": {
+        "title": "Hotel Services"
+      },
+      "id": "ID",
+      "active": "Active",
+      "forGuest": "For Guest",
+      "servicePrice": "Service Price",
+      "hotel": "Hotel",
+      "services": "Services"
+    }
+  }
+}

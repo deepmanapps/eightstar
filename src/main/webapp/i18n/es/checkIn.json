@@ -1,0 +1,38 @@
+{
+  "eightStarApp": {
+    "checkIn": {
+      "home": {
+        "title": "Check Ins",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Check In",
+        "createOrEditLabel": "Crear o editar Check In",
+        "notFound": "Ningún Check Ins encontrado"
+      },
+      "created": "Un nuevo Check In ha sido creado con el identificador {{ param }}",
+      "updated": "Un Check In ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Check In ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Check In {{ id }}?"
+      },
+      "detail": {
+        "title": "Check In"
+      },
+      "id": "ID",
+      "identityPath": "Identity Path",
+      "status": "Status",
+      "depositAmount": "Deposit Amount",
+      "paymentMethod": "Payment Method",
+      "arrivalDate": "Arrival Date",
+      "departureDate": "Departure Date",
+      "roomType": "Room Type",
+      "smooking": "Smooking",
+      "adults": "Adults",
+      "children": "Children",
+      "notes": "Notes",
+      "checkOut": "Check Out",
+      "serviceRequest": "Service Request",
+      "hotel": "Hotel",
+      "customer": "Customer"
+    }
+  }
+}

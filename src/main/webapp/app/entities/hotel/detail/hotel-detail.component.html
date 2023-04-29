@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="hotel">
+      <h2 data-cy="hotelDetailsHeading"><span esTranslate="eightStarApp.hotel.detail.title">Hotel</span></h2>
+
+      <hr />
+
+      <es-alert-error></es-alert-error>
+
+      <es-alert></es-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span esTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ hotel.id }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.hotel.hotelId" [ngbTooltip]="'eightStarApp.hotel.help.hotelId' | translate">Hotel Id</span></dt>
+        <dd>
+          <span>{{ hotel.hotelId }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.hotel.name">Name</span></dt>
+        <dd>
+          <span>{{ hotel.name }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.hotel.description">Description</span></dt>
+        <dd>
+          <span>{{ hotel.description }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.hotel.adresse">Adresse</span></dt>
+        <dd>
+          <span>{{ hotel.adresse }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.hotel.starsNumber">Stars Number</span></dt>
+        <dd>
+          <span>{{ hotel.starsNumber }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.hotel.emergencyNumber">Emergency Number</span></dt>
+        <dd>
+          <span>{{ hotel.emergencyNumber }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.hotel.location">Location</span></dt>
+        <dd>
+          <div *ngIf="hotel.location">
+            <a [routerLink]="['/location', hotel.location.id, 'view']">{{ hotel.location.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span esTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/hotel', hotel.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span esTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

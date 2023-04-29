@@ -1,0 +1,26 @@
+{
+  "eightStarApp": {
+    "deliveryRequestPlace": {
+      "home": {
+        "title": "Delivery Request Places",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Delivery Request Place",
+        "createOrEditLabel": "Create or edit a Delivery Request Place",
+        "notFound": "No Delivery Request Places found"
+      },
+      "created": "A new Delivery Request Place is created with identifier {{ param }}",
+      "updated": "A Delivery Request Place is updated with identifier {{ param }}",
+      "deleted": "A Delivery Request Place is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Delivery Request Place {{ id }}?"
+      },
+      "detail": {
+        "title": "Delivery Request Place"
+      },
+      "id": "ID",
+      "name": "Name",
+      "serviceRequest": "Service Request",
+      "hotel": "Hotel"
+    }
+  }
+}

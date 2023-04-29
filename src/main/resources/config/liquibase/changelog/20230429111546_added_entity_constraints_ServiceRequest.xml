@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity ServiceRequest.
+    -->
+    <changeSet id="20230429111546-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="parking_all_id"
+                                 baseTableName="service_request"
+                                 constraintName="fk_service_request__parking_all_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="parking_all"/>
+
+        <addForeignKeyConstraint baseColumnNames="delivery_request_place_id"
+                                 baseTableName="service_request"
+                                 constraintName="fk_service_request__delivery_request_place_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="delivery_request_place"/>
+
+        <addForeignKeyConstraint baseColumnNames="services_id"
+                                 baseTableName="service_request"
+                                 constraintName="fk_service_request__services_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="services"/>
+
+        <addForeignKeyConstraint baseColumnNames="check_in_id"
+                                 baseTableName="service_request"
+                                 constraintName="fk_service_request__check_in_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="check_in"/>
+    </changeSet>
+</databaseChangeLog>

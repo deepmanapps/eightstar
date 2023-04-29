@@ -1,0 +1,11 @@
+{
+  "eightStarApp": {
+    "PaymentMethod": {
+      "null": "",
+      "CCARD": "CCARD",
+      "CASH": "CASH",
+      "BCHECK": "BCHECK",
+      "EWALLET": "EWALLET"
+    }
+  }
+}

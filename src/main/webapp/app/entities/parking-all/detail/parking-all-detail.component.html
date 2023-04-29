@@ -1,0 +1,44 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="parkingAll">
+      <h2 data-cy="parkingAllDetailsHeading"><span esTranslate="eightStarApp.parkingAll.detail.title">Parking All</span></h2>
+
+      <hr />
+
+      <es-alert-error></es-alert-error>
+
+      <es-alert></es-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span esTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ parkingAll.id }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.parkingAll.name">Name</span></dt>
+        <dd>
+          <span>{{ parkingAll.name }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.parkingAll.location">Location</span></dt>
+        <dd>
+          <div *ngIf="parkingAll.location">
+            <a [routerLink]="['/location', parkingAll.location.id, 'view']">{{ parkingAll.location.id }}</a>
+          </div>
+        </dd>
+        <dt><span esTranslate="eightStarApp.parkingAll.hotel">Hotel</span></dt>
+        <dd>
+          <div *ngIf="parkingAll.hotel">
+            <a [routerLink]="['/hotel', parkingAll.hotel.id, 'view']">{{ parkingAll.hotel.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span esTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/parking-all', parkingAll.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span esTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

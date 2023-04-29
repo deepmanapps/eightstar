@@ -1,0 +1,120 @@
+<div>
+  <h2 id="page-heading" data-cy="ProductRequestHeading">
+    <span esTranslate="eightStarApp.productRequest.home.title">Product Requests</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span esTranslate="eightStarApp.productRequest.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-product-request"
+        [routerLink]="['/product-request/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span esTranslate="eightStarApp.productRequest.home.createLabel"> Create a new Product Request </span>
+      </button>
+    </div>
+  </h2>
+
+  <es-alert-error></es-alert-error>
+
+  <es-alert></es-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="productRequests?.length === 0">
+    <span esTranslate="eightStarApp.productRequest.home.notFound">No Product Requests found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="productRequests && productRequests.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr esSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" esSortBy="id">
+            <div class="d-flex">
+              <span esTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" esSortBy="productName">
+            <div class="d-flex">
+              <span esTranslate="eightStarApp.productRequest.productName">Product Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" esSortBy="productUnitPrice">
+            <div class="d-flex">
+              <span esTranslate="eightStarApp.productRequest.productUnitPrice">Product Unit Price</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" esSortBy="productTotalPrice">
+            <div class="d-flex">
+              <span esTranslate="eightStarApp.productRequest.productTotalPrice">Product Total Price</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" esSortBy="requestedQuantity">
+            <div class="d-flex">
+              <span esTranslate="eightStarApp.productRequest.requestedQuantity">Requested Quantity</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" esSortBy="serviceRequest.id">
+            <div class="d-flex">
+              <span esTranslate="eightStarApp.productRequest.serviceRequest">Service Request</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let productRequest of productRequests; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/product-request', productRequest.id, 'view']">{{ productRequest.id }}</a>
+          </td>
+          <td>{{ productRequest.productName }}</td>
+          <td>{{ productRequest.productUnitPrice }}</td>
+          <td>{{ productRequest.productTotalPrice }}</td>
+          <td>{{ productRequest.requestedQuantity }}</td>
+          <td>
+            <div *ngIf="productRequest.serviceRequest">
+              <a [routerLink]="['/service-request', productRequest.serviceRequest.id, 'view']">{{ productRequest.serviceRequest.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/product-request', productRequest.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" esTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/product-request', productRequest.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" esTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(productRequest)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" esTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

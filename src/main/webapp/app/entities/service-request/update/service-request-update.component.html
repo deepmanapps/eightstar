@@ -1,0 +1,210 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="es-service-request-heading"
+        data-cy="ServiceRequestCreateUpdateHeading"
+        esTranslate="eightStarApp.serviceRequest.home.createOrEditLabel"
+      >
+        Create or edit a Service Request
+      </h2>
+
+      <div>
+        <es-alert-error></es-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" esTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" esTranslate="eightStarApp.serviceRequest.requestDate" for="field_requestDate">Request Date</label>
+          <div class="d-flex">
+            <input
+              id="field_requestDate"
+              data-cy="requestDate"
+              type="datetime-local"
+              class="form-control"
+              name="requestDate"
+              formControlName="requestDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" esTranslate="eightStarApp.serviceRequest.requestThruDate" for="field_requestThruDate"
+            >Request Thru Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_requestThruDate"
+              data-cy="requestThruDate"
+              type="datetime-local"
+              class="form-control"
+              name="requestThruDate"
+              formControlName="requestThruDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" esTranslate="eightStarApp.serviceRequest.statusRequest" for="field_statusRequest">Status Request</label>
+          <select
+            class="form-control"
+            name="statusRequest"
+            formControlName="statusRequest"
+            id="field_statusRequest"
+            data-cy="statusRequest"
+          >
+            <option [ngValue]="null">{{ 'eightStarApp.RQStatus.null' | translate }}</option>
+            <option *ngFor="let rQStatus of rQStatusValues" [value]="rQStatus">
+              {{ 'eightStarApp.RQStatus.' + rQStatus | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" esTranslate="eightStarApp.serviceRequest.rejecttReason" for="field_rejecttReason">Rejectt Reason</label>
+          <input
+            type="text"
+            class="form-control"
+            name="rejecttReason"
+            id="field_rejecttReason"
+            data-cy="rejecttReason"
+            formControlName="rejecttReason"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" esTranslate="eightStarApp.serviceRequest.requestDescription" for="field_requestDescription"
+            >Request Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="requestDescription"
+            id="field_requestDescription"
+            data-cy="requestDescription"
+            formControlName="requestDescription"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" esTranslate="eightStarApp.serviceRequest.objectNumber" for="field_objectNumber">Object Number</label>
+          <input
+            type="text"
+            class="form-control"
+            name="objectNumber"
+            id="field_objectNumber"
+            data-cy="objectNumber"
+            formControlName="objectNumber"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" esTranslate="eightStarApp.serviceRequest.guest" for="field_guest">Guest</label>
+          <input type="checkbox" class="form-check" name="guest" id="field_guest" data-cy="guest" formControlName="guest" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" esTranslate="eightStarApp.serviceRequest.quantity" for="field_quantity">Quantity</label>
+          <input type="number" class="form-control" name="quantity" id="field_quantity" data-cy="quantity" formControlName="quantity" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" esTranslate="eightStarApp.serviceRequest.totalPrice" for="field_totalPrice">Total Price</label>
+          <input
+            type="number"
+            class="form-control"
+            name="totalPrice"
+            id="field_totalPrice"
+            data-cy="totalPrice"
+            formControlName="totalPrice"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" esTranslate="eightStarApp.serviceRequest.parkingAll" for="field_parkingAll">Parking All</label>
+          <select
+            class="form-control"
+            id="field_parkingAll"
+            data-cy="parkingAll"
+            name="parkingAll"
+            formControlName="parkingAll"
+            [compareWith]="compareParkingAll"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="parkingAllOption" *ngFor="let parkingAllOption of parkingAllsCollection">{{ parkingAllOption.id }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" esTranslate="eightStarApp.serviceRequest.deliveryRequestPlace" for="field_deliveryRequestPlace"
+            >Delivery Request Place</label
+          >
+          <select
+            class="form-control"
+            id="field_deliveryRequestPlace"
+            data-cy="deliveryRequestPlace"
+            name="deliveryRequestPlace"
+            formControlName="deliveryRequestPlace"
+            [compareWith]="compareDeliveryRequestPlace"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="deliveryRequestPlaceOption" *ngFor="let deliveryRequestPlaceOption of deliveryRequestPlacesCollection">
+              {{ deliveryRequestPlaceOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" esTranslate="eightStarApp.serviceRequest.services" for="field_services">Services</label>
+          <select
+            class="form-control"
+            id="field_services"
+            data-cy="services"
+            name="services"
+            formControlName="services"
+            [compareWith]="compareServices"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="servicesOption" *ngFor="let servicesOption of servicesSharedCollection">{{ servicesOption.id }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" esTranslate="eightStarApp.serviceRequest.checkIn" for="field_checkIn">Check In</label>
+          <select
+            class="form-control"
+            id="field_checkIn"
+            data-cy="checkIn"
+            name="checkIn"
+            formControlName="checkIn"
+            [compareWith]="compareCheckIn"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="checkInOption" *ngFor="let checkInOption of checkInsSharedCollection">{{ checkInOption.id }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span esTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span esTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

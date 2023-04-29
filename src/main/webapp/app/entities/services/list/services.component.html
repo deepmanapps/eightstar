@@ -1,0 +1,106 @@
+<div>
+  <h2 id="page-heading" data-cy="ServicesHeading">
+    <span esTranslate="eightStarApp.services.home.title">Services</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span esTranslate="eightStarApp.services.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-services"
+        [routerLink]="['/services/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span esTranslate="eightStarApp.services.home.createLabel"> Create a new Services </span>
+      </button>
+    </div>
+  </h2>
+
+  <es-alert-error></es-alert-error>
+
+  <es-alert></es-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="services?.length === 0">
+    <span esTranslate="eightStarApp.services.home.notFound">No Services found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="services && services.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr esSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" esSortBy="id">
+            <div class="d-flex">
+              <span esTranslate="eightStarApp.services.id">Id</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" esSortBy="nom">
+            <div class="d-flex">
+              <span esTranslate="eightStarApp.services.nom">Nom</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" esSortBy="description">
+            <div class="d-flex">
+              <span esTranslate="eightStarApp.services.description">Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" esSortBy="parentService.id">
+            <div class="d-flex">
+              <span esTranslate="eightStarApp.services.parentService">Parent Service</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let services of services; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/services', services.id, 'view']">{{ services.id }}</a>
+          </td>
+          <td>{{ services.nom }}</td>
+          <td>{{ services.description }}</td>
+          <td>
+            <div *ngIf="services.parentService">
+              <a [routerLink]="['/services', services.parentService.id, 'view']">{{ services.parentService.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/services', services.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" esTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/services', services.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" esTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(services)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" esTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

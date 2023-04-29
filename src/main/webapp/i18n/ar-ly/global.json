@@ -7,6 +7,17 @@
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "الكيانات",
+        "hotel": "Hotel",
+        "location": "Location",
+        "checkIn": "Check In",
+        "services": "Services",
+        "serviceRequest": "Service Request",
+        "productRequest": "Product Request",
+        "parkingAll": "Parking All",
+        "deliveryRequestPlace": "Delivery Request Place",
+        "customer": "Customer",
+        "checkOut": "Check Out",
+        "hotelServices": "Hotel Services",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

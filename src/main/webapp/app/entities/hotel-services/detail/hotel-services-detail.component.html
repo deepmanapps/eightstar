@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="hotelServices">
+      <h2 data-cy="hotelServicesDetailsHeading"><span esTranslate="eightStarApp.hotelServices.detail.title">Hotel Services</span></h2>
+
+      <hr />
+
+      <es-alert-error></es-alert-error>
+
+      <es-alert></es-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span esTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ hotelServices.id }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.hotelServices.active">Active</span></dt>
+        <dd>
+          <span>{{ hotelServices.active }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.hotelServices.forGuest">For Guest</span></dt>
+        <dd>
+          <span>{{ hotelServices.forGuest }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.hotelServices.servicePrice">Service Price</span></dt>
+        <dd>
+          <span>{{ hotelServices.servicePrice }}</span>
+        </dd>
+        <dt><span esTranslate="eightStarApp.hotelServices.hotel">Hotel</span></dt>
+        <dd>
+          <div *ngIf="hotelServices.hotel">
+            <a [routerLink]="['/hotel', hotelServices.hotel.id, 'view']">{{ hotelServices.hotel.id }}</a>
+          </div>
+        </dd>
+        <dt><span esTranslate="eightStarApp.hotelServices.services">Services</span></dt>
+        <dd>
+          <div *ngIf="hotelServices.services">
+            <a [routerLink]="['/services', hotelServices.services.id, 'view']">{{ hotelServices.services.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span esTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/hotel-services', hotelServices.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span esTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

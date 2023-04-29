@@ -1,0 +1,31 @@
+{
+  "eightStarApp": {
+    "checkOut": {
+      "home": {
+        "title": "Check Outs",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Check Out",
+        "createOrEditLabel": "Crear o editar Check Out",
+        "notFound": "Ningún Check Outs encontrado"
+      },
+      "created": "Un nuevo Check Out ha sido creado con el identificador {{ param }}",
+      "updated": "Un Check Out ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Check Out ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Check Out {{ id }}?"
+      },
+      "detail": {
+        "title": "Check Out"
+      },
+      "id": "ID",
+      "roomClearance": "Room Clearance",
+      "customerReview": "Customer Review",
+      "miniBarClearance": "Mini Bar Clearance",
+      "lateCheckOut": "Late Check Out",
+      "isLate": "Is Late",
+      "isCollectedDepositAmount": "Is Collected Deposit Amount",
+      "collectedAmount": "Collected Amount",
+      "checkIn": "Check In"
+    }
+  }
+}

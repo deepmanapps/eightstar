@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <property name="now" value="now()" dbms="mysql"/>
+    <property name="floatType" value="float" dbms="mysql"/>
+    <property name="clobType" value="clob" dbms="mysql"/>
+    <property name="blobType" value="longblob" dbms="mysql"/>
+    <property name="uuidType" value="varchar(36)" dbms="mysql"/>
+    <property name="datetimeType" value="datetime(6)" dbms="mysql"/>
+
+    <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230429111542_added_entity_Hotel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230429111543_added_entity_Location.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230429111544_added_entity_CheckIn.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230429111545_added_entity_Services.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230429111546_added_entity_ServiceRequest.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230429111547_added_entity_ProductRequest.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230429111548_added_entity_ParkingAll.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230429111549_added_entity_DeliveryRequestPlace.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230429111550_added_entity_Customer.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230429111551_added_entity_CheckOut.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230429111552_added_entity_HotelServices.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230429111815_added_entity_Hotel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230429111816_added_entity_Location.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230429111817_added_entity_CheckIn.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230429111818_added_entity_Services.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230429111819_added_entity_ServiceRequest.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230429111820_added_entity_ProductRequest.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230429111821_added_entity_ParkingAll.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230429111822_added_entity_DeliveryRequestPlace.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230429111823_added_entity_Customer.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230429111824_added_entity_CheckOut.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230429111825_added_entity_HotelServices.xml" relativeToChangelogFile="false"/>
+    <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20230429111542_added_entity_constraints_Hotel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230429111544_added_entity_constraints_CheckIn.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230429111545_added_entity_constraints_Services.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230429111546_added_entity_constraints_ServiceRequest.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230429111547_added_entity_constraints_ProductRequest.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230429111548_added_entity_constraints_ParkingAll.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230429111549_added_entity_constraints_DeliveryRequestPlace.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230429111552_added_entity_constraints_HotelServices.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230429111815_added_entity_constraints_Hotel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230429111817_added_entity_constraints_CheckIn.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230429111818_added_entity_constraints_Services.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230429111819_added_entity_constraints_ServiceRequest.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230429111820_added_entity_constraints_ProductRequest.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230429111821_added_entity_constraints_ParkingAll.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230429111822_added_entity_constraints_DeliveryRequestPlace.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230429111825_added_entity_constraints_HotelServices.xml" relativeToChangelogFile="false"/>
+    <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
+    <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
+</databaseChangeLog>

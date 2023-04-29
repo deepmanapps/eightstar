@@ -1,0 +1,88 @@
+{
+  "applications": "*",
+  "changelogDate": "20230429111817",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "check_in",
+  "fields": [
+    {
+      "fieldName": "identityPath",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "Status",
+      "fieldValues": "CONFIRMED,CANCELLED,COMPLETED"
+    },
+    {
+      "fieldName": "depositAmount",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "paymentMethod",
+      "fieldType": "PaymentMethod",
+      "fieldValues": "CCARD,CASH,BCHECK,EWALLET"
+    },
+    {
+      "fieldName": "arrivalDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "departureDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "roomType",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "smooking",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "adults",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "children",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "notes",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "CheckIn",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "checkOut",
+      "otherEntityRelationshipName": "checkIn",
+      "ownerSide": true,
+      "relationshipName": "checkOut",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "serviceRequest",
+      "otherEntityRelationshipName": "checkIn",
+      "relationshipName": "serviceRequest",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "hotel",
+      "otherEntityRelationshipName": "checkIn",
+      "relationshipName": "hotel",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "customer",
+      "otherEntityRelationshipName": "checkIn",
+      "relationshipName": "customer",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

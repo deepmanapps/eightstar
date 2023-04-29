@@ -2,7 +2,7 @@ package com.altair.eightstar;
 
 import com.altair.eightstar.EightStarApp;
 import com.altair.eightstar.config.AsyncSyncConfiguration;
-import com.altair.eightstar.config.EmbeddedMongo;
+import com.altair.eightstar.config.EmbeddedSQL;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -16,7 +16,7 @@ import org.springframework.test.annotation.DirtiesContext;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @SpringBootTest(classes = { EightStarApp.class, AsyncSyncConfiguration.class })
-@EmbeddedMongo
+@EmbeddedSQL
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 public @interface IntegrationTest {
 }

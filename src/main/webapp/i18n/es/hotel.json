@@ -1,0 +1,37 @@
+{
+  "eightStarApp": {
+    "hotel": {
+      "home": {
+        "title": "Hotels",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Hotel",
+        "createOrEditLabel": "Crear o editar Hotel",
+        "notFound": "Ningún Hotels encontrado"
+      },
+      "created": "Un nuevo Hotel ha sido creado con el identificador {{ param }}",
+      "updated": "Un Hotel ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Hotel ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Hotel {{ id }}?"
+      },
+      "detail": {
+        "title": "Hotel"
+      },
+      "id": "ID",
+      "hotelId": "Hotel Id",
+      "name": "Name",
+      "description": "Description",
+      "adresse": "Adresse",
+      "starsNumber": "Stars Number",
+      "emergencyNumber": "Emergency Number",
+      "location": "Location",
+      "checkIn": "Check In",
+      "parkingAll": "Parking All",
+      "hotelServices": "Hotel Services",
+      "deliveryRequestPlace": "Delivery Request Place",
+      "help": {
+        "hotelId": "Minimum d&#39;info sur l&#39;hotel"
+      }
+    }
+  }
+}

@@ -1,0 +1,111 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="es-product-request-heading"
+        data-cy="ProductRequestCreateUpdateHeading"
+        esTranslate="eightStarApp.productRequest.home.createOrEditLabel"
+      >
+        Create or edit a Product Request
+      </h2>
+
+      <div>
+        <es-alert-error></es-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" esTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" esTranslate="eightStarApp.productRequest.productName" for="field_productName">Product Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="productName"
+            id="field_productName"
+            data-cy="productName"
+            formControlName="productName"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" esTranslate="eightStarApp.productRequest.productUnitPrice" for="field_productUnitPrice"
+            >Product Unit Price</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="productUnitPrice"
+            id="field_productUnitPrice"
+            data-cy="productUnitPrice"
+            formControlName="productUnitPrice"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" esTranslate="eightStarApp.productRequest.productTotalPrice" for="field_productTotalPrice"
+            >Product Total Price</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="productTotalPrice"
+            id="field_productTotalPrice"
+            data-cy="productTotalPrice"
+            formControlName="productTotalPrice"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" esTranslate="eightStarApp.productRequest.requestedQuantity" for="field_requestedQuantity"
+            >Requested Quantity</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="requestedQuantity"
+            id="field_requestedQuantity"
+            data-cy="requestedQuantity"
+            formControlName="requestedQuantity"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" esTranslate="eightStarApp.productRequest.serviceRequest" for="field_serviceRequest"
+            >Service Request</label
+          >
+          <select
+            class="form-control"
+            id="field_serviceRequest"
+            data-cy="serviceRequest"
+            name="serviceRequest"
+            formControlName="serviceRequest"
+            [compareWith]="compareServiceRequest"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="serviceRequestOption" *ngFor="let serviceRequestOption of serviceRequestsSharedCollection">
+              {{ serviceRequestOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span esTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span esTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

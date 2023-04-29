@@ -1,0 +1,34 @@
+{
+  "applications": "*",
+  "changelogDate": "20230429111822",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "delivery_request_place",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "DeliveryRequestPlace",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "serviceRequest",
+      "otherEntityRelationshipName": "deliveryRequestPlace",
+      "ownerSide": false,
+      "relationshipName": "serviceRequest",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "hotel",
+      "otherEntityRelationshipName": "deliveryRequestPlace",
+      "relationshipName": "hotel",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}
