@@ -13,7 +13,7 @@
   "fluentMethods": true,
   "jpaMetamodelFiltering": false,
   "name": "DeliveryRequestPlace",
-  "pagination": "no",
+  "pagination": "pagination",
   "readOnly": false,
   "relationships": [
     {

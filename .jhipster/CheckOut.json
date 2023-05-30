@@ -40,7 +40,7 @@
   "fluentMethods": true,
   "jpaMetamodelFiltering": false,
   "name": "CheckOut",
-  "pagination": "no",
+  "pagination": "pagination",
   "readOnly": false,
   "relationships": [
     {

@@ -51,7 +51,9 @@ export class MainComponent implements OnInit {
     }
     return title;
   }
-
+  isAuthenticated(): boolean {
+    return this.accountService.isAuthenticated();
+  }
   private updateTitle(): void {
     let pageTitle = this.getPageTitle(this.router.routerState.snapshot.root);
     if (!pageTitle) {

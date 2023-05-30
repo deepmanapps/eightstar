@@ -3,6 +3,8 @@ package com.altair.eightstar.service;
 import com.altair.eightstar.service.dto.CheckOutDTO;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 /**
  * Service Interface for managing {@link com.altair.eightstar.domain.CheckOut}.
@@ -35,9 +37,10 @@ public interface CheckOutService {
     /**
      * Get all the checkOuts.
      *
+     * @param pageable the pagination information.
      * @return the list of entities.
      */
-    List<CheckOutDTO> findAll();
+    Page<CheckOutDTO> findAll(Pageable pageable);
     /**
      * Get all the CheckOutDTO where CheckIn is {@code null}.
      *

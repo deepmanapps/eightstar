@@ -1,8 +1,9 @@
 package com.altair.eightstar.service;
 
 import com.altair.eightstar.service.dto.ProductRequestDTO;
-import java.util.List;
 import java.util.Optional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 /**
  * Service Interface for managing {@link com.altair.eightstar.domain.ProductRequest}.
@@ -35,9 +36,10 @@ public interface ProductRequestService {
     /**
      * Get all the productRequests.
      *
+     * @param pageable the pagination information.
      * @return the list of entities.
      */
-    List<ProductRequestDTO> findAll();
+    Page<ProductRequestDTO> findAll(Pageable pageable);
 
     /**
      * Get the "id" productRequest.

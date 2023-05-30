@@ -1,8 +1,9 @@
 package com.altair.eightstar.service;
 
 import com.altair.eightstar.service.dto.CheckInDTO;
-import java.util.List;
 import java.util.Optional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 /**
  * Service Interface for managing {@link com.altair.eightstar.domain.CheckIn}.
@@ -35,9 +36,10 @@ public interface CheckInService {
     /**
      * Get all the checkIns.
      *
+     * @param pageable the pagination information.
      * @return the list of entities.
      */
-    List<CheckInDTO> findAll();
+    Page<CheckInDTO> findAll(Pageable pageable);
 
     /**
      * Get the "id" checkIn.

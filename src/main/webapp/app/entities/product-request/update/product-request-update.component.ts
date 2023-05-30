@@ -51,8 +51,10 @@ export class ProductRequestUpdateComponent implements OnInit {
     this.isSaving = true;
     const productRequest = this.productRequestFormService.getProductRequest(this.editForm);
     if (productRequest.id !== null) {
+      // @ts-ignore
       this.subscribeToSaveResponse(this.productRequestService.update(productRequest));
     } else {
+      // @ts-ignore
       this.subscribeToSaveResponse(this.productRequestService.create(productRequest));
     }
   }

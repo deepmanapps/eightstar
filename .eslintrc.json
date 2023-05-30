@@ -20,6 +20,10 @@
     "project": ["./tsconfig.app.json", "./tsconfig.spec.json"]
   },
   "rules": {
+    "no-empty-function": "off",
+    "@typescript-eslint/no-empty-function": "off",
+    "@angular-eslint/no-empty-lifecycle-method": "off",
+    "@angular-eslint/no-input-rename": "off",
     "@angular-eslint/component-selector": [
       "error",
       {

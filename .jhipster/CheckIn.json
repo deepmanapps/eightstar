@@ -55,7 +55,7 @@
   "fluentMethods": true,
   "jpaMetamodelFiltering": false,
   "name": "CheckIn",
-  "pagination": "no",
+  "pagination": "pagination",
   "readOnly": false,
   "relationships": [
     {

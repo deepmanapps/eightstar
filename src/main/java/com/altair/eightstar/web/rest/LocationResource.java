@@ -13,9 +13,15 @@ import java.util.stream.StreamSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.jhipster.web.util.HeaderUtil;
+import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
 /**
@@ -134,22 +140,28 @@ public class LocationResource {
     /**
      * {@code GET  /locations} : get all the locations.
      *
+     * @param pageable the pagination information.
      * @param filter the filter of the request.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of locations in body.
      */
     @GetMapping("/locations")
-    public List<LocationDTO> getAllLocations(@RequestParam(required = false) String filter) {
+    public ResponseEntity<List<LocationDTO>> getAllLocations(
+        @org.springdoc.api.annotations.ParameterObject Pageable pageable,
+        @RequestParam(required = false) String filter
+    ) {
         if ("hotel-is-null".equals(filter)) {
             log.debug("REST request to get all Locations where hotel is null");
-            return locationService.findAllWhereHotelIsNull();
+            return new ResponseEntity<>(locationService.findAllWhereHotelIsNull(), HttpStatus.OK);
         }
 
         if ("parkingall-is-null".equals(filter)) {
             log.debug("REST request to get all Locations where parkingAll is null");
-            return locationService.findAllWhereParkingAllIsNull();
+            return new ResponseEntity<>(locationService.findAllWhereParkingAllIsNull(), HttpStatus.OK);
         }
-        log.debug("REST request to get all Locations");
-        return locationService.findAll();
+        log.debug("REST request to get a page of Locations");
+        Page<LocationDTO> page = locationService.findAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
     /**

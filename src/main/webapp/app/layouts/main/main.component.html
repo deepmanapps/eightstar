@@ -1,13 +1,10 @@
-<es-page-ribbon></es-page-ribbon>
-
-<div>
-  <router-outlet name="navbar"></router-outlet>
+<div *ngIf="!isAuthenticated()" class="h-100">
+  <es-login></es-login>
 </div>
-
-<div class="container-fluid">
-  <div class="card jh-card">
-    <router-outlet></router-outlet>
-  </div>
-
-  <es-footer></es-footer>
+<div *ngIf="isAuthenticated()">
+  <app-layout></app-layout>
 </div>
+<app-scripts-init></app-scripts-init>
+<ng-container>
+  <app-scroll-top id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true"></app-scroll-top>
+</ng-container>

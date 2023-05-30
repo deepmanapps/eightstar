@@ -56,8 +56,10 @@ export class ParkingAllUpdateComponent implements OnInit {
     this.isSaving = true;
     const parkingAll = this.parkingAllFormService.getParkingAll(this.editForm);
     if (parkingAll.id !== null) {
+      // @ts-ignore
       this.subscribeToSaveResponse(this.parkingAllService.update(parkingAll));
     } else {
+      // @ts-ignore
       this.subscribeToSaveResponse(this.parkingAllService.create(parkingAll));
     }
   }

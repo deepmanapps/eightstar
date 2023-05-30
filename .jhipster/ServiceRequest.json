@@ -46,7 +46,7 @@
   "fluentMethods": true,
   "jpaMetamodelFiltering": false,
   "name": "ServiceRequest",
-  "pagination": "no",
+  "pagination": "pagination",
   "readOnly": false,
   "relationships": [
     {

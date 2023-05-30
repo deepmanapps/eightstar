@@ -1,8 +1,9 @@
 package com.altair.eightstar.service;
 
 import com.altair.eightstar.service.dto.HotelServicesDTO;
-import java.util.List;
 import java.util.Optional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 /**
  * Service Interface for managing {@link com.altair.eightstar.domain.HotelServices}.
@@ -35,9 +36,10 @@ public interface HotelServicesService {
     /**
      * Get all the hotelServices.
      *
+     * @param pageable the pagination information.
      * @return the list of entities.
      */
-    List<HotelServicesDTO> findAll();
+    Page<HotelServicesDTO> findAll(Pageable pageable);
 
     /**
      * Get the "id" hotelServices.

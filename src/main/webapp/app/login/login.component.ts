@@ -1,7 +1,7 @@
 import { Component, ViewChild, OnInit, AfterViewInit, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import { Subscription, Observable } from 'rxjs';
 import { LoginService } from 'app/login/login.service';
 import { AccountService } from 'app/core/auth/account.service';
 
@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     password: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
     rememberMe: new FormControl(false, { nonNullable: true, validators: [Validators.required] }),
   });
+  isLoading$: Observable<boolean>;
 
   constructor(private accountService: AccountService, private loginService: LoginService, private router: Router) {}
 
@@ -27,7 +28,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     // if already authenticated then navigate to home page
     this.accountService.identity().subscribe(() => {
       if (this.accountService.isAuthenticated()) {
-        this.router.navigate(['']);
+        this.router.navigate(['home']);
       }
     });
   }
@@ -41,8 +42,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
       next: () => {
         this.authenticationError = false;
         if (!this.router.getCurrentNavigation()) {
-          // There were no routing during login (eg from navigationToStoredUrl)
-          this.router.navigate(['']);
+          this.router.navigate(['home']);
         }
       },
       error: () => (this.authenticationError = true),

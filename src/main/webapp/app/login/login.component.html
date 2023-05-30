@@ -1,57 +1,181 @@
-<div>
-  <div class="d-flex justify-content-center">
-    <div class="col-lg-6 col-md-8 col-sm-10">
-      <h1 esTranslate="login.title" data-cy="loginTitle">Sign in</h1>
-      <div class="alert alert-danger" *ngIf="authenticationError" esTranslate="login.messages.error.authentication" data-cy="loginError">
-        <strong>Failed to sign in!</strong> Please check your credentials and try again.
-      </div>
-      <form class="form" role="form" (ngSubmit)="login()" [formGroup]="loginForm">
-        <div class="mb-3">
-          <label class="username-label" for="username" esTranslate="global.form.username.label">Username</label>
-          <input
-            type="text"
-            class="form-control"
-            name="username"
-            id="username"
-            placeholder="{{ 'global.form.username.placeholder' | translate }}"
-            formControlName="username"
-            #username
-            data-cy="username"
-          />
-        </div>
-
-        <div class="mb-3">
-          <label for="password" esTranslate="login.form.password">Password</label>
-          <input
-            type="password"
-            class="form-control"
-            name="password"
-            id="password"
-            placeholder="{{ 'login.form.password.placeholder' | translate }}"
-            formControlName="password"
-            data-cy="password"
-          />
-        </div>
-
-        <div class="form-check">
-          <label class="form-check-label" for="rememberMe">
-            <input class="form-check-input" type="checkbox" name="rememberMe" id="rememberMe" formControlName="rememberMe" />
-            <span esTranslate="login.form.rememberme">Remember me</span>
-          </label>
-        </div>
-
-        <button type="submit" class="btn btn-primary" esTranslate="login.form.button" data-cy="submit">Sign in</button>
-      </form>
-      <div class="mt-3 alert alert-warning">
-        <a class="alert-link" routerLink="/account/reset/request" esTranslate="login.password.forgot" data-cy="forgetYourPasswordSelector"
-          >Did you forget your password?</a
-        >
-      </div>
-
-      <div class="alert alert-warning">
-        <span esTranslate="global.messages.info.register.noaccount">You don't have an account yet?</span>
-        <a class="alert-link" routerLink="/account/register" esTranslate="global.messages.info.register.link">Register a new account</a>
+<!-- <div class="d-flex flex-column flex-center flex-column-fluid">
+  <div class="d-flex flex-column flex-center text-center p-10">
+    <div class="card card-flush  w-lg-650px py-5">
+      <div class="card-body py-15 py-lg-20">
+        <router-outlet></router-outlet>
       </div>
     </div>
   </div>
+</div> -->
+
+<div class="d-flex flex-column flex-lg-row flex-column-fluid">
+  <!--begin::Body-->
+  <div class="d-flex flex-column flex-lg-row-fluid w-lg-50 p-10 order-2 order-lg-1">
+    <!--begin::Form-->
+    <div class="d-flex flex-center flex-column flex-lg-row-fluid">
+      <!--begin::Wrapper-->
+      <div class="<?php echo $params['wrapperClass']?> p-10">
+        <!--begin::Form-->
+        <form class="form w-100" [formGroup]="loginForm" novalidate="novalidate" id="kt_login_signin_form" (ngSubmit)="login()">
+          <!--begin::Heading-->
+          <div class="text-center mb-11">
+            <h1 class="text-dark fw-bolder mb-3">Eight Star</h1>
+            <!--begin::Subtitle-->
+            <div class="text-gray-500 fw-semibold fs-6">Sign In</div>
+            <!--end::Subtitle--->
+          </div>
+          <!--end::Heading-->
+
+          <!-- begin::Alert error-->
+          <ng-container *ngIf="authenticationError">
+            <div class="mb-lg-15 alert alert-danger">
+              <div class="alert-text font-weight-bold">The login details are incorrect, Please check your credentials and try again.</div>
+            </div>
+          </ng-container>
+          <!-- end::Alert error-->
+
+          <!--begin::Form group-->
+          <div class="fv-row mb-8">
+            <label class="form-label fs-6 fw-bolder text-dark">User ID</label>
+            <input
+              class="form-control bg-transparent"
+              type="email"
+              name="username"
+              formControlName="username"
+              autocomplete="off"
+              data-cy="username"
+              [ngClass]="{
+                'is-invalid': loginForm.controls['username'].invalid,
+                'is-valid': loginForm.controls['username'].valid
+              }"
+            />
+          </div>
+          <!--end::Form group-->
+
+          <!--begin::Form group-->
+          <div class="fv-row mb-3">
+            <label class="form-label fw-bolder text-dark fs-6 mb-0">Password</label>
+
+            <input
+              class="form-control bg-transparent"
+              type="password"
+              name="password"
+              autocomplete="off"
+              id="password"
+              formControlName="password"
+              [ngClass]="{
+                'is-invalid': loginForm.controls['password'].invalid,
+                'is-valid': loginForm.controls['password'].valid
+              }"
+            />
+            <ng-container
+              [ngTemplateOutlet]="formError"
+              [ngTemplateOutletContext]="{
+                validation: 'required',
+                message: 'Password is required',
+                control: loginForm.controls['password']
+              }"
+            ></ng-container>
+            <ng-container
+              [ngTemplateOutlet]="formError"
+              [ngTemplateOutletContext]="{
+                validation: 'minlength',
+                message: 'Password should have at least 3 symbols',
+                control: loginForm.controls['password']
+              }"
+            ></ng-container>
+            <ng-container
+              [ngTemplateOutlet]="formError"
+              [ngTemplateOutletContext]="{
+                validation: 'maxLength',
+                message: 'Password should have maximum 100 symbols',
+                control: loginForm.controls['password']
+              }"
+            ></ng-container>
+          </div>
+          <!--end::Form group-->
+
+          <!--begin::Wrapper-->
+          <div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8">
+            <div></div>
+
+            <!--begin::Link-->
+            <a routerLink="/" class="link-primary"> Forgot Password ? </a>
+            <!--end::Link-->
+          </div>
+          <!--end::Wrapper-->
+
+          <!--begin::Action-->
+          <div class="d-grid mb-10">
+            <button type="submit" id="kt_sign_in_submit" class="btn btn-primary" [disabled]="loginForm.invalid">
+              <ng-container *ngIf="isLoading$ | async">
+                <span class="indicator-progress" [style.display]="'block'">
+                  Please wait...
+                  <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                </span>
+              </ng-container>
+              <ng-container>
+                <span class="indicator-label">Sign In</span>
+              </ng-container>
+            </button>
+          </div>
+
+          <div class="text-gray-500 text-center fw-semibold fs-6">Not a Member yet? Please contact your Administration</div>
+
+          <!--end::Action-->
+        </form>
+        <!--end::Form-->
+
+        <ng-template #formError let-control="control" let-message="message" let-validation="validation">
+          <ng-container *ngIf="control.hasError(validation) && (control.dirty || control.touched)">
+            <div class="fv-plugins-message-container">
+              <span role="alert">
+                {{ message }}
+              </span>
+            </div>
+          </ng-container>
+        </ng-template>
+      </div>
+      <!--end::Wrapper-->
+    </div>
+    <!--end::Form-->
+
+    <!--begin::Footer-->
+    <div class="d-flex flex-center flex-wrap px-5">
+      <!--begin::Links-->
+      <div class="d-flex fw-semibold text-primary fs-base">
+        <a href="#" class="px-5" target="_blank">Terms</a>
+
+        <a href="#" class="px-5" target="_blank">Plans</a>
+
+        <a href="#" class="px-5" target="_blank">Contact Us</a>
+      </div>
+      <!--end::Links-->
+    </div>
+    <!--end::Footer-->
+  </div>
+  <!--end::Body-->
+
+  <!--begin::Aside-->
+  <div
+    class="d-flex flex-lg-row-fluid w-lg-50 bgi-size-cover bgi-position-center order-1 order-lg-2"
+    [ngStyle]="{ 'background-image': 'url(../../content/metronic/assets/media/misc/auth-bg.png)' }"
+  >
+    <!--begin::Content-->
+    <div class="d-flex flex-column flex-center py-15 px-5 px-md-15 w-100">
+      <!--begin::Logo-->
+      <a routerLink="/" class="mb-12">
+        <img alt="Logo" src="../../content/images/eightstart_bg.png" class="h-75px" />
+      </a>
+      <!--end::Logo-->
+
+      <img class="mx-auto w-275px w-md-50 w-xl-500px mb-10 mb-lg-20" src="../../content/images/checkIn-illustration2-png.png" alt="" />
+
+      <!--begin::Title-->
+      <h1 class="text-white fs-2qx fw-bolder text-center mb-7">Fast, Efficient and Productive</h1>
+      <!--end::Title-->
+    </div>
+    <!--end::Content-->
+  </div>
+  <!--end::Aside-->
 </div>

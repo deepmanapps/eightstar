@@ -41,8 +41,10 @@ export class LocationUpdateComponent implements OnInit {
     this.isSaving = true;
     const location = this.locationFormService.getLocation(this.editForm);
     if (location.id !== null) {
+      // @ts-ignore
       this.subscribeToSaveResponse(this.locationService.update(location));
     } else {
+      // @ts-ignore
       this.subscribeToSaveResponse(this.locationService.create(location));
     }
   }

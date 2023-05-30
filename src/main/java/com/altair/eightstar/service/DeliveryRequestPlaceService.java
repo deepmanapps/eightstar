@@ -3,6 +3,8 @@ package com.altair.eightstar.service;
 import com.altair.eightstar.service.dto.DeliveryRequestPlaceDTO;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 /**
  * Service Interface for managing {@link com.altair.eightstar.domain.DeliveryRequestPlace}.
@@ -35,9 +37,10 @@ public interface DeliveryRequestPlaceService {
     /**
      * Get all the deliveryRequestPlaces.
      *
+     * @param pageable the pagination information.
      * @return the list of entities.
      */
-    List<DeliveryRequestPlaceDTO> findAll();
+    Page<DeliveryRequestPlaceDTO> findAll(Pageable pageable);
     /**
      * Get all the DeliveryRequestPlaceDTO where ServiceRequest is {@code null}.
      *

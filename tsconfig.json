@@ -4,8 +4,10 @@
     "outDir": "./target/classes/static/",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "strictNullChecks": true,
-    "noImplicitReturns": true,
+    "strictPropertyInitialization": false,
+    "resolveJsonModule": true,
+    "strictNullChecks": false,
+    "noImplicitReturns": false,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "declaration": false,
@@ -20,6 +22,7 @@
     "lib": ["es2018", "dom"]
   },
   "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true,

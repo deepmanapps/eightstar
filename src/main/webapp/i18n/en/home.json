@@ -1,19 +1,19 @@
 {
   "home": {
-    "title": "Welcome, Java Hipster!",
-    "subtitle": "This is your homepage",
+    "title": "Eight Star",
+    "subtitle": "Eight Star",
     "logged": {
       "message": "You are logged in as user \"{{username}}\"."
     },
-    "question": "If you have any question on JHipster:",
+    "question": "If you have any question on Eight Star:",
     "link": {
-      "homepage": "JHipster homepage",
-      "stackoverflow": "JHipster on Stack Overflow",
-      "bugtracker": "JHipster bug tracker",
-      "chat": "JHipster public chat room",
-      "follow": "follow @jhipster on Twitter"
+      "homepage": "Eight Star homepage",
+      "stackoverflow": "Eight Star on Stack Overflow",
+      "bugtracker": "Eight Star bug tracker",
+      "chat": "Eight Star public chat room",
+      "follow": "follow @Eight Star on Twitter"
     },
-    "like": "If you like JHipster, don't forget to give us a star on",
+    "like": "If you like Eight Star, don't forget to give us a star on",
     "github": "GitHub"
   }
 }

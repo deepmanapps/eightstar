@@ -21,7 +21,7 @@
   "fluentMethods": true,
   "jpaMetamodelFiltering": false,
   "name": "Services",
-  "pagination": "no",
+  "pagination": "pagination",
   "readOnly": false,
   "relationships": [
     {

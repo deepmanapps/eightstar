@@ -3,6 +3,8 @@ package com.altair.eightstar.service;
 import com.altair.eightstar.service.dto.LocationDTO;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 /**
  * Service Interface for managing {@link com.altair.eightstar.domain.Location}.
@@ -35,9 +37,10 @@ public interface LocationService {
     /**
      * Get all the locations.
      *
+     * @param pageable the pagination information.
      * @return the list of entities.
      */
-    List<LocationDTO> findAll();
+    Page<LocationDTO> findAll(Pageable pageable);
     /**
      * Get all the LocationDTO where Hotel is {@code null}.
      *

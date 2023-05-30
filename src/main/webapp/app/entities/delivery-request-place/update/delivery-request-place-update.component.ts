@@ -50,8 +50,10 @@ export class DeliveryRequestPlaceUpdateComponent implements OnInit {
     this.isSaving = true;
     const deliveryRequestPlace = this.deliveryRequestPlaceFormService.getDeliveryRequestPlace(this.editForm);
     if (deliveryRequestPlace.id !== null) {
+      // @ts-ignore
       this.subscribeToSaveResponse(this.deliveryRequestPlaceService.update(deliveryRequestPlace));
     } else {
+      // @ts-ignore
       this.subscribeToSaveResponse(this.deliveryRequestPlaceService.create(deliveryRequestPlace));
     }
   }

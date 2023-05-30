@@ -35,7 +35,7 @@
   "javadoc": "The Entity entity.\\n@author A true hipster",
   "jpaMetamodelFiltering": false,
   "name": "Hotel",
-  "pagination": "no",
+  "pagination": "pagination",
   "readOnly": false,
   "relationships": [
     {

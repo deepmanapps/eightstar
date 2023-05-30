@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { SessionStorageService } from 'ngx-webstorage';
@@ -16,7 +16,8 @@ import { EntityNavbarItems } from 'app/entities/entity-navbar-items';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
 })
-export class NavbarComponent implements OnInit {
+export class NavbarJhComponent implements OnInit {
+  @Input() toggleBtnClass: string = '';
   inProduction?: boolean;
   isNavbarCollapsed = true;
   languages = LANGUAGES;

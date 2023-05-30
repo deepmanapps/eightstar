@@ -8,11 +8,13 @@ import { of } from 'rxjs';
 import { DeliveryRequestPlaceService } from '../service/delivery-request-place.service';
 
 import { DeliveryRequestPlaceComponent } from './delivery-request-place.component';
+import SpyInstance = jest.SpyInstance;
 
 describe('DeliveryRequestPlace Management Component', () => {
   let comp: DeliveryRequestPlaceComponent;
   let fixture: ComponentFixture<DeliveryRequestPlaceComponent>;
   let service: DeliveryRequestPlaceService;
+  let routerNavigateSpy: SpyInstance<Promise<boolean>>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -46,6 +48,7 @@ describe('DeliveryRequestPlace Management Component', () => {
     fixture = TestBed.createComponent(DeliveryRequestPlaceComponent);
     comp = fixture.componentInstance;
     service = TestBed.inject(DeliveryRequestPlaceService);
+    routerNavigateSpy = jest.spyOn(comp.router, 'navigate');
 
     const headers = new HttpHeaders();
     jest.spyOn(service, 'query').mockReturnValue(
@@ -75,5 +78,39 @@ describe('DeliveryRequestPlace Management Component', () => {
       expect(service.getDeliveryRequestPlaceIdentifier).toHaveBeenCalledWith(entity);
       expect(id).toBe(entity.id);
     });
+  });
+
+  it('should load a page', () => {
+    // WHEN
+    comp.navigateToPage(1);
+
+    // THEN
+    expect(routerNavigateSpy).toHaveBeenCalled();
+  });
+
+  it('should calculate the sort attribute for an id', () => {
+    // WHEN
+    comp.ngOnInit();
+
+    // THEN
+    expect(service.query).toHaveBeenLastCalledWith(expect.objectContaining({ sort: ['id,desc'] }));
+  });
+
+  it('should calculate the sort attribute for a non-id attribute', () => {
+    // GIVEN
+    comp.predicate = 'name';
+
+    // WHEN
+    comp.navigateToWithComponentValues();
+
+    // THEN
+    expect(routerNavigateSpy).toHaveBeenLastCalledWith(
+      expect.anything(),
+      expect.objectContaining({
+        queryParams: expect.objectContaining({
+          sort: ['name,asc'],
+        }),
+      })
+    );
   });
 });

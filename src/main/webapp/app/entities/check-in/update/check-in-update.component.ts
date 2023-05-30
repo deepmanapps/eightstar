@@ -66,8 +66,10 @@ export class CheckInUpdateComponent implements OnInit {
     this.isSaving = true;
     const checkIn = this.checkInFormService.getCheckIn(this.editForm);
     if (checkIn.id !== null) {
+      // @ts-ignore
       this.subscribeToSaveResponse(this.checkInService.update(checkIn));
     } else {
+      // @ts-ignore
       this.subscribeToSaveResponse(this.checkInService.create(checkIn));
     }
   }

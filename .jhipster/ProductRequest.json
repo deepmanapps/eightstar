@@ -25,7 +25,7 @@
   "fluentMethods": true,
   "jpaMetamodelFiltering": false,
   "name": "ProductRequest",
-  "pagination": "no",
+  "pagination": "pagination",
   "readOnly": false,
   "relationships": [
     {

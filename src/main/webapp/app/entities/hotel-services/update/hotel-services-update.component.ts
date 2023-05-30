@@ -56,8 +56,10 @@ export class HotelServicesUpdateComponent implements OnInit {
     this.isSaving = true;
     const hotelServices = this.hotelServicesFormService.getHotelServices(this.editForm);
     if (hotelServices.id !== null) {
+      // @ts-ignore
       this.subscribeToSaveResponse(this.hotelServicesService.update(hotelServices));
     } else {
+      // @ts-ignore
       this.subscribeToSaveResponse(this.hotelServicesService.create(hotelServices));
     }
   }

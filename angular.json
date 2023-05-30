@@ -33,9 +33,10 @@
               "src/main/webapp/content",
               "src/main/webapp/favicon.ico",
               "src/main/webapp/manifest.webapp",
-              "src/main/webapp/robots.txt"
+              "src/main/webapp/robots.txt",
+              "src/main/webapp/content/metronic/assets"
             ],
-            "styles": ["src/main/webapp/content/scss/vendor.scss", "src/main/webapp/content/scss/global.scss"],
+            "styles": ["src/main/webapp/content/metronic/styles.scss"],
             "scripts": []
           },
           "configurations": {

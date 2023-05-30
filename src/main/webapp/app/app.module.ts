@@ -1,4 +1,4 @@
-import { NgModule, LOCALE_ID } from '@angular/core';
+import { NgModule, LOCALE_ID, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import locale from '@angular/common/locales/en';
@@ -11,7 +11,7 @@ import { NgbDateAdapter, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap'
 
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import './config/dayjs';
-import { SharedModule } from 'app/shared/shared.module';
+import { SharedSourcesModule } from 'app/sharedSources/shared.module';
 import { TranslationModule } from 'app/shared/language/translation.module';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeModule } from './home/home.module';
@@ -21,14 +21,25 @@ import { fontAwesomeIcons } from './config/font-awesome-icons';
 import { httpInterceptorProviders } from 'app/core/interceptor/index';
 import { FindLanguageFromKeyPipe } from 'app/shared/language/find-language-from-key.pipe';
 import { MainComponent } from './layouts/main/main.component';
-import { NavbarComponent } from './layouts/navbar/navbar.component';
+import { HomeComponent } from './home/home.component';
+import { NavbarJhComponent } from './layouts/navbar/navbar.component';
 import { FooterComponent } from './layouts/footer/footer.component';
-import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
+//import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ActiveMenuDirective } from './layouts/navbar/active-menu.directive';
 import { ErrorComponent } from './layouts/error/error.component';
-
+import { LayoutModule } from './_metronic/layout/layout.module';
+import { LoginModule } from './login/login.module';
+import { LayoutComponent } from './_metronic/layout/layout.component';
+import { LoginComponent } from './login/login.component';
+import { SharedModule } from './_metronic/shared/shared.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+//import {KeeniconComponent} from "./_metronic/shared/keenicon/keenicon.component";
 @NgModule({
   imports: [
+    ReactiveFormsModule,
+    SharedModule,
+    LoginModule,
+    LayoutModule,
     BrowserModule,
     SharedModule,
     HomeModule,
@@ -47,7 +58,7 @@ import { ErrorComponent } from './layouts/error/error.component';
     FindLanguageFromKeyPipe,
     httpInterceptorProviders,
   ],
-  declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
+  declarations: [LoginComponent, MainComponent, ErrorComponent, ActiveMenuDirective, FooterComponent],
   bootstrap: [MainComponent],
 })
 export class AppModule {

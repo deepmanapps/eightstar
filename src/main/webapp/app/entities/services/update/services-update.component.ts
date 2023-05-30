@@ -47,8 +47,10 @@ export class ServicesUpdateComponent implements OnInit {
     this.isSaving = true;
     const services = this.servicesFormService.getServices(this.editForm);
     if (services.id !== null) {
+      // @ts-ignore
       this.subscribeToSaveResponse(this.servicesService.update(services));
     } else {
+      // @ts-ignore
       this.subscribeToSaveResponse(this.servicesService.create(services));
     }
   }

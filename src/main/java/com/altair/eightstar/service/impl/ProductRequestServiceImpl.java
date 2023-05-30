@@ -5,12 +5,11 @@ import com.altair.eightstar.repository.ProductRequestRepository;
 import com.altair.eightstar.service.ProductRequestService;
 import com.altair.eightstar.service.dto.ProductRequestDTO;
 import com.altair.eightstar.service.mapper.ProductRequestMapper;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -65,13 +64,9 @@ public class ProductRequestServiceImpl implements ProductRequestService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<ProductRequestDTO> findAll() {
+    public Page<ProductRequestDTO> findAll(Pageable pageable) {
         log.debug("Request to get all ProductRequests");
-        return productRequestRepository
-            .findAll()
-            .stream()
-            .map(productRequestMapper::toDto)
-            .collect(Collectors.toCollection(LinkedList::new));
+        return productRequestRepository.findAll(pageable).map(productRequestMapper::toDto);
     }
 
     @Override

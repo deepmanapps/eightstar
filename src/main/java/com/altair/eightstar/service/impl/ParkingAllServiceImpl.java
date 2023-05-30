@@ -12,6 +12,8 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -66,9 +68,9 @@ public class ParkingAllServiceImpl implements ParkingAllService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<ParkingAllDTO> findAll() {
+    public Page<ParkingAllDTO> findAll(Pageable pageable) {
         log.debug("Request to get all ParkingAlls");
-        return parkingAllRepository.findAll().stream().map(parkingAllMapper::toDto).collect(Collectors.toCollection(LinkedList::new));
+        return parkingAllRepository.findAll(pageable).map(parkingAllMapper::toDto);
     }
 
     /**

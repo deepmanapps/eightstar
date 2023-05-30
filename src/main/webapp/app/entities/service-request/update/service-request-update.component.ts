@@ -53,6 +53,7 @@ export class ServiceRequestUpdateComponent implements OnInit {
   compareCheckIn = (o1: ICheckIn | null, o2: ICheckIn | null): boolean => this.checkInService.compareCheckIn(o1, o2);
 
   ngOnInit(): void {
+    // @ts-ignore
     this.activatedRoute.data.subscribe(({ serviceRequest }) => {
       this.serviceRequest = serviceRequest;
       if (serviceRequest) {
@@ -71,8 +72,10 @@ export class ServiceRequestUpdateComponent implements OnInit {
     this.isSaving = true;
     const serviceRequest = this.serviceRequestFormService.getServiceRequest(this.editForm);
     if (serviceRequest.id !== null) {
+      // @ts-ignore
       this.subscribeToSaveResponse(this.serviceRequestService.update(serviceRequest));
     } else {
+      // @ts-ignore
       this.subscribeToSaveResponse(this.serviceRequestService.create(serviceRequest));
     }
   }

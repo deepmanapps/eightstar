@@ -5,12 +5,11 @@ import com.altair.eightstar.repository.HotelRepository;
 import com.altair.eightstar.service.HotelService;
 import com.altair.eightstar.service.dto.HotelDTO;
 import com.altair.eightstar.service.mapper.HotelMapper;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -65,9 +64,9 @@ public class HotelServiceImpl implements HotelService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<HotelDTO> findAll() {
+    public Page<HotelDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Hotels");
-        return hotelRepository.findAll().stream().map(hotelMapper::toDto).collect(Collectors.toCollection(LinkedList::new));
+        return hotelRepository.findAll(pageable).map(hotelMapper::toDto);
     }
 
     @Override

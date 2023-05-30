@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-
+import { HomeComponent } from './home/home.component';
 import { errorRoute } from './layouts/error/error.route';
 import { navbarRoute } from './layouts/navbar/navbar.route';
 import { DEBUG_INFO_ENABLED } from 'app/app.constants';
@@ -12,6 +12,7 @@ import { UserRouteAccessService } from 'app/core/auth/user-route-access.service'
   imports: [
     RouterModule.forRoot(
       [
+        { path: '', redirectTo: 'home', pathMatch: 'full' },
         {
           path: 'admin',
           data: {
@@ -25,8 +26,16 @@ import { UserRouteAccessService } from 'app/core/auth/user-route-access.service'
           loadChildren: () => import('./account/account.module').then(m => m.AccountModule),
         },
         {
-          path: 'login',
+          path: '',
+          loadChildren: () => import('./home/home.module').then(m => m.HomeModule),
+        },
+        {
+          path: '',
           loadChildren: () => import('./login/login.module').then(m => m.LoginModule),
+        },
+        {
+          path: 'error',
+          loadChildren: () => import('./errors/errors.module').then(m => m.ErrorsModule),
         },
         {
           path: '',

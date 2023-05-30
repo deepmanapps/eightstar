@@ -1,8 +1,9 @@
 package com.altair.eightstar.service;
 
 import com.altair.eightstar.service.dto.ServicesDTO;
-import java.util.List;
 import java.util.Optional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 /**
  * Service Interface for managing {@link com.altair.eightstar.domain.Services}.
@@ -35,9 +36,10 @@ public interface ServicesService {
     /**
      * Get all the services.
      *
+     * @param pageable the pagination information.
      * @return the list of entities.
      */
-    List<ServicesDTO> findAll();
+    Page<ServicesDTO> findAll(Pageable pageable);
 
     /**
      * Get the "id" services.

@@ -41,8 +41,10 @@ export class CustomerUpdateComponent implements OnInit {
     this.isSaving = true;
     const customer = this.customerFormService.getCustomer(this.editForm);
     if (customer.id !== null) {
+      // @ts-ignore
       this.subscribeToSaveResponse(this.customerService.update(customer));
     } else {
+      // @ts-ignore
       this.subscribeToSaveResponse(this.customerService.create(customer));
     }
   }

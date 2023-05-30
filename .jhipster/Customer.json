@@ -54,7 +54,7 @@
   "fluentMethods": true,
   "jpaMetamodelFiltering": false,
   "name": "Customer",
-  "pagination": "no",
+  "pagination": "pagination",
   "readOnly": false,
   "relationships": [
     {

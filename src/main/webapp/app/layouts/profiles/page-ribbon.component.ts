@@ -6,11 +6,6 @@ import { ProfileService } from './profile.service';
 
 @Component({
   selector: 'es-page-ribbon',
-  template: `
-    <div class="ribbon" *ngIf="ribbonEnv$ | async as ribbonEnv">
-      <a href="" esTranslate="global.ribbon.{{ ribbonEnv }}">{{ { dev: 'Development' }[ribbonEnv] || '' }}</a>
-    </div>
-  `,
   styleUrls: ['./page-ribbon.component.scss'],
 })
 export class PageRibbonComponent implements OnInit {

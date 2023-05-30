@@ -3,6 +3,8 @@ package com.altair.eightstar.service;
 import com.altair.eightstar.service.dto.ParkingAllDTO;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 /**
  * Service Interface for managing {@link com.altair.eightstar.domain.ParkingAll}.
@@ -35,9 +37,10 @@ public interface ParkingAllService {
     /**
      * Get all the parkingAlls.
      *
+     * @param pageable the pagination information.
      * @return the list of entities.
      */
-    List<ParkingAllDTO> findAll();
+    Page<ParkingAllDTO> findAll(Pageable pageable);
     /**
      * Get all the ParkingAllDTO where ServiceRequest is {@code null}.
      *
