@@ -33,9 +33,11 @@ import { LayoutComponent } from './_metronic/layout/layout.component';
 import { LoginComponent } from './login/login.component';
 import { SharedModule } from './_metronic/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 //import {KeeniconComponent} from "./_metronic/shared/keenicon/keenicon.component";
 @NgModule({
   imports: [
+    NgbModule,
     ReactiveFormsModule,
     SharedModule,
     LoginModule,

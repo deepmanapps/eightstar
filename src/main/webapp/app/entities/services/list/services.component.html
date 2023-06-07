@@ -1,124 +1,169 @@
-<div>
-  <h2 id="page-heading" data-cy="ServicesHeading">
-    <span esTranslate="eightStarApp.services.home.title">Services</span>
+<div class="app-container container-xxl">
+  <div class="card shadow-sm">
+    <div class="card-header">
+      <!--begin::Card title-->
+      <div class="card-title">
+        <div class="d-flex align-items-center position-relative my-1">
+          <h2 id="page-heading" data-cy="ServicesHeading">
+            <span esTranslate="eightStarApp.services.home.title">Services</span>
+          </h2>
+        </div>
+      </div>
+      <div class="card-toolbar">
+        <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
+          <button
+            type="button"
+            class="btn btn-light-primary me-3"
+            data-kt-menu-trigger="click"
+            data-kt-menu-placement="bottom-end"
+            (click)="load()"
+            [disabled]="isLoading"
+          >
+            <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+            <span esTranslate="eightStarApp.services.home.refreshListLabel">Refresh list</span>
+          </button>
 
-    <div class="d-flex justify-content-end">
-      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
-        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
-        <span esTranslate="eightStarApp.services.home.refreshListLabel">Refresh list</span>
-      </button>
-
-      <button
-        id="jh-create-entity"
-        data-cy="entityCreateButton"
-        class="btn btn-primary jh-create-entity create-services"
-        [routerLink]="['/services/new']"
-      >
-        <fa-icon icon="plus"></fa-icon>
-        <span esTranslate="eightStarApp.services.home.createLabel"> Create a new Services </span>
-      </button>
+          <button
+            type="button"
+            id="jh-create-entity"
+            data-cy="entityCreateButton"
+            class="btn btn-light-primary me-3"
+            data-kt-menu-trigger="click"
+            data-kt-menu-placement="bottom-end"
+            [routerLink]="['/services/new']"
+          >
+            <fa-icon icon="plus"></fa-icon>
+            <span esTranslate="eightStarApp.services.home.createLabel"> Create a new Services </span>
+          </button>
+        </div>
+      </div>
     </div>
-  </h2>
+    <es-alert-error></es-alert-error>
 
-  <es-alert-error></es-alert-error>
+    <es-alert></es-alert>
+    <div class="card-body py-4">
+      <div class="alert alert-warning" id="no-result" *ngIf="services?.length === 0">
+        <span esTranslate="eightStarApp.services.home.notFound">No Services found</span>
+      </div>
 
-  <es-alert></es-alert>
+      <!-- <div class="table-responsive table-entities" id="entities" *ngIf="services && services.length > 0"> -->
+      <table class="table table-hover table-rounded align-middle table-row-dashed fs-6 gy-5" aria-describedby="page-heading">
+        <thead>
+          <tr
+            esSort
+            [(predicate)]="predicate"
+            [(ascending)]="ascending"
+            (sortChange)="navigateToWithComponentValues()"
+            class="text-start text-muted fw-bold fs-7 text-uppercase gs-0"
+          >
+            <!-- <th scope="col" esSortBy="id" class="w-10px pe-2">
+              <div class="d-flex">
+                <span esTranslate="eightStarApp.services.id">Id</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>-->
+            <th scope="col" esSortBy="nom" class="min-w-125px">
+              <div class="d-flex">
+                <span esTranslate="eightStarApp.services.nom">Nom</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" esSortBy="description" class="min-w-125px">
+              <div class="d-flex">
+                <span esTranslate="eightStarApp.services.description">Description</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" esSortBy="parentService.id" class="min-w-125px">
+              <div class="d-flex">
+                <span esTranslate="eightStarApp.services.parentService">Parent Service</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-600 fw-semibold">
+          <tr *ngFor="let services of services; trackBy: trackId" data-cy="entityTable">
+            <!--  <td >
+              <a [routerLink]="['/services', services.id, 'view']">{{ services.id }}</a>
+            </td>-->
+            <td>
+              <a class="text-info" [routerLink]="['/services', services.id, 'view']">{{ services.nom }}</a>
+            </td>
+            <td>{{ services.description }}</td>
+            <td>
+              <div *ngIf="services.parentService">
+                <a [routerLink]="['/services', services.parentService.id, 'view']">{{ services.parentService.id }}</a>
+              </div>
+            </td>
+            <td class="text-end">
+              <div ngbDropdown>
+                <button type="button" class="btn btn-bg-light btn-color-primary" id="dropdownForm1" ngbDropdownToggle>
+                  <i class="bi bi-boxes fs-1x"></i> Actions
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownForm1">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col text-center">
+                        <div class="dropdown-divider"></div>
+                        <div class="btn-group-vertical">
+                          <button
+                            type="submit"
+                            [routerLink]="['/services', services.id, 'view']"
+                            class="btn btn-info btn-sm"
+                            data-cy="entityDetailsButton"
+                          >
+                            <fa-icon icon="eye"></fa-icon>
+                            <span class="d-none d-md-inline" esTranslate="entity.action.view">View</span>
+                          </button>
+                          <div class="dropdown-divider"></div>
 
-  <div class="alert alert-warning" id="no-result" *ngIf="services?.length === 0">
-    <span esTranslate="eightStarApp.services.home.notFound">No Services found</span>
-  </div>
+                          <button
+                            type="submit"
+                            [routerLink]="['/services', services.id, 'edit']"
+                            class="btn btn-primary btn-sm"
+                            data-cy="entityEditButton"
+                          >
+                            <fa-icon icon="pencil-alt"></fa-icon>
+                            <span class="d-none d-md-inline" esTranslate="entity.action.edit">Edit</span>
+                          </button>
+                          <div class="dropdown-divider"></div>
 
-  <div class="table-responsive table-entities" id="entities" *ngIf="services && services.length > 0">
-    <table class="table table-striped" aria-describedby="page-heading">
-      <thead>
-        <tr esSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
-          <th scope="col" esSortBy="id">
-            <div class="d-flex">
-              <span esTranslate="eightStarApp.services.id">Id</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" esSortBy="nom">
-            <div class="d-flex">
-              <span esTranslate="eightStarApp.services.nom">Nom</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" esSortBy="description">
-            <div class="d-flex">
-              <span esTranslate="eightStarApp.services.description">Description</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" esSortBy="parentService.id">
-            <div class="d-flex">
-              <span esTranslate="eightStarApp.services.parentService">Parent Service</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let services of services; trackBy: trackId" data-cy="entityTable">
-          <td>
-            <a [routerLink]="['/services', services.id, 'view']">{{ services.id }}</a>
-          </td>
-          <td>{{ services.nom }}</td>
-          <td>{{ services.description }}</td>
-          <td>
-            <div *ngIf="services.parentService">
-              <a [routerLink]="['/services', services.parentService.id, 'view']">{{ services.parentService.id }}</a>
-            </div>
-          </td>
-          <td class="text-end">
-            <div class="btn-group">
-              <button
-                type="submit"
-                [routerLink]="['/services', services.id, 'view']"
-                class="btn btn-info btn-sm"
-                data-cy="entityDetailsButton"
-              >
-                <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline" esTranslate="entity.action.view">View</span>
-              </button>
+                          <button type="submit" (click)="delete(services)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                            <fa-icon icon="times"></fa-icon>
+                            <span class="d-none d-md-inline" esTranslate="entity.action.delete">Delete</span>
+                          </button>
+                        </div>
+                      </div>
+                      <div class="dropdown-divider"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- </div> -->
 
-              <button
-                type="submit"
-                [routerLink]="['/services', services.id, 'edit']"
-                class="btn btn-primary btn-sm"
-                data-cy="entityEditButton"
-              >
-                <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline" esTranslate="entity.action.edit">Edit</span>
-              </button>
+      <div *ngIf="services && services.length > 0">
+        <div class="d-flex justify-content-center">
+          <es-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></es-item-count>
+        </div>
 
-              <button type="submit" (click)="delete(services)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
-                <fa-icon icon="times"></fa-icon>
-                <span class="d-none d-md-inline" esTranslate="entity.action.delete">Delete</span>
-              </button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div *ngIf="services && services.length > 0">
-    <div class="d-flex justify-content-center">
-      <es-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></es-item-count>
-    </div>
-
-    <div class="d-flex justify-content-center">
-      <ngb-pagination
-        [collectionSize]="totalItems"
-        [page]="page"
-        [pageSize]="itemsPerPage"
-        [maxSize]="5"
-        [rotate]="true"
-        [boundaryLinks]="true"
-        (pageChange)="navigateToPage($event)"
-      ></ngb-pagination>
+        <div class="d-flex justify-content-center">
+          <ngb-pagination
+            [collectionSize]="totalItems"
+            [page]="page"
+            [pageSize]="itemsPerPage"
+            [maxSize]="5"
+            [rotate]="true"
+            [boundaryLinks]="true"
+            (pageChange)="navigateToPage($event)"
+          ></ngb-pagination>
+        </div>
+      </div>
     </div>
   </div>
 </div>

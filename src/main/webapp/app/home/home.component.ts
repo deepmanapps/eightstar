@@ -5,7 +5,8 @@ import { takeUntil } from 'rxjs/operators';
 
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
-
+import { MenuComponent } from 'app/_metronic/kt/components/MenuComponent';
+import { DrawerComponent } from 'app/_metronic/kt/components/_DrawerComponent';
 @Component({
   selector: 'es-home',
   templateUrl: './home.component.html',
@@ -19,6 +20,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(private accountService: AccountService, private router: Router) {}
 
   ngOnInit(): void {
+    MenuComponent.reinitialization();
+    DrawerComponent.reinitialization();
     this.accountService
       .getAuthenticationState()
       .pipe(takeUntil(this.destroy$))

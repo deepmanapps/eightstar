@@ -4,7 +4,8 @@ import { Subscription } from 'rxjs';
 import { LayoutService } from './core/layout.service';
 import { LayoutInitService } from './core/layout-init.service';
 import { ILayout, LayoutType } from './core/configs/config';
-
+import { MenuComponent } from '../kt/components/MenuComponent';
+import { DrawerComponent } from '../kt/components/_DrawerComponent';
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
@@ -87,6 +88,8 @@ export class LayoutComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    MenuComponent.reinitialization();
+    DrawerComponent.reinitialization();
     const subscr = this.layout.layoutConfigSubject.asObservable().subscribe(config => {
       this.updateProps(config);
     });
