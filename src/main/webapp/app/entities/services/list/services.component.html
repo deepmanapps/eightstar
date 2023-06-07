@@ -84,7 +84,7 @@
           </tr>
         </thead>
         <tbody class="text-gray-600 fw-semibold">
-          <tr *ngFor="let services of services; trackBy: trackId" data-cy="entityTable">
+          <tr *ngFor="let services of servicesAll; trackBy: trackId" data-cy="entityTable">
             <!--  <td >
               <a [routerLink]="['/services', services.id, 'view']">{{ services.id }}</a>
             </td>-->
@@ -94,7 +94,7 @@
             <td>{{ services.description }}</td>
             <td>
               <div *ngIf="services.parentService">
-                <a [routerLink]="['/services', services.parentService.id, 'view']">{{ services.parentService.id }}</a>
+                <a [routerLink]="['/services', services.parentService.id, 'view']">{{ services.parentService.nom }}</a>
               </div>
             </td>
             <td class="text-end">
@@ -147,7 +147,7 @@
       </table>
       <!-- </div> -->
 
-      <div *ngIf="services && services.length > 0">
+      <div *ngIf="servicesAll && servicesAll.length > 0">
         <div class="d-flex justify-content-center">
           <es-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></es-item-count>
         </div>

@@ -2,6 +2,7 @@
   "eightStarApp": {
     "serviceRequest": {
       "home": {
+        "id": "Request Id",
         "title": "Service Requests",
         "refreshListLabel": "Refresh list",
         "createLabel": "Create a new Service Request",

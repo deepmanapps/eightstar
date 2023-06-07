@@ -1,49 +1,75 @@
-<div>
-  <h2 id="page-heading" data-cy="CheckInHeading">
-    <span esTranslate="eightStarApp.checkIn.home.title">Check Ins</span>
+<div class="card shadow-sm">
+  <div class="card-header">
+    <!--begin::Card title-->
+    <div class="card-title">
+      <div class="d-flex align-items-center position-relative my-1">
+        <h2 id="page-heading" data-cy="HotelHeading">
+          <span esTranslate="eightStarApp.checkIn.home.title">Hotels</span>
+        </h2>
+      </div>
+    </div>
+    <div class="card-toolbar">
+      <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
+        <button
+          class="btn btn-light-primary me-3"
+          (click)="load()"
+          [disabled]="isLoading"
+          data-kt-menu-trigger="click"
+          data-kt-menu-placement="bottom-end"
+        >
+          <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+          <span esTranslate="eightStarApp.checkIn.home.refreshListLabel">Refresh list</span>
+        </button>
 
-    <div class="d-flex justify-content-end">
-      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
-        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
-        <span esTranslate="eightStarApp.checkIn.home.refreshListLabel">Refresh list</span>
-      </button>
-
-      <button
+        <!-- <button
         id="jh-create-entity"
         data-cy="entityCreateButton"
-        class="btn btn-primary jh-create-entity create-check-in"
+        class="btn btn-light-primary me-3"
+        data-kt-menu-trigger="click"
+        data-kt-menu-placement="bottom-end"
         [routerLink]="['/check-in/new']"
       >
         <fa-icon icon="plus"></fa-icon>
         <span esTranslate="eightStarApp.checkIn.home.createLabel"> Create a new Check In </span>
-      </button>
+      </button>-->
+      </div>
     </div>
-  </h2>
+  </div>
 
   <es-alert-error></es-alert-error>
 
   <es-alert></es-alert>
+  <div class="card-body py-3">
+    <div class="alert alert-warning" id="no-result" *ngIf="checkIns?.length === 0">
+      <span esTranslate="eightStarApp.checkIn.home.notFound">No Check Ins found</span>
+    </div>
 
-  <div class="alert alert-warning" id="no-result" *ngIf="checkIns?.length === 0">
-    <span esTranslate="eightStarApp.checkIn.home.notFound">No Check Ins found</span>
-  </div>
-
-  <div class="table-responsive table-entities" id="entities" *ngIf="checkIns && checkIns.length > 0">
-    <table class="table table-striped" aria-describedby="page-heading">
+    <!--<div class="table-responsive table-entities" id="entities" *ngIf="checkIns && checkIns.length > 0">-->
+    <table
+      class="table table-hover table-rounded table-responsive table-entities"
+      style="display: inline-block; table-layout: fixed; word-wrap: break-word"
+      aria-describedby="page-heading"
+    >
       <thead>
-        <tr esSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+        <tr
+          esSort
+          [(predicate)]="predicate"
+          [(ascending)]="ascending"
+          (sortChange)="navigateToWithComponentValues()"
+          class="text-start text-muted fw-bold fs-7 text-uppercase gs-0"
+        >
           <th scope="col" esSortBy="id">
             <div class="d-flex">
-              <span esTranslate="global.field.id">ID</span>
+              <span esTranslate="eightStarApp.checkIn.home.checkInNum">ID</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" esSortBy="identityPath">
+          <!-- <th scope="col" esSortBy="identityPath">
             <div class="d-flex">
               <span esTranslate="eightStarApp.checkIn.identityPath">Identity Path</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
-          </th>
+          </th>-->
           <th scope="col" esSortBy="status">
             <div class="d-flex">
               <span esTranslate="eightStarApp.checkIn.status">Status</span>
@@ -125,39 +151,45 @@
           <th scope="col"></th>
         </tr>
       </thead>
-      <tbody>
+      <tbody class="text-gray-600 font-weight-normal">
         <tr *ngFor="let checkIn of checkIns; trackBy: trackId" data-cy="entityTable">
           <td>
-            <a [routerLink]="['/check-in', checkIn.id, 'view']">{{ checkIn.id }}</a>
+            <a class="text-info" [routerLink]="['/check-in', checkIn.id, 'view']">{{ checkIn.id }}</a>
           </td>
-          <td>{{ checkIn.identityPath }}</td>
-          <td esTranslate="{{ 'eightStarApp.Status.' + checkIn.status }}">{{ checkIn.status }}</td>
-          <td>{{ checkIn.depositAmount }}</td>
-          <td esTranslate="{{ 'eightStarApp.PaymentMethod.' + checkIn.paymentMethod }}">{{ checkIn.paymentMethod }}</td>
-          <td>{{ checkIn.arrivalDate | formatMediumDatetime }}</td>
-          <td>{{ checkIn.departureDate | formatMediumDatetime }}</td>
-          <td>{{ checkIn.roomType }}</td>
-          <td>{{ checkIn.smooking }}</td>
-          <td>{{ checkIn.adults }}</td>
-          <td>{{ checkIn.children }}</td>
-          <td>{{ checkIn.notes }}</td>
+          <!-- <td class="font-size-sm">{{ checkIn.identityPath }}</td> -->
           <td>
+            <div *ngIf="checkIn.status === 'CONFIRMED'" class="badge badge-light-success fw-bold">{{ checkIn.status }}</div>
+            <div *ngIf="checkIn.status === 'CANCELLED'" class="badge badge-light-danger fw-bold">{{ checkIn.status }}</div>
+            <div *ngIf="checkIn.status === 'COMPLETED'" class="badge badge-light-primary fw-bold">{{ checkIn.status }}</div>
+          </td>
+          <td style="font-size: x-small">{{ checkIn.depositAmount }}</td>
+          <td style="font-size: x-small" esTranslate="{{ 'eightStarApp.PaymentMethod.' + checkIn.paymentMethod }}">
+            {{ checkIn.paymentMethod }}
+          </td>
+          <td style="font-size: x-small">{{ checkIn.arrivalDate | formatMediumDatetime | date: 'dd/MM/yyyy' }}</td>
+          <td style="font-size: x-small">{{ checkIn.departureDate | formatMediumDatetime | date: 'dd/MM/yyyy' }}</td>
+          <td style="font-size: x-small">{{ checkIn.roomType }}</td>
+          <td style="font-size: x-small">{{ checkIn.smooking }}</td>
+          <td style="font-size: x-small">{{ checkIn.adults }}</td>
+          <td style="font-size: x-small">{{ checkIn.children }}</td>
+          <td style="font-size: x-small">{{ checkIn.notes }}</td>
+          <td style="font-size: x-small">
             <div *ngIf="checkIn.checkOut">
               <a [routerLink]="['/check-out', checkIn.checkOut.id, 'view']">{{ checkIn.checkOut.id }}</a>
             </div>
           </td>
-          <td>
+          <td style="font-size: x-small">
             <div *ngIf="checkIn.hotel">
               <a [routerLink]="['/hotel', checkIn.hotel.id, 'view']">{{ checkIn.hotel.id }}</a>
             </div>
           </td>
-          <td>
+          <td class="font-weight-lighter">
             <div *ngIf="checkIn.customer">
               <a [routerLink]="['/customer', checkIn.customer.id, 'view']">{{ checkIn.customer.id }}</a>
             </div>
           </td>
-          <td class="text-end">
-            <div class="btn-group">
+          <td class="text-end" style="font-size: x-small">
+            <!-- <div class="btn-group">
               <button
                 type="submit"
                 [routerLink]="['/check-in', checkIn.id, 'view']"
@@ -182,6 +214,50 @@
                 <fa-icon icon="times"></fa-icon>
                 <span class="d-none d-md-inline" esTranslate="entity.action.delete">Delete</span>
               </button>
+            </div>-->
+
+            <div ngbDropdown>
+              <button type="button" class="btn btn-bg-light btn-color-primary" id="dropdownForm1" ngbDropdownToggle>
+                <i class="bi bi-boxes fs-1x"></i> Actions
+              </button>
+              <div ngbDropdownMenu aria-labelledby="dropdownForm1">
+                <div class="container">
+                  <div class="row">
+                    <div class="col text-center">
+                      <div class="dropdown-divider"></div>
+                      <div class="btn-group-vertical">
+                        <button
+                          type="submit"
+                          [routerLink]="['/check-in', checkIn.id, 'view']"
+                          class="btn btn-info btn-sm"
+                          data-cy="entityDetailsButton"
+                        >
+                          <fa-icon icon="eye"></fa-icon>
+                          <span class="d-none d-md-inline" esTranslate="entity.action.view">View</span>
+                        </button>
+                        <div class="dropdown-divider"></div>
+
+                        <button
+                          type="submit"
+                          [routerLink]="['/check-in', checkIn.id, 'edit']"
+                          class="btn btn-primary btn-sm"
+                          data-cy="entityEditButton"
+                        >
+                          <fa-icon icon="pencil-alt"></fa-icon>
+                          <span class="d-none d-md-inline" esTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <div class="dropdown-divider"></div>
+
+                        <button type="submit" (click)="delete(checkIn)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                          <fa-icon icon="times"></fa-icon>
+                          <span class="d-none d-md-inline" esTranslate="entity.action.delete">Delete</span>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                  </div>
+                </div>
+              </div>
             </div>
           </td>
         </tr>

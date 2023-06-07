@@ -20,7 +20,7 @@
       "id": "ID",
       "hotelId": "Hotel Id",
       "name": "Name",
-      "description": "Description",
+      "description": "Hotel info",
       "adresse": "Adresse",
       "starsNumber": "Stars Number",
       "emergencyNumber": "Emergency Number",

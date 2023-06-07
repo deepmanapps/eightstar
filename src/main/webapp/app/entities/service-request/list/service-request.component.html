@@ -1,14 +1,27 @@
-<div>
-  <h2 id="page-heading" data-cy="ServiceRequestHeading">
-    <span esTranslate="eightStarApp.serviceRequest.home.title">Service Requests</span>
+<div class="card shadow-sm">
+  <div class="card-header">
+    <!--begin::Card title-->
+    <div class="card-title">
+      <div class="d-flex align-items-center position-relative my-1">
+        <h2 id="page-heading" data-cy="HotelHeading">
+          <span esTranslate="eightStarApp.serviceRequest.home.title">Service Requests</span>
+        </h2>
+      </div>
+    </div>
+    <div class="card-toolbar">
+      <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
+        <button
+          class="btn btn-light-primary me-3"
+          (click)="load()"
+          [disabled]="isLoading"
+          data-kt-menu-trigger="click"
+          data-kt-menu-placement="bottom-end"
+        >
+          <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+          <span esTranslate="eightStarApp.serviceRequest.home.refreshListLabel">Refresh list</span>
+        </button>
 
-    <div class="d-flex justify-content-end">
-      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
-        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
-        <span esTranslate="eightStarApp.serviceRequest.home.refreshListLabel">Refresh list</span>
-      </button>
-
-      <button
+        <!--   <button
         id="jh-create-entity"
         data-cy="entityCreateButton"
         class="btn btn-primary jh-create-entity create-service-request"
@@ -16,25 +29,36 @@
       >
         <fa-icon icon="plus"></fa-icon>
         <span esTranslate="eightStarApp.serviceRequest.home.createLabel"> Create a new Service Request </span>
-      </button>
+      </button> -->
+      </div>
     </div>
-  </h2>
+  </div>
 
   <es-alert-error></es-alert-error>
 
   <es-alert></es-alert>
+  <div class="card-body py-3">
+    <div class="alert alert-warning" id="no-result" *ngIf="serviceRequests?.length === 0">
+      <span esTranslate="eightStarApp.serviceRequest.home.notFound">No Service Requests found</span>
+    </div>
 
-  <div class="alert alert-warning" id="no-result" *ngIf="serviceRequests?.length === 0">
-    <span esTranslate="eightStarApp.serviceRequest.home.notFound">No Service Requests found</span>
-  </div>
-
-  <div class="table-responsive table-entities" id="entities" *ngIf="serviceRequests && serviceRequests.length > 0">
-    <table class="table table-striped" aria-describedby="page-heading">
+    <!-- <div class="table-responsive table-entities" id="entities" *ngIf="serviceRequests && serviceRequests.length > 0">-->
+    <table
+      class="table table-hover table-rounded table-responsive table-entities"
+      style="display: inline-block; table-layout: fixed; word-wrap: break-word"
+      aria-describedby="page-heading"
+    >
       <thead>
-        <tr esSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+        <tr
+          esSort
+          [(predicate)]="predicate"
+          [(ascending)]="ascending"
+          (sortChange)="navigateToWithComponentValues()"
+          class="text-start text-muted fw-bold fs-7 text-uppercase gs-0"
+        >
           <th scope="col" esSortBy="id">
             <div class="d-flex">
-              <span esTranslate="global.field.id">ID</span>
+              <span esTranslate="eightStarApp.serviceRequest.home.id">ID</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
@@ -56,12 +80,12 @@
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" esSortBy="rejecttReason">
-            <div class="d-flex">
-              <span esTranslate="eightStarApp.serviceRequest.rejecttReason">Rejectt Reason</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
+          <!--<th scope="col" esSortBy="rejecttReason">
+             <div class="d-flex">
+               <span esTranslate="eightStarApp.serviceRequest.rejecttReason">Rejectt Reason</span>
+               <fa-icon class="p-1" icon="sort"></fa-icon>
+             </div>
+           </th>-->
           <th scope="col" esSortBy="requestDescription">
             <div class="d-flex">
               <span esTranslate="eightStarApp.serviceRequest.requestDescription">Request Description</span>
@@ -119,68 +143,122 @@
           <th scope="col"></th>
         </tr>
       </thead>
-      <tbody>
+      <tbody class="text-gray-600 font-weight-normal">
         <tr *ngFor="let serviceRequest of serviceRequests; trackBy: trackId" data-cy="entityTable">
           <td>
-            <a [routerLink]="['/service-request', serviceRequest.id, 'view']">{{ serviceRequest.id }}</a>
+            <a class="text-info" [routerLink]="['/service-request', serviceRequest.id, 'view']">{{ serviceRequest.id }}</a>
           </td>
-          <td>{{ serviceRequest.requestDate | formatMediumDatetime }}</td>
-          <td>{{ serviceRequest.requestThruDate | formatMediumDatetime }}</td>
-          <td esTranslate="{{ 'eightStarApp.RQStatus.' + serviceRequest.statusRequest }}">{{ serviceRequest.statusRequest }}</td>
-          <td>{{ serviceRequest.rejecttReason }}</td>
-          <td>{{ serviceRequest.requestDescription }}</td>
-          <td>{{ serviceRequest.objectNumber }}</td>
-          <td>{{ serviceRequest.guest }}</td>
-          <td>{{ serviceRequest.quantity }}</td>
-          <td>{{ serviceRequest.totalPrice }}</td>
+          <td style="font-size: x-small">{{ serviceRequest.requestDate | formatMediumDatetime | date: 'dd/MM/yyyy' }}</td>
+          <td style="font-size: x-small">{{ serviceRequest.requestThruDate | formatMediumDatetime | date: 'dd/MM/yyyy' }}</td>
           <td>
+            <div *ngIf="serviceRequest.statusRequest === 'OK'" class="badge badge-light-success fw-bold">
+              {{ serviceRequest.statusRequest }}
+            </div>
+            <div *ngIf="serviceRequest.statusRequest === 'NOK'" class="badge badge-light-danger fw-bold">
+              {{ serviceRequest.statusRequest }}
+            </div>
+            <div *ngIf="serviceRequest.statusRequest === 'INPROGRESS'" class="badge badge-light-primary fw-bold">
+              {{ serviceRequest.statusRequest }}
+            </div>
+          </td>
+          <!--<td style="font-size: x-small;">{{ serviceRequest.rejecttReason }}</td>-->
+          <td style="font-size: x-small">{{ serviceRequest.requestDescription }}</td>
+          <td style="font-size: x-small">{{ serviceRequest.objectNumber }}</td>
+          <td style="font-size: x-small">{{ serviceRequest.guest }}</td>
+          <td style="font-size: x-small">{{ serviceRequest.quantity }}</td>
+          <td style="font-size: x-small">{{ serviceRequest.totalPrice }}</td>
+          <td style="font-size: x-small">
             <div *ngIf="serviceRequest.parkingAll">
               <a [routerLink]="['/parking-all', serviceRequest.parkingAll.id, 'view']">{{ serviceRequest.parkingAll.id }}</a>
             </div>
           </td>
-          <td>
+          <td style="font-size: x-small">
             <div *ngIf="serviceRequest.deliveryRequestPlace">
               <a [routerLink]="['/delivery-request-place', serviceRequest.deliveryRequestPlace.id, 'view']">{{
                 serviceRequest.deliveryRequestPlace.id
               }}</a>
             </div>
           </td>
-          <td>
+          <td style="font-size: x-small">
             <div *ngIf="serviceRequest.services">
               <a [routerLink]="['/services', serviceRequest.services.id, 'view']">{{ serviceRequest.services.id }}</a>
             </div>
           </td>
-          <td>
+          <td style="font-size: x-small">
             <div *ngIf="serviceRequest.checkIn">
               <a [routerLink]="['/check-in', serviceRequest.checkIn.id, 'view']">{{ serviceRequest.checkIn.id }}</a>
             </div>
           </td>
           <td class="text-end">
-            <div class="btn-group">
-              <button
-                type="submit"
-                [routerLink]="['/service-request', serviceRequest.id, 'view']"
-                class="btn btn-info btn-sm"
-                data-cy="entityDetailsButton"
-              >
-                <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline" esTranslate="entity.action.view">View</span>
-              </button>
+            <!--<div class="btn-group">
+               <button
+                 type="submit"
+                 [routerLink]="['/service-request', serviceRequest.id, 'view']"
+                 class="btn btn-info btn-sm"
+                 data-cy="entityDetailsButton"
+               >
+                 <fa-icon icon="eye"></fa-icon>
+                 <span class="d-none d-md-inline" esTranslate="entity.action.view">View</span>
+               </button>
 
-              <button
-                type="submit"
-                [routerLink]="['/service-request', serviceRequest.id, 'edit']"
-                class="btn btn-primary btn-sm"
-                data-cy="entityEditButton"
-              >
-                <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline" esTranslate="entity.action.edit">Edit</span>
-              </button>
+               <button
+                 type="submit"
+                 [routerLink]="['/service-request', serviceRequest.id, 'edit']"
+                 class="btn btn-primary btn-sm"
+                 data-cy="entityEditButton"
+               >
+                 <fa-icon icon="pencil-alt"></fa-icon>
+                 <span class="d-none d-md-inline" esTranslate="entity.action.edit">Edit</span>
+               </button>
 
-              <button type="submit" (click)="delete(serviceRequest)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
-                <fa-icon icon="times"></fa-icon>
-                <span class="d-none d-md-inline" esTranslate="entity.action.delete">Delete</span>
+               <button type="submit" (click)="delete(serviceRequest)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                 <fa-icon icon="times"></fa-icon>
+                 <span class="d-none d-md-inline" esTranslate="entity.action.delete">Delete</span>
+               </button>
+             </div>-->
+
+            <div ngbDropdown>
+              <button type="button" class="btn btn-bg-light btn-color-primary" id="dropdownForm1" ngbDropdownToggle>
+                <i class="bi bi-boxes fs-1x"></i> Actions
               </button>
+              <div ngbDropdownMenu aria-labelledby="dropdownForm1">
+                <div class="container">
+                  <div class="row">
+                    <div class="col text-center">
+                      <div class="dropdown-divider"></div>
+                      <div class="btn-group-vertical">
+                        <button
+                          type="submit"
+                          [routerLink]="['/service-request', serviceRequest.id, 'view']"
+                          class="btn btn-info btn-sm"
+                          data-cy="entityDetailsButton"
+                        >
+                          <fa-icon icon="eye"></fa-icon>
+                          <span class="d-none d-md-inline" esTranslate="entity.action.view">View</span>
+                        </button>
+                        <div class="dropdown-divider"></div>
+
+                        <button
+                          type="submit"
+                          [routerLink]="['/service-request', serviceRequest.id, 'edit']"
+                          class="btn btn-primary btn-sm"
+                          data-cy="entityEditButton"
+                        >
+                          <fa-icon icon="pencil-alt"></fa-icon>
+                          <span class="d-none d-md-inline" esTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <div class="dropdown-divider"></div>
+
+                        <button type="submit" (click)="delete(serviceRequest)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                          <fa-icon icon="times"></fa-icon>
+                          <span class="d-none d-md-inline" esTranslate="entity.action.delete">Delete</span>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                  </div>
+                </div>
+              </div>
             </div>
           </td>
         </tr>

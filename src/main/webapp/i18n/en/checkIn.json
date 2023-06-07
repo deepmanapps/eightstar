@@ -2,6 +2,7 @@
   "eightStarApp": {
     "checkIn": {
       "home": {
+        "checkInNum": "CheckIn Number",
         "title": "Check Ins",
         "refreshListLabel": "Refresh list",
         "createLabel": "Create a new Check In",
