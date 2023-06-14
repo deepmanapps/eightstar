@@ -1,10 +1,10 @@
-<div *ngIf="!isAuthenticated()" class="h-100">
+<div *ngIf="!isAuthenticated()">
   <es-login></es-login>
 </div>
 <div *ngIf="isAuthenticated()">
   <app-layout></app-layout>
+  <app-scripts-init></app-scripts-init>
+  <ng-container>
+    <app-scroll-top id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true"></app-scroll-top>
+  </ng-container>
 </div>
-<app-scripts-init></app-scripts-init>
-<ng-container>
-  <app-scroll-top id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true"></app-scroll-top>
-</ng-container>

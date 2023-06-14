@@ -15,7 +15,7 @@
         "question": "Are you sure you want to delete Services {{ id }}?"
       },
       "detail": {
-        "title": "Services"
+        "title": "Service"
       },
       "id": "Id",
       "nom": "Nom",

@@ -25,5 +25,6 @@ public interface ParkingAllMapper extends EntityMapper<ParkingAllDTO, ParkingAll
     @Named("hotelId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
+    @Mapping(target = "name", source = "name")
     HotelDTO toDtoHotelId(Hotel hotel);
 }

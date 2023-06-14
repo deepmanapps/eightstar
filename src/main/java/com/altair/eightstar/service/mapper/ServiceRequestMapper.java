@@ -26,6 +26,7 @@ public interface ServiceRequestMapper extends EntityMapper<ServiceRequestDTO, Se
     @Named("parkingAllId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
+    @Mapping(target = "name", source = "name")
     ParkingAllDTO toDtoParkingAllId(ParkingAll parkingAll);
 
     @Named("deliveryRequestPlaceId")
@@ -36,6 +37,7 @@ public interface ServiceRequestMapper extends EntityMapper<ServiceRequestDTO, Se
     @Named("servicesId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
+    @Mapping(target = "nom", source = "nom")
     ServicesDTO toDtoServicesId(Services services);
 
     @Named("checkInId")

@@ -6,8 +6,8 @@ export interface IHotelServices {
   active?: boolean | null;
   forGuest?: boolean | null;
   servicePrice?: number | null;
-  hotel?: Pick<IHotel, 'id'> | null;
-  services?: Pick<IServices, 'id'> | null;
+  hotel?: IHotel | null;
+  services?: IServices | null;
 }
 
 export type NewHotelServices = Omit<IHotelServices, 'id'> & { id: null };

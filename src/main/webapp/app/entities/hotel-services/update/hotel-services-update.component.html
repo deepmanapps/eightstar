@@ -1,83 +1,102 @@
-<div class="d-flex justify-content-center">
-  <div class="col-8">
-    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2
-        id="es-hotel-services-heading"
-        data-cy="HotelServicesCreateUpdateHeading"
-        esTranslate="eightStarApp.hotelServices.home.createOrEditLabel"
-      >
-        Create or edit a Hotel Services
-      </h2>
+<!--begin::details View-->
+<div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
+  <!--begin::Card header-->
+  <div class="card-header cursor-pointer">
+    <!--begin::Card title-->
+    <div class="card-title m-0">
+      <h3 class="fw-bold m-0">Edit Hotel Service</h3>
+    </div>
+  </div>
+  <!--begin::Card header-->
+  <!--begin::Card body-->
+  <div class="card-body">
+    <div class="d-flex justify-content-center">
+      <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+          <div>
+            <es-alert-error></es-alert-error>
 
-      <div>
-        <es-alert-error></es-alert-error>
+            <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+              <label class="form-label" esTranslate="global.field.id" for="field_id">ID</label>
+              <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+            </div>
 
-        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
-          <label class="form-label" esTranslate="global.field.id" for="field_id">ID</label>
-          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
-        </div>
+            <div class="row mb-3">
+              <label class="form-label" esTranslate="eightStarApp.hotelServices.active" for="field_active">Active</label>
+              <input type="checkbox" class="form-check" name="active" id="field_active" data-cy="active" formControlName="active" />
+            </div>
 
-        <div class="row mb-3">
-          <label class="form-label" esTranslate="eightStarApp.hotelServices.active" for="field_active">Active</label>
-          <input type="checkbox" class="form-check" name="active" id="field_active" data-cy="active" formControlName="active" />
-        </div>
+            <div class="row mb-3">
+              <label class="form-label" esTranslate="eightStarApp.hotelServices.forGuest" for="field_forGuest">For Guest</label>
+              <input type="checkbox" class="form-check" name="forGuest" id="field_forGuest" data-cy="forGuest" formControlName="forGuest" />
+            </div>
 
-        <div class="row mb-3">
-          <label class="form-label" esTranslate="eightStarApp.hotelServices.forGuest" for="field_forGuest">For Guest</label>
-          <input type="checkbox" class="form-check" name="forGuest" id="field_forGuest" data-cy="forGuest" formControlName="forGuest" />
-        </div>
+            <div class="row mb-3">
+              <label class="form-label" esTranslate="eightStarApp.hotelServices.servicePrice" for="field_servicePrice">Service Price</label>
+              <input
+                type="number"
+                class="form-control"
+                name="servicePrice"
+                id="field_servicePrice"
+                data-cy="servicePrice"
+                formControlName="servicePrice"
+              />
+            </div>
 
-        <div class="row mb-3">
-          <label class="form-label" esTranslate="eightStarApp.hotelServices.servicePrice" for="field_servicePrice">Service Price</label>
-          <input
-            type="number"
-            class="form-control"
-            name="servicePrice"
-            id="field_servicePrice"
-            data-cy="servicePrice"
-            formControlName="servicePrice"
-          />
-        </div>
+            <div class="row mb-3">
+              <label class="form-label" esTranslate="eightStarApp.hotelServices.hotel" for="field_hotel">Hotel</label>
+              <select
+                class="form-control"
+                id="field_hotel"
+                data-cy="hotel"
+                name="hotel"
+                formControlName="hotel"
+                [compareWith]="compareHotel"
+              >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="hotelOption" *ngFor="let hotelOption of hotelsSharedCollection">{{ hotelOption.name }}</option>
+              </select>
+            </div>
 
-        <div class="row mb-3">
-          <label class="form-label" esTranslate="eightStarApp.hotelServices.hotel" for="field_hotel">Hotel</label>
-          <select class="form-control" id="field_hotel" data-cy="hotel" name="hotel" formControlName="hotel" [compareWith]="compareHotel">
-            <option [ngValue]="null"></option>
-            <option [ngValue]="hotelOption" *ngFor="let hotelOption of hotelsSharedCollection">{{ hotelOption.id }}</option>
-          </select>
-        </div>
+            <div class="row mb-3">
+              <label class="form-label" esTranslate="eightStarApp.hotelServices.services" for="field_services">Services</label>
+              <select
+                class="form-control"
+                id="field_services"
+                data-cy="services"
+                name="services"
+                formControlName="services"
+                [compareWith]="compareServices"
+              >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="servicesOption" *ngFor="let servicesOption of servicesSharedCollection">{{ servicesOption.nom }}</option>
+              </select>
+            </div>
+          </div>
 
-        <div class="row mb-3">
-          <label class="form-label" esTranslate="eightStarApp.hotelServices.services" for="field_services">Services</label>
-          <select
-            class="form-control"
-            id="field_services"
-            data-cy="services"
-            name="services"
-            formControlName="services"
-            [compareWith]="compareServices"
-          >
-            <option [ngValue]="null"></option>
-            <option [ngValue]="servicesOption" *ngFor="let servicesOption of servicesSharedCollection">{{ servicesOption.id }}</option>
-          </select>
-        </div>
+          <div>
+            <button
+              type="button"
+              id="cancel-save"
+              data-cy="entityCreateCancelButton"
+              class="btn btn-sm btn-secondary align-self-center"
+              (click)="previousState()"
+            >
+              <fa-icon icon="ban"></fa-icon>&nbsp;<span esTranslate="entity.action.cancel">Cancel</span>
+            </button>
+
+            <button
+              type="submit"
+              id="save-entity"
+              data-cy="entityCreateSaveButton"
+              [disabled]="editForm.invalid || isSaving"
+              class="btn btn-sm btn-primary align-self-center"
+            >
+              <fa-icon icon="save"></fa-icon>&nbsp;<span esTranslate="entity.action.save">Save</span>
+            </button>
+          </div>
+        </form>
       </div>
-
-      <div>
-        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
-          <fa-icon icon="ban"></fa-icon>&nbsp;<span esTranslate="entity.action.cancel">Cancel</span>
-        </button>
-
-        <button
-          type="submit"
-          id="save-entity"
-          data-cy="entityCreateSaveButton"
-          [disabled]="editForm.invalid || isSaving"
-          class="btn btn-primary"
-        >
-          <fa-icon icon="save"></fa-icon>&nbsp;<span esTranslate="entity.action.save">Save</span>
-        </button>
-      </div>
-    </form>
+    </div>
   </div>
 </div>

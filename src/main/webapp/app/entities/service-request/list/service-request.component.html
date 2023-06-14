@@ -169,7 +169,7 @@
           <td style="font-size: x-small">{{ serviceRequest.totalPrice }}</td>
           <td style="font-size: x-small">
             <div *ngIf="serviceRequest.parkingAll">
-              <a [routerLink]="['/parking-all', serviceRequest.parkingAll.id, 'view']">{{ serviceRequest.parkingAll.id }}</a>
+              <a [routerLink]="['/parking-all', serviceRequest.parkingAll.id, 'view']">{{ serviceRequest.parkingAll.name }}</a>
             </div>
           </td>
           <td style="font-size: x-small">
@@ -181,7 +181,7 @@
           </td>
           <td style="font-size: x-small">
             <div *ngIf="serviceRequest.services">
-              <a [routerLink]="['/services', serviceRequest.services.id, 'view']">{{ serviceRequest.services.id }}</a>
+              <a [routerLink]="['/services', serviceRequest.services.id, 'view']">{{ serviceRequest.services.nom }}</a>
             </div>
           </td>
           <td style="font-size: x-small">

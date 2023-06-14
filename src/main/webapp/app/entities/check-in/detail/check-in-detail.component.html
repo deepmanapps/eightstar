@@ -1,90 +1,200 @@
-<div class="d-flex justify-content-center">
-  <div class="col-8">
-    <div *ngIf="checkIn">
-      <h2 data-cy="checkInDetailsHeading"><span esTranslate="eightStarApp.checkIn.detail.title">Check In</span></h2>
-
-      <hr />
-
-      <es-alert-error></es-alert-error>
-
-      <es-alert></es-alert>
-
-      <dl class="row-md jh-entity-details">
-        <dt><span esTranslate="global.field.id">ID</span></dt>
-        <dd>
-          <span>{{ checkIn.id }}</span>
-        </dd>
-        <dt><span esTranslate="eightStarApp.checkIn.identityPath">Identity Path</span></dt>
-        <dd>
-          <span>{{ checkIn.identityPath }}</span>
-        </dd>
-        <dt><span esTranslate="eightStarApp.checkIn.status">Status</span></dt>
-        <dd>
-          <span esTranslate="{{ 'eightStarApp.Status.' + checkIn.status }}">{{ checkIn.status }}</span>
-        </dd>
-        <dt><span esTranslate="eightStarApp.checkIn.depositAmount">Deposit Amount</span></dt>
-        <dd>
-          <span>{{ checkIn.depositAmount }}</span>
-        </dd>
-        <dt><span esTranslate="eightStarApp.checkIn.paymentMethod">Payment Method</span></dt>
-        <dd>
-          <span esTranslate="{{ 'eightStarApp.PaymentMethod.' + checkIn.paymentMethod }}">{{ checkIn.paymentMethod }}</span>
-        </dd>
-        <dt><span esTranslate="eightStarApp.checkIn.arrivalDate">Arrival Date</span></dt>
-        <dd>
-          <span>{{ checkIn.arrivalDate | formatMediumDatetime }}</span>
-        </dd>
-        <dt><span esTranslate="eightStarApp.checkIn.departureDate">Departure Date</span></dt>
-        <dd>
-          <span>{{ checkIn.departureDate | formatMediumDatetime }}</span>
-        </dd>
-        <dt><span esTranslate="eightStarApp.checkIn.roomType">Room Type</span></dt>
-        <dd>
-          <span>{{ checkIn.roomType }}</span>
-        </dd>
-        <dt><span esTranslate="eightStarApp.checkIn.smooking">Smooking</span></dt>
-        <dd>
-          <span>{{ checkIn.smooking }}</span>
-        </dd>
-        <dt><span esTranslate="eightStarApp.checkIn.adults">Adults</span></dt>
-        <dd>
-          <span>{{ checkIn.adults }}</span>
-        </dd>
-        <dt><span esTranslate="eightStarApp.checkIn.children">Children</span></dt>
-        <dd>
-          <span>{{ checkIn.children }}</span>
-        </dd>
-        <dt><span esTranslate="eightStarApp.checkIn.notes">Notes</span></dt>
-        <dd>
-          <span>{{ checkIn.notes }}</span>
-        </dd>
-        <dt><span esTranslate="eightStarApp.checkIn.checkOut">Check Out</span></dt>
-        <dd>
-          <div *ngIf="checkIn.checkOut">
-            <a [routerLink]="['/check-out', checkIn.checkOut.id, 'view']">{{ checkIn.checkOut.id }}</a>
-          </div>
-        </dd>
-        <dt><span esTranslate="eightStarApp.checkIn.hotel">Hotel</span></dt>
-        <dd>
-          <div *ngIf="checkIn.hotel">
-            <a [routerLink]="['/hotel', checkIn.hotel.id, 'view']">{{ checkIn.hotel.id }}</a>
-          </div>
-        </dd>
-        <dt><span esTranslate="eightStarApp.checkIn.customer">Customer</span></dt>
-        <dd>
-          <div *ngIf="checkIn.customer">
-            <a [routerLink]="['/customer', checkIn.customer.id, 'view']">{{ checkIn.customer.id }}</a>
-          </div>
-        </dd>
-      </dl>
-
-      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
-        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span esTranslate="entity.action.back">Back</span>
-      </button>
-
-      <button type="button" [routerLink]="['/check-in', checkIn.id, 'edit']" class="btn btn-primary">
-        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span esTranslate="entity.action.edit">Edit</span>
-      </button>
+<!--begin::details View-->
+<div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
+  <!--begin::Card header-->
+  <div class="card-header cursor-pointer">
+    <!--begin::Card title-->
+    <div class="card-title m-0">
+      <h3 class="fw-bold m-0"><span esTranslate="eightStarApp.checkIn.detail.title">Check In</span></h3>
     </div>
+    <!--end::Card title-->
+    <!--begin::Action-->
+    <a [routerLink]="['/check-in', checkIn.id, 'edit']" class="btn btn-sm btn-primary align-self-center"
+      ><fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span esTranslate="entity.action.edit">Edit</span></a
+    >
+    <!--end::Action-->
   </div>
+  <!--begin::Card header-->
+  <!--begin::Card body-->
+  <div class="card-body p-9">
+    <es-alert-error></es-alert-error>
+
+    <es-alert></es-alert>
+    <!--begin::Row-->
+    <div class="row mb-7">
+      <!--begin::Label-->
+      <label class="col-lg-4 fw-semibold text-muted"><span esTranslate="global.field.id">ID</span></label>
+      <!--end::Label-->
+      <!--begin::Col-->
+      <div class="col-lg-8">
+        <span class="fw-bold fs-6 text-gray-800">{{ checkIn.id }}</span>
+      </div>
+      <!--end::Col-->
+    </div>
+    <!--end::Row-->
+    <!--begin::Input group-->
+    <div class="row mb-7">
+      <!--begin::Label-->
+      <label class="col-lg-4 fw-semibold text-muted"><span esTranslate="eightStarApp.checkIn.status">Status</span></label>
+      <!--end::Label-->
+      <!--begin::Col-->
+      <div class="col-lg-8 d-flex align-items-center">
+        <span class="fw-bold fs-6 text-gray-800 me-2"
+          ><div *ngIf="checkIn.status === 'CONFIRMED'" class="badge badge-light-success fw-bold">{{ checkIn.status }}</div>
+          <div *ngIf="checkIn.status === 'CANCELLED'" class="badge badge-light-danger fw-bold">{{ checkIn.status }}</div>
+          <div *ngIf="checkIn.status === 'COMPLETED'" class="badge badge-light-primary fw-bold">{{ checkIn.status }}</div></span
+        >
+      </div>
+      <!--end::Col-->
+    </div>
+    <!--end::Input group-->
+    <!--begin::Input group-->
+    <div class="row mb-7">
+      <!--begin::Label-->
+      <label class="col-lg-4 fw-semibold text-muted"><span esTranslate="eightStarApp.checkIn.depositAmount">Deposit Amount</span></label>
+      <!--end::Label-->
+      <!--begin::Col-->
+      <div class="col-lg-8">
+        <a class="fw-semibold fs-6 text-gray-800 text-hover-primary">{{ checkIn.depositAmount }}</a>
+      </div>
+      <!--end::Col-->
+    </div>
+    <!--end::Input group-->
+    <!--begin::Input group-->
+    <div class="row mb-7">
+      <!--begin::Label-->
+      <label class="col-lg-4 fw-semibold text-muted"><span esTranslate="eightStarApp.checkIn.paymentMethod">Payment Method</span> </label>
+      <!--end::Label-->
+      <!--begin::Col-->
+      <div class="col-lg-8">
+        <span esTranslate="{{ 'eightStarApp.PaymentMethod.' + checkIn.paymentMethod }}" class="fw-bold fs-6 text-gray-800">{{
+          checkIn.paymentMethod
+        }}</span>
+      </div>
+      <!--end::Col-->
+    </div>
+    <!--end::Input group-->
+    <!--begin::Input group-->
+    <div class="row mb-7">
+      <!--begin::Label-->
+      <label class="col-lg-4 fw-semibold text-muted"><span esTranslate="eightStarApp.checkIn.arrivalDate">Arrival Date</span></label>
+      <!--end::Label-->
+      <!--begin::Col-->
+      <div class="col-lg-8">
+        <span class="fw-bold fs-6 text-gray-800">{{ checkIn.arrivalDate | formatMediumDatetime }}</span>
+      </div>
+      <!--end::Col-->
+    </div>
+    <!--end::Input group-->
+    <!--begin::Input group-->
+    <div class="row mb-10">
+      <!--begin::Label-->
+      <label class="col-lg-4 fw-semibold text-muted"><span esTranslate="eightStarApp.checkIn.departureDate">Departure Date</span></label>
+      <!--begin::Label-->
+      <!--begin::Label-->
+      <div class="col-lg-8">
+        <span class="fw-semibold fs-6 text-gray-800">{{ checkIn.departureDate | formatMediumDatetime }}</span>
+      </div>
+      <!--begin::Label-->
+    </div>
+    <!--end::Input group-->
+    <!--begin::Input group-->
+    <div class="row mb-10">
+      <!--begin::Label-->
+      <label class="col-lg-4 fw-semibold text-muted"><span esTranslate="eightStarApp.checkIn.roomType">Room Type</span></label>
+      <!--begin::Label-->
+      <!--begin::Label-->
+      <div class="col-lg-8">
+        <span class="fw-semibold fs-6 text-gray-800">{{ checkIn.roomType }}</span>
+      </div>
+      <!--begin::Label-->
+    </div>
+    <!--end::Input group-->
+    <!--begin::Input group-->
+    <div class="row mb-10">
+      <!--begin::Label-->
+      <label class="col-lg-4 fw-semibold text-muted"><span esTranslate="eightStarApp.checkIn.smooking">Smooking</span></label>
+      <!--begin::Label-->
+      <!--begin::Label-->
+      <div class="col-lg-8">
+        <span *ngIf="checkIn.smooking == true" class="badge badge-dark">Yes</span>
+        <span *ngIf="checkIn.smooking == false" class="badge badge-secondary">No</span>
+      </div>
+      <!--begin::Label-->
+    </div>
+    <!--end::Input group-->
+
+    <!--begin::Input group-->
+    <div class="row mb-10">
+      <!--begin::Label-->
+      <label class="col-lg-4 fw-semibold text-muted"><span esTranslate="eightStarApp.checkIn.adults">Adults</span></label>
+      <!--begin::Label-->
+      <!--begin::Label-->
+      <div class="col-lg-8">
+        <span class="fw-semibold fs-6 text-gray-800">{{ checkIn.adults }}</span>
+      </div>
+      <!--begin::Label-->
+    </div>
+    <!--end::Input group-->
+    <!--begin::Input group-->
+    <div class="row mb-10">
+      <!--begin::Label-->
+      <label class="col-lg-4 fw-semibold text-muted"><span esTranslate="eightStarApp.checkIn.children">Children</span></label>
+      <!--begin::Label-->
+      <!--begin::Label-->
+      <div class="col-lg-8">
+        <span class="fw-semibold fs-6 text-gray-800">{{ checkIn.children }}</span>
+      </div>
+      <!--begin::Label-->
+    </div>
+    <!--end::Input group-->
+    <!--begin::Input group-->
+    <div class="row mb-10">
+      <!--begin::Label-->
+      <label class="col-lg-4 fw-semibold text-muted"><span esTranslate="eightStarApp.checkIn.notes">Notes</span></label>
+      <!--begin::Label-->
+      <!--begin::Label-->
+      <div class="col-lg-8">
+        <span class="fw-semibold fs-6 text-gray-800">{{ checkIn.notes }}</span>
+      </div>
+      <!--begin::Label-->
+    </div>
+    <!--end::Input group-->
+    <!--begin::Input group-->
+    <div class="row mb-10">
+      <!--begin::Label-->
+      <label class="col-lg-4 fw-semibold text-muted"><span esTranslate="eightStarApp.checkIn.hotel">Hotel</span></label>
+      <!--begin::Label-->
+      <!--begin::Label-->
+      <div class="col-lg-8">
+        <span class="fw-semibold fs-6 text-gray-800">
+          <div *ngIf="checkIn.hotel">
+            <a [routerLink]="['/hotel', checkIn.hotel.id, 'view']">{{ checkIn.hotel.name }}</a>
+          </div></span
+        >
+      </div>
+      <!--begin::Label-->
+    </div>
+    <!--end::Input group-->
+    <!--begin::Input group-->
+    <div class="row mb-10">
+      <!--begin::Label-->
+      <label class="col-lg-4 fw-semibold text-muted"><span esTranslate="eightStarApp.checkIn.customer">Customer</span></label>
+      <!--begin::Label-->
+      <!--begin::Label-->
+      <div class="col-lg-8">
+        <a class="fw-semibold" *ngIf="checkIn.customer" [routerLink]="['/customer', checkIn.customer.id, 'view']">
+          <span class="fw-semibold fs-6 text-gray-800">{{ checkIn.customer.firstName }}</span>
+          <span class="fw-semibold fs-6 text-gray-800">, {{ checkIn.customer.lastName }}</span>
+        </a>
+      </div>
+      <!--begin::Label-->
+    </div>
+    <!--end::Input group-->
+
+    <button type="submit" (click)="previousState()" class="btn btn-sm btn-info align-self-center" data-cy="entityDetailsBackButton">
+      <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span esTranslate="entity.action.back">Back</span>
+    </button>
+  </div>
+  <!--end::Card body-->
 </div>
+<!--end::details View-->

@@ -1,106 +1,124 @@
-<div class="d-flex justify-content-center">
-  <div class="col-8">
-    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2 id="es-hotel-heading" data-cy="HotelCreateUpdateHeading" esTranslate="eightStarApp.hotel.home.createOrEditLabel">
-        Create or edit a Hotel
-      </h2>
+<!--begin::details View-->
+<div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
+  <!--begin::Card header-->
+  <div class="card-header cursor-pointer">
+    <!--begin::Card title-->
+    <div class="card-title m-0">
+      <h3 class="fw-bold m-0">Create or edit a Hotel</h3>
+    </div>
+  </div>
+  <!--begin::Card header-->
+  <!--begin::Card body-->
+  <div class="card-body">
+    <div class="d-flex justify-content-center">
+      <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+          <div>
+            <es-alert-error></es-alert-error>
 
-      <div>
-        <es-alert-error></es-alert-error>
+            <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+              <label class="form-label" esTranslate="global.field.id" for="field_id">ID</label>
+              <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+            </div>
 
-        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
-          <label class="form-label" esTranslate="global.field.id" for="field_id">ID</label>
-          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
-        </div>
+            <div class="row mb-3">
+              <label
+                class="form-label"
+                esTranslate="eightStarApp.hotel.hotelId"
+                for="field_hotelId"
+                [ngbTooltip]="'eightStarApp.hotel.help.hotelId' | translate"
+                >Hotel Id</label
+              >
+              <input type="number" class="form-control" name="hotelId" id="field_hotelId" data-cy="hotelId" formControlName="hotelId" />
+            </div>
 
-        <div class="row mb-3">
-          <label
-            class="form-label"
-            esTranslate="eightStarApp.hotel.hotelId"
-            for="field_hotelId"
-            [ngbTooltip]="'eightStarApp.hotel.help.hotelId' | translate"
-            >Hotel Id</label
-          >
-          <input type="number" class="form-control" name="hotelId" id="field_hotelId" data-cy="hotelId" formControlName="hotelId" />
-        </div>
+            <div class="row mb-3">
+              <label class="form-label" esTranslate="eightStarApp.hotel.name" for="field_name">Name</label>
+              <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+            </div>
 
-        <div class="row mb-3">
-          <label class="form-label" esTranslate="eightStarApp.hotel.name" for="field_name">Name</label>
-          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
-        </div>
+            <div class="row mb-3">
+              <label class="form-label" esTranslate="eightStarApp.hotel.description" for="field_description">Description</label>
+              <input
+                type="text"
+                class="form-control"
+                name="description"
+                id="field_description"
+                data-cy="description"
+                formControlName="description"
+              />
+            </div>
 
-        <div class="row mb-3">
-          <label class="form-label" esTranslate="eightStarApp.hotel.description" for="field_description">Description</label>
-          <input
-            type="text"
-            class="form-control"
-            name="description"
-            id="field_description"
-            data-cy="description"
-            formControlName="description"
-          />
-        </div>
+            <div class="row mb-3">
+              <label class="form-label" esTranslate="eightStarApp.hotel.adresse" for="field_adresse">Adresse</label>
+              <input type="text" class="form-control" name="adresse" id="field_adresse" data-cy="adresse" formControlName="adresse" />
+            </div>
 
-        <div class="row mb-3">
-          <label class="form-label" esTranslate="eightStarApp.hotel.adresse" for="field_adresse">Adresse</label>
-          <input type="text" class="form-control" name="adresse" id="field_adresse" data-cy="adresse" formControlName="adresse" />
-        </div>
+            <div class="row mb-3">
+              <label class="form-label" esTranslate="eightStarApp.hotel.starsNumber" for="field_starsNumber">Stars Number</label>
+              <input
+                type="number"
+                class="form-control"
+                name="starsNumber"
+                id="field_starsNumber"
+                data-cy="starsNumber"
+                formControlName="starsNumber"
+              />
+            </div>
 
-        <div class="row mb-3">
-          <label class="form-label" esTranslate="eightStarApp.hotel.starsNumber" for="field_starsNumber">Stars Number</label>
-          <input
-            type="number"
-            class="form-control"
-            name="starsNumber"
-            id="field_starsNumber"
-            data-cy="starsNumber"
-            formControlName="starsNumber"
-          />
-        </div>
+            <div class="row mb-3">
+              <label class="form-label" esTranslate="eightStarApp.hotel.emergencyNumber" for="field_emergencyNumber"
+                >Emergency Number</label
+              >
+              <input
+                type="number"
+                class="form-control"
+                name="emergencyNumber"
+                id="field_emergencyNumber"
+                data-cy="emergencyNumber"
+                formControlName="emergencyNumber"
+              />
+            </div>
 
-        <div class="row mb-3">
-          <label class="form-label" esTranslate="eightStarApp.hotel.emergencyNumber" for="field_emergencyNumber">Emergency Number</label>
-          <input
-            type="number"
-            class="form-control"
-            name="emergencyNumber"
-            id="field_emergencyNumber"
-            data-cy="emergencyNumber"
-            formControlName="emergencyNumber"
-          />
-        </div>
+            <div class="row mb-3">
+              <label class="form-label" esTranslate="eightStarApp.hotel.location" for="field_location">Location</label>
+              <select
+                class="form-control"
+                id="field_location"
+                data-cy="location"
+                name="location"
+                formControlName="location"
+                [compareWith]="compareLocation"
+              >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="locationOption" *ngFor="let locationOption of locationsCollection">{{ locationOption.id }}</option>
+              </select>
+            </div>
+          </div>
 
-        <div class="row mb-3">
-          <label class="form-label" esTranslate="eightStarApp.hotel.location" for="field_location">Location</label>
-          <select
-            class="form-control"
-            id="field_location"
-            data-cy="location"
-            name="location"
-            formControlName="location"
-            [compareWith]="compareLocation"
-          >
-            <option [ngValue]="null"></option>
-            <option [ngValue]="locationOption" *ngFor="let locationOption of locationsCollection">{{ locationOption.id }}</option>
-          </select>
-        </div>
+          <div>
+            <button
+              type="button"
+              id="cancel-save"
+              data-cy="entityCreateCancelButton"
+              class="btn btn-sm btn-secondary align-self-center"
+              (click)="previousState()"
+            >
+              <fa-icon icon="ban"></fa-icon>&nbsp;<span esTranslate="entity.action.cancel">Cancel</span>
+            </button>
+
+            <button
+              type="submit"
+              id="save-entity"
+              data-cy="entityCreateSaveButton"
+              [disabled]="editForm.invalid || isSaving"
+              class="btn btn-sm btn-primary align-self-center"
+            >
+              <fa-icon icon="save"></fa-icon>&nbsp;<span esTranslate="entity.action.save">Save</span>
+            </button>
+          </div>
+        </form>
       </div>
-
-      <div>
-        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
-          <fa-icon icon="ban"></fa-icon>&nbsp;<span esTranslate="entity.action.cancel">Cancel</span>
-        </button>
-
-        <button
-          type="submit"
-          id="save-entity"
-          data-cy="entityCreateSaveButton"
-          [disabled]="editForm.invalid || isSaving"
-          class="btn btn-primary"
-        >
-          <fa-icon icon="save"></fa-icon>&nbsp;<span esTranslate="entity.action.save">Save</span>
-        </button>
-      </div>
-    </form>
+    </div>
   </div>
 </div>

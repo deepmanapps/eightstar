@@ -5,7 +5,7 @@ export interface IParkingAll {
   id: number;
   name?: string | null;
   location?: Pick<ILocation, 'id'> | null;
-  hotel?: Pick<IHotel, 'id'> | null;
+  hotel?: IHotel | null;
 }
 
 export type NewParkingAll = Omit<IParkingAll, 'id'> & { id: null };

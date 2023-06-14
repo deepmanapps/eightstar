@@ -1,66 +1,84 @@
-<div class="d-flex justify-content-center">
-  <div class="col-8">
-    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+<!--begin::details View-->
+<div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
+  <!--begin::Card header-->
+  <div class="card-header cursor-pointer">
+    <!--begin::Card title-->
+    <div class="card-title m-0">
       <h2 id="es-services-heading" data-cy="ServicesCreateUpdateHeading" esTranslate="eightStarApp.services.home.createOrEditLabel">
         Create or edit a Services
       </h2>
+    </div>
+  </div>
+  <!--begin::Card header-->
+  <!--begin::Card body-->
+  <div class="card-body">
+    <div class="d-flex justify-content-center">
+      <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+          <div>
+            <es-alert-error></es-alert-error>
 
-      <div>
-        <es-alert-error></es-alert-error>
+            <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+              <label class="form-label" esTranslate="eightStarApp.services.id" for="field_id">Id</label>
+              <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+            </div>
 
-        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
-          <label class="form-label" esTranslate="eightStarApp.services.id" for="field_id">Id</label>
-          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
-        </div>
+            <div class="row mb-3">
+              <label class="form-label" esTranslate="eightStarApp.services.nom" for="field_nom">Nom</label>
+              <input type="text" class="form-control" name="nom" id="field_nom" data-cy="nom" formControlName="nom" />
+            </div>
 
-        <div class="row mb-3">
-          <label class="form-label" esTranslate="eightStarApp.services.nom" for="field_nom">Nom</label>
-          <input type="text" class="form-control" name="nom" id="field_nom" data-cy="nom" formControlName="nom" />
-        </div>
+            <div class="row mb-3">
+              <label class="form-label" esTranslate="eightStarApp.services.description" for="field_description">Description</label>
+              <input
+                type="text"
+                class="form-control"
+                name="description"
+                id="field_description"
+                data-cy="description"
+                formControlName="description"
+              />
+            </div>
 
-        <div class="row mb-3">
-          <label class="form-label" esTranslate="eightStarApp.services.description" for="field_description">Description</label>
-          <input
-            type="text"
-            class="form-control"
-            name="description"
-            id="field_description"
-            data-cy="description"
-            formControlName="description"
-          />
-        </div>
+            <div class="row mb-3">
+              <label class="form-label" esTranslate="eightStarApp.services.parentService" for="field_parentService">Parent Service</label>
+              <select
+                class="form-control"
+                id="field_parentService"
+                data-cy="parentService"
+                name="parentService"
+                formControlName="parentService"
+                [compareWith]="compareServices"
+              >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="servicesOption" *ngFor="let servicesOption of servicesSharedCollection">{{ servicesOption.nom }}</option>
+              </select>
+            </div>
+          </div>
 
-        <div class="row mb-3">
-          <label class="form-label" esTranslate="eightStarApp.services.parentService" for="field_parentService">Parent Service</label>
-          <select
-            class="form-control"
-            id="field_parentService"
-            data-cy="parentService"
-            name="parentService"
-            formControlName="parentService"
-            [compareWith]="compareServices"
-          >
-            <option [ngValue]="null"></option>
-            <option [ngValue]="servicesOption" *ngFor="let servicesOption of servicesSharedCollection">{{ servicesOption.id }}</option>
-          </select>
-        </div>
+          <div>
+            <button
+              type="button"
+              id="cancel-save"
+              data-cy="entityCreateCancelButton"
+              class="btn btn-sm btn-secondary align-self-center"
+              (click)="previousState()"
+            >
+              <fa-icon icon="ban"></fa-icon>&nbsp;<span esTranslate="entity.action.cancel">Cancel</span>
+            </button>
+
+            <button
+              type="submit"
+              id="save-entity"
+              data-cy="entityCreateSaveButton"
+              [disabled]="editForm.invalid || isSaving"
+              class="btn btn-sm btn-primary align-self-center"
+            >
+              <fa-icon icon="save"></fa-icon>&nbsp;<span esTranslate="entity.action.save">Save</span>
+            </button>
+          </div>
+        </form>
       </div>
-
-      <div>
-        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
-          <fa-icon icon="ban"></fa-icon>&nbsp;<span esTranslate="entity.action.cancel">Cancel</span>
-        </button>
-
-        <button
-          type="submit"
-          id="save-entity"
-          data-cy="entityCreateSaveButton"
-          [disabled]="editForm.invalid || isSaving"
-          class="btn btn-primary"
-        >
-          <fa-icon icon="save"></fa-icon>&nbsp;<span esTranslate="entity.action.save">Save</span>
-        </button>
-      </div>
-    </form>
+    </div>
   </div>
 </div>

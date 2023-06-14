@@ -28,10 +28,13 @@ public interface CheckInMapper extends EntityMapper<CheckInDTO, CheckIn> {
     @Named("hotelId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
+    @Mapping(target = "name", source = "name")
     HotelDTO toDtoHotelId(Hotel hotel);
 
     @Named("customerId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
+    @Mapping(target = "firstName", source = "firstName")
+    @Mapping(target = "lastName", source = "lastName")
     CustomerDTO toDtoCustomerId(Customer customer);
 }

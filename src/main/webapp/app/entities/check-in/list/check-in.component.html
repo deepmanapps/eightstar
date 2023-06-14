@@ -180,12 +180,12 @@
           </td>
           <td style="font-size: x-small">
             <div *ngIf="checkIn.hotel">
-              <a [routerLink]="['/hotel', checkIn.hotel.id, 'view']">{{ checkIn.hotel.id }}</a>
+              <a [routerLink]="['/hotel', checkIn.hotel.id, 'view']">{{ checkIn.hotel.name }}</a>
             </div>
           </td>
           <td class="font-weight-lighter">
             <div *ngIf="checkIn.customer">
-              <a [routerLink]="['/customer', checkIn.customer.id, 'view']">{{ checkIn.customer.id }}</a>
+              <a [routerLink]="['/customer', checkIn.customer.id, 'view']">{{ checkIn.customer.firstName }}</a>
             </div>
           </td>
           <td class="text-end" style="font-size: x-small">

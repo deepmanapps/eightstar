@@ -1,175 +1,198 @@
-<div class="d-flex justify-content-center">
-  <div class="col-8">
-    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2 id="es-check-in-heading" data-cy="CheckInCreateUpdateHeading" esTranslate="eightStarApp.checkIn.home.createOrEditLabel">
-        Create or edit a Check In
-      </h2>
+<!--begin::details View-->
+<div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
+  <!--begin::Card header-->
+  <div class="card-header cursor-pointer">
+    <!--begin::Card title-->
+    <div class="card-title m-0">
+      <h3 class="fw-bold m-0">Edit Check In</h3>
+    </div>
+  </div>
+  <!--begin::Card header-->
+  <!--begin::Card body-->
+  <div class="card-body">
+    <div class="d-flex justify-content-center">
+      <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+          <div>
+            <es-alert-error></es-alert-error>
 
-      <div>
-        <es-alert-error></es-alert-error>
+            <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+              <label class="form-label" esTranslate="global.field.id" for="field_id">ID</label>
+              <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+            </div>
 
-        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
-          <label class="form-label" esTranslate="global.field.id" for="field_id">ID</label>
-          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
-        </div>
+            <div class="row mb-3">
+              <label class="form-label" esTranslate="eightStarApp.checkIn.identityPath" for="field_identityPath">Identity Path</label>
+              <input
+                type="text"
+                class="form-control"
+                name="identityPath"
+                id="field_identityPath"
+                data-cy="identityPath"
+                formControlName="identityPath"
+              />
+            </div>
 
-        <div class="row mb-3">
-          <label class="form-label" esTranslate="eightStarApp.checkIn.identityPath" for="field_identityPath">Identity Path</label>
-          <input
-            type="text"
-            class="form-control"
-            name="identityPath"
-            id="field_identityPath"
-            data-cy="identityPath"
-            formControlName="identityPath"
-          />
-        </div>
+            <div class="row mb-3">
+              <label class="form-label" esTranslate="eightStarApp.checkIn.status" for="field_status">Status</label>
+              <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+                <option [ngValue]="null">{{ 'eightStarApp.Status.null' | translate }}</option>
+                <option *ngFor="let status of statusValues" [value]="status">{{ 'eightStarApp.Status.' + status | translate }}</option>
+              </select>
+            </div>
 
-        <div class="row mb-3">
-          <label class="form-label" esTranslate="eightStarApp.checkIn.status" for="field_status">Status</label>
-          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
-            <option [ngValue]="null">{{ 'eightStarApp.Status.null' | translate }}</option>
-            <option *ngFor="let status of statusValues" [value]="status">{{ 'eightStarApp.Status.' + status | translate }}</option>
-          </select>
-        </div>
+            <div class="row mb-3">
+              <label class="form-label" esTranslate="eightStarApp.checkIn.depositAmount" for="field_depositAmount">Deposit Amount</label>
+              <input
+                type="number"
+                class="form-control"
+                name="depositAmount"
+                id="field_depositAmount"
+                data-cy="depositAmount"
+                formControlName="depositAmount"
+              />
+            </div>
 
-        <div class="row mb-3">
-          <label class="form-label" esTranslate="eightStarApp.checkIn.depositAmount" for="field_depositAmount">Deposit Amount</label>
-          <input
-            type="number"
-            class="form-control"
-            name="depositAmount"
-            id="field_depositAmount"
-            data-cy="depositAmount"
-            formControlName="depositAmount"
-          />
-        </div>
+            <div class="row mb-3">
+              <label class="form-label" esTranslate="eightStarApp.checkIn.paymentMethod" for="field_paymentMethod">Payment Method</label>
+              <select
+                class="form-control"
+                name="paymentMethod"
+                formControlName="paymentMethod"
+                id="field_paymentMethod"
+                data-cy="paymentMethod"
+              >
+                <option [ngValue]="null">{{ 'eightStarApp.PaymentMethod.null' | translate }}</option>
+                <option *ngFor="let paymentMethod of paymentMethodValues" [value]="paymentMethod">
+                  {{ 'eightStarApp.PaymentMethod.' + paymentMethod | translate }}
+                </option>
+              </select>
+            </div>
 
-        <div class="row mb-3">
-          <label class="form-label" esTranslate="eightStarApp.checkIn.paymentMethod" for="field_paymentMethod">Payment Method</label>
-          <select
-            class="form-control"
-            name="paymentMethod"
-            formControlName="paymentMethod"
-            id="field_paymentMethod"
-            data-cy="paymentMethod"
-          >
-            <option [ngValue]="null">{{ 'eightStarApp.PaymentMethod.null' | translate }}</option>
-            <option *ngFor="let paymentMethod of paymentMethodValues" [value]="paymentMethod">
-              {{ 'eightStarApp.PaymentMethod.' + paymentMethod | translate }}
-            </option>
-          </select>
-        </div>
+            <div class="row mb-3">
+              <label class="form-label" esTranslate="eightStarApp.checkIn.arrivalDate" for="field_arrivalDate">Arrival Date</label>
+              <div class="d-flex">
+                <input
+                  id="field_arrivalDate"
+                  data-cy="arrivalDate"
+                  type="datetime-local"
+                  class="form-control"
+                  name="arrivalDate"
+                  formControlName="arrivalDate"
+                  placeholder="YYYY-MM-DD HH:mm"
+                />
+              </div>
+            </div>
 
-        <div class="row mb-3">
-          <label class="form-label" esTranslate="eightStarApp.checkIn.arrivalDate" for="field_arrivalDate">Arrival Date</label>
-          <div class="d-flex">
-            <input
-              id="field_arrivalDate"
-              data-cy="arrivalDate"
-              type="datetime-local"
-              class="form-control"
-              name="arrivalDate"
-              formControlName="arrivalDate"
-              placeholder="YYYY-MM-DD HH:mm"
-            />
+            <div class="row mb-3">
+              <label class="form-label" esTranslate="eightStarApp.checkIn.departureDate" for="field_departureDate">Departure Date</label>
+              <div class="d-flex">
+                <input
+                  id="field_departureDate"
+                  data-cy="departureDate"
+                  type="datetime-local"
+                  class="form-control"
+                  name="departureDate"
+                  formControlName="departureDate"
+                  placeholder="YYYY-MM-DD HH:mm"
+                />
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label class="form-label" esTranslate="eightStarApp.checkIn.roomType" for="field_roomType">Room Type</label>
+              <input type="text" class="form-control" name="roomType" id="field_roomType" data-cy="roomType" formControlName="roomType" />
+            </div>
+
+            <div class="row mb-3">
+              <label class="form-label" esTranslate="eightStarApp.checkIn.smooking" for="field_smooking">Smooking</label>
+              <input type="checkbox" class="form-check" name="smooking" id="field_smooking" data-cy="smooking" formControlName="smooking" />
+            </div>
+
+            <div class="row mb-3">
+              <label class="form-label" esTranslate="eightStarApp.checkIn.adults" for="field_adults">Adults</label>
+              <input type="number" class="form-control" name="adults" id="field_adults" data-cy="adults" formControlName="adults" />
+            </div>
+
+            <div class="row mb-3">
+              <label class="form-label" esTranslate="eightStarApp.checkIn.children" for="field_children">Children</label>
+              <input type="number" class="form-control" name="children" id="field_children" data-cy="children" formControlName="children" />
+            </div>
+
+            <div class="row mb-3">
+              <label class="form-label" esTranslate="eightStarApp.checkIn.notes" for="field_notes">Notes</label>
+              <input type="text" class="form-control" name="notes" id="field_notes" data-cy="notes" formControlName="notes" />
+            </div>
+
+            <div class="row mb-3">
+              <label class="form-label" esTranslate="eightStarApp.checkIn.checkOut" for="field_checkOut">Check Out</label>
+              <select
+                class="form-control"
+                id="field_checkOut"
+                data-cy="checkOut"
+                name="checkOut"
+                formControlName="checkOut"
+                [compareWith]="compareCheckOut"
+              >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="checkOutOption" *ngFor="let checkOutOption of checkOutsCollection">{{ checkOutOption.id }}</option>
+              </select>
+            </div>
+
+            <div class="row mb-3">
+              <label class="form-label" esTranslate="eightStarApp.checkIn.hotel" for="field_hotel">Hotel</label>
+              <select
+                class="form-control"
+                id="field_hotel"
+                data-cy="hotel"
+                name="hotel"
+                formControlName="hotel"
+                [compareWith]="compareHotel"
+              >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="hotelOption" *ngFor="let hotelOption of hotelsSharedCollection">{{ hotelOption.id }}</option>
+              </select>
+            </div>
+
+            <div class="row mb-3">
+              <label class="form-label" esTranslate="eightStarApp.checkIn.customer" for="field_customer">Customer</label>
+              <select
+                class="form-control"
+                id="field_customer"
+                data-cy="customer"
+                name="customer"
+                formControlName="customer"
+                [compareWith]="compareCustomer"
+              >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="customerOption" *ngFor="let customerOption of customersSharedCollection">{{ customerOption.id }}</option>
+              </select>
+            </div>
           </div>
-        </div>
 
-        <div class="row mb-3">
-          <label class="form-label" esTranslate="eightStarApp.checkIn.departureDate" for="field_departureDate">Departure Date</label>
-          <div class="d-flex">
-            <input
-              id="field_departureDate"
-              data-cy="departureDate"
-              type="datetime-local"
-              class="form-control"
-              name="departureDate"
-              formControlName="departureDate"
-              placeholder="YYYY-MM-DD HH:mm"
-            />
+          <div>
+            <button
+              type="button"
+              id="cancel-save"
+              data-cy="entityCreateCancelButton"
+              class="btn btn-sm btn-secondary align-self-center"
+              (click)="previousState()"
+            >
+              <fa-icon icon="ban"></fa-icon>&nbsp;<span esTranslate="entity.action.cancel">Cancel</span>
+            </button>
+
+            <button
+              type="submit"
+              id="save-entity"
+              data-cy="entityCreateSaveButton"
+              [disabled]="editForm.invalid || isSaving"
+              class="btn btn-sm btn-primary align-self-center"
+            >
+              <fa-icon icon="save"></fa-icon>&nbsp;<span esTranslate="entity.action.save">Save</span>
+            </button>
           </div>
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" esTranslate="eightStarApp.checkIn.roomType" for="field_roomType">Room Type</label>
-          <input type="text" class="form-control" name="roomType" id="field_roomType" data-cy="roomType" formControlName="roomType" />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" esTranslate="eightStarApp.checkIn.smooking" for="field_smooking">Smooking</label>
-          <input type="checkbox" class="form-check" name="smooking" id="field_smooking" data-cy="smooking" formControlName="smooking" />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" esTranslate="eightStarApp.checkIn.adults" for="field_adults">Adults</label>
-          <input type="number" class="form-control" name="adults" id="field_adults" data-cy="adults" formControlName="adults" />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" esTranslate="eightStarApp.checkIn.children" for="field_children">Children</label>
-          <input type="number" class="form-control" name="children" id="field_children" data-cy="children" formControlName="children" />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" esTranslate="eightStarApp.checkIn.notes" for="field_notes">Notes</label>
-          <input type="text" class="form-control" name="notes" id="field_notes" data-cy="notes" formControlName="notes" />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" esTranslate="eightStarApp.checkIn.checkOut" for="field_checkOut">Check Out</label>
-          <select
-            class="form-control"
-            id="field_checkOut"
-            data-cy="checkOut"
-            name="checkOut"
-            formControlName="checkOut"
-            [compareWith]="compareCheckOut"
-          >
-            <option [ngValue]="null"></option>
-            <option [ngValue]="checkOutOption" *ngFor="let checkOutOption of checkOutsCollection">{{ checkOutOption.id }}</option>
-          </select>
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" esTranslate="eightStarApp.checkIn.hotel" for="field_hotel">Hotel</label>
-          <select class="form-control" id="field_hotel" data-cy="hotel" name="hotel" formControlName="hotel" [compareWith]="compareHotel">
-            <option [ngValue]="null"></option>
-            <option [ngValue]="hotelOption" *ngFor="let hotelOption of hotelsSharedCollection">{{ hotelOption.id }}</option>
-          </select>
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" esTranslate="eightStarApp.checkIn.customer" for="field_customer">Customer</label>
-          <select
-            class="form-control"
-            id="field_customer"
-            data-cy="customer"
-            name="customer"
-            formControlName="customer"
-            [compareWith]="compareCustomer"
-          >
-            <option [ngValue]="null"></option>
-            <option [ngValue]="customerOption" *ngFor="let customerOption of customersSharedCollection">{{ customerOption.id }}</option>
-          </select>
-        </div>
+        </form>
       </div>
-
-      <div>
-        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
-          <fa-icon icon="ban"></fa-icon>&nbsp;<span esTranslate="entity.action.cancel">Cancel</span>
-        </button>
-
-        <button
-          type="submit"
-          id="save-entity"
-          data-cy="entityCreateSaveButton"
-          [disabled]="editForm.invalid || isSaving"
-          class="btn btn-primary"
-        >
-          <fa-icon icon="save"></fa-icon>&nbsp;<span esTranslate="entity.action.save">Save</span>
-        </button>
-      </div>
-    </form>
+    </div>
   </div>
 </div>

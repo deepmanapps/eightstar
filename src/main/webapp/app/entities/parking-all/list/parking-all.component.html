@@ -1,128 +1,198 @@
-<div>
-  <h2 id="page-heading" data-cy="ParkingAllHeading">
-    <span esTranslate="eightStarApp.parkingAll.home.title">Parking Alls</span>
+<div class="app-container container-xxl">
+  <div class="card shadow-sm">
+    <div class="card-header">
+      <!--begin::Card title-->
+      <div class="card-title">
+        <div class="d-flex align-items-center position-relative my-1">
+          <h2 id="page-heading" data-cy="HotelHeading">
+            <span esTranslate="eightStarApp.parkingAll.home.title">Parking Alls</span>
+          </h2>
+        </div>
+      </div>
+      <div class="card-toolbar">
+        <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
+          <button
+            class="btn btn-light-primary me-3"
+            (click)="load()"
+            [disabled]="isLoading"
+            data-kt-menu-trigger="click"
+            data-kt-menu-placement="bottom-end"
+          >
+            <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+            <span esTranslate="eightStarApp.parkingAll.home.refreshListLabel">Refresh list</span>
+          </button>
 
-    <div class="d-flex justify-content-end">
-      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
-        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
-        <span esTranslate="eightStarApp.parkingAll.home.refreshListLabel">Refresh list</span>
-      </button>
-
-      <button
-        id="jh-create-entity"
-        data-cy="entityCreateButton"
-        class="btn btn-primary jh-create-entity create-parking-all"
-        [routerLink]="['/parking-all/new']"
-      >
-        <fa-icon icon="plus"></fa-icon>
-        <span esTranslate="eightStarApp.parkingAll.home.createLabel"> Create a new Parking All </span>
-      </button>
+          <button
+            id="jh-create-entity"
+            data-cy="entityCreateButton"
+            class="btn btn-light-primary me-3"
+            data-kt-menu-trigger="click"
+            data-kt-menu-placement="bottom-end"
+            [routerLink]="['/parking-all/new']"
+          >
+            <fa-icon icon="plus"></fa-icon>
+            <span esTranslate="eightStarApp.parkingAll.home.createLabel"> Create a new Parking All </span>
+          </button>
+        </div>
+      </div>
     </div>
-  </h2>
+    <div class="card-body py-3">
+      <es-alert-error></es-alert-error>
 
-  <es-alert-error></es-alert-error>
+      <es-alert></es-alert>
 
-  <es-alert></es-alert>
+      <div class="alert alert-warning" id="no-result" *ngIf="parkingAlls?.length === 0">
+        <span esTranslate="eightStarApp.parkingAll.home.notFound">No Parking Alls found</span>
+      </div>
 
-  <div class="alert alert-warning" id="no-result" *ngIf="parkingAlls?.length === 0">
-    <span esTranslate="eightStarApp.parkingAll.home.notFound">No Parking Alls found</span>
-  </div>
+      <!-- <div class="table-responsive table-entities" id="entities" *ngIf="parkingAlls && parkingAlls.length > 0">-->
+      <table class="table table-hover table-rounded align-middle table-row-dashed fs-6 gy-5" aria-describedby="page-heading">
+        <thead>
+          <tr
+            esSort
+            [(predicate)]="predicate"
+            [(ascending)]="ascending"
+            (sortChange)="navigateToWithComponentValues()"
+            class="text-start text-muted fw-bold fs-7 text-uppercase gs-0"
+          >
+            <th scope="col" esSortBy="id">
+              <div class="d-flex">
+                <span esTranslate="global.field.id">ID</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" esSortBy="name">
+              <div class="d-flex">
+                <span esTranslate="eightStarApp.parkingAll.name">Name</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" esSortBy="location.id">
+              <div class="d-flex">
+                <span esTranslate="eightStarApp.parkingAll.location">Location</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" esSortBy="hotel.id">
+              <div class="d-flex">
+                <span esTranslate="eightStarApp.parkingAll.hotel">Hotel</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-600 fw-semibold">
+          <tr *ngFor="let parkingAll of parkingAlls; trackBy: trackId" data-cy="entityTable">
+            <td>
+              <a [routerLink]="['/parking-all', parkingAll.id, 'view']">{{ parkingAll.id }}</a>
+            </td>
+            <td>
+              <a class="text-info" [routerLink]="['/parking-all', parkingAll.id, 'view']">{{ parkingAll.name }}</a>
+            </td>
+            <td>
+              <div *ngIf="parkingAll.location">
+                <a [routerLink]="['/location', parkingAll.location.id, 'view']">{{ parkingAll.location.id }}</a>
+              </div>
+            </td>
+            <td>
+              <div *ngIf="parkingAll.hotel">
+                <a [routerLink]="['/hotel', parkingAll.hotel.id, 'view']">{{ parkingAll.hotel.name }}</a>
+              </div>
+            </td>
+            <td class="text-end">
+              <!-- <div class="btn-group">
+                   <button
+                     type="submit"
+                     [routerLink]="['/parking-all', parkingAll.id, 'view']"
+                     class="btn btn-info btn-sm"
+                     data-cy="entityDetailsButton"
+                   >
+                     <fa-icon icon="eye"></fa-icon>
+                     <span class="d-none d-md-inline" esTranslate="entity.action.view">View</span>
+                   </button>
 
-  <div class="table-responsive table-entities" id="entities" *ngIf="parkingAlls && parkingAlls.length > 0">
-    <table class="table table-striped" aria-describedby="page-heading">
-      <thead>
-        <tr esSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
-          <th scope="col" esSortBy="id">
-            <div class="d-flex">
-              <span esTranslate="global.field.id">ID</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" esSortBy="name">
-            <div class="d-flex">
-              <span esTranslate="eightStarApp.parkingAll.name">Name</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" esSortBy="location.id">
-            <div class="d-flex">
-              <span esTranslate="eightStarApp.parkingAll.location">Location</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" esSortBy="hotel.id">
-            <div class="d-flex">
-              <span esTranslate="eightStarApp.parkingAll.hotel">Hotel</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let parkingAll of parkingAlls; trackBy: trackId" data-cy="entityTable">
-          <td>
-            <a [routerLink]="['/parking-all', parkingAll.id, 'view']">{{ parkingAll.id }}</a>
-          </td>
-          <td>{{ parkingAll.name }}</td>
-          <td>
-            <div *ngIf="parkingAll.location">
-              <a [routerLink]="['/location', parkingAll.location.id, 'view']">{{ parkingAll.location.id }}</a>
-            </div>
-          </td>
-          <td>
-            <div *ngIf="parkingAll.hotel">
-              <a [routerLink]="['/hotel', parkingAll.hotel.id, 'view']">{{ parkingAll.hotel.id }}</a>
-            </div>
-          </td>
-          <td class="text-end">
-            <div class="btn-group">
-              <button
-                type="submit"
-                [routerLink]="['/parking-all', parkingAll.id, 'view']"
-                class="btn btn-info btn-sm"
-                data-cy="entityDetailsButton"
-              >
-                <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline" esTranslate="entity.action.view">View</span>
-              </button>
+                   <button
+                     type="submit"
+                     [routerLink]="['/parking-all', parkingAll.id, 'edit']"
+                     class="btn btn-primary btn-sm"
+                     data-cy="entityEditButton"
+                   >
+                     <fa-icon icon="pencil-alt"></fa-icon>
+                     <span class="d-none d-md-inline" esTranslate="entity.action.edit">Edit</span>
+                   </button>
 
-              <button
-                type="submit"
-                [routerLink]="['/parking-all', parkingAll.id, 'edit']"
-                class="btn btn-primary btn-sm"
-                data-cy="entityEditButton"
-              >
-                <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline" esTranslate="entity.action.edit">Edit</span>
-              </button>
+                   <button type="submit" (click)="delete(parkingAll)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                     <fa-icon icon="times"></fa-icon>
+                     <span class="d-none d-md-inline" esTranslate="entity.action.delete">Delete</span>
+                   </button>
+                 </div>-->
 
-              <button type="submit" (click)="delete(parkingAll)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
-                <fa-icon icon="times"></fa-icon>
-                <span class="d-none d-md-inline" esTranslate="entity.action.delete">Delete</span>
-              </button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+              <div ngbDropdown>
+                <button type="button" class="btn btn-bg-light btn-color-primary" id="dropdownForm1" ngbDropdownToggle>
+                  <i class="bi bi-boxes fs-1x"></i> Actions
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownForm1">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col text-center">
+                        <div class="dropdown-divider"></div>
+                        <div class="btn-group-vertical">
+                          <button
+                            type="submit"
+                            [routerLink]="['/parking-all', parkingAll.id, 'view']"
+                            class="btn btn-info btn-sm"
+                            data-cy="entityDetailsButton"
+                          >
+                            <fa-icon icon="eye"></fa-icon>
+                            <span class="d-none d-md-inline" esTranslate="entity.action.view">View</span>
+                          </button>
+                          <div class="dropdown-divider"></div>
 
-  <div *ngIf="parkingAlls && parkingAlls.length > 0">
-    <div class="d-flex justify-content-center">
-      <es-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></es-item-count>
+                          <button
+                            type="submit"
+                            [routerLink]="['/parking-all', parkingAll.id, 'edit']"
+                            class="btn btn-primary btn-sm"
+                            data-cy="entityEditButton"
+                          >
+                            <fa-icon icon="pencil-alt"></fa-icon>
+                            <span class="d-none d-md-inline" esTranslate="entity.action.edit">Edit</span>
+                          </button>
+                          <div class="dropdown-divider"></div>
+
+                          <button type="submit" (click)="delete(parkingAll)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                            <fa-icon icon="times"></fa-icon>
+                            <span class="d-none d-md-inline" esTranslate="entity.action.delete">Delete</span>
+                          </button>
+                        </div>
+                      </div>
+                      <div class="dropdown-divider"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
-    <div class="d-flex justify-content-center">
-      <ngb-pagination
-        [collectionSize]="totalItems"
-        [page]="page"
-        [pageSize]="itemsPerPage"
-        [maxSize]="5"
-        [rotate]="true"
-        [boundaryLinks]="true"
-        (pageChange)="navigateToPage($event)"
-      ></ngb-pagination>
+    <div *ngIf="parkingAlls && parkingAlls.length > 0">
+      <div class="d-flex justify-content-center">
+        <es-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></es-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
     </div>
   </div>
 </div>

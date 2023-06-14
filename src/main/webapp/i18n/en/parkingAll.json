@@ -15,7 +15,7 @@
         "question": "Are you sure you want to delete Parking All {{ id }}?"
       },
       "detail": {
-        "title": "Parking All"
+        "title": "Parking detail"
       },
       "id": "ID",
       "name": "Name",

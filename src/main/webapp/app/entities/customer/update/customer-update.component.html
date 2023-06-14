@@ -1,126 +1,152 @@
-<div class="d-flex justify-content-center">
-  <div class="col-8">
-    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2 id="es-customer-heading" data-cy="CustomerCreateUpdateHeading" esTranslate="eightStarApp.customer.home.createOrEditLabel">
-        Create or edit a Customer
-      </h2>
-
-      <div>
-        <es-alert-error></es-alert-error>
-
-        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
-          <label class="form-label" esTranslate="global.field.id" for="field_id">ID</label>
-          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" esTranslate="eightStarApp.customer.customerId" for="field_customerId">Customer Id</label>
-          <input
-            type="number"
-            class="form-control"
-            name="customerId"
-            id="field_customerId"
-            data-cy="customerId"
-            formControlName="customerId"
-          />
-          <div *ngIf="editForm.get('customerId')!.invalid && (editForm.get('customerId')!.dirty || editForm.get('customerId')!.touched)">
-            <small
-              class="form-text text-danger"
-              *ngIf="editForm.get('customerId')?.errors?.required"
-              esTranslate="entity.validation.required"
-            >
-              This field is required.
-            </small>
-            <small
-              class="form-text text-danger"
-              [hidden]="!editForm.get('customerId')?.errors?.number"
-              esTranslate="entity.validation.number"
-            >
-              This field should be a number.
-            </small>
-          </div>
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" esTranslate="eightStarApp.customer.firstName" for="field_firstName">First Name</label>
-          <input type="text" class="form-control" name="firstName" id="field_firstName" data-cy="firstName" formControlName="firstName" />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" esTranslate="eightStarApp.customer.lastName" for="field_lastName">Last Name</label>
-          <input type="text" class="form-control" name="lastName" id="field_lastName" data-cy="lastName" formControlName="lastName" />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" esTranslate="eightStarApp.customer.email" for="field_email">Email</label>
-          <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" esTranslate="eightStarApp.customer.phoneNumber" for="field_phoneNumber">Phone Number</label>
-          <input
-            type="text"
-            class="form-control"
-            name="phoneNumber"
-            id="field_phoneNumber"
-            data-cy="phoneNumber"
-            formControlName="phoneNumber"
-          />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" esTranslate="eightStarApp.customer.streetAdress" for="field_streetAdress">Street Adress</label>
-          <input
-            type="text"
-            class="form-control"
-            name="streetAdress"
-            id="field_streetAdress"
-            data-cy="streetAdress"
-            formControlName="streetAdress"
-          />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" esTranslate="eightStarApp.customer.line1" for="field_line1">Line 1</label>
-          <input type="text" class="form-control" name="line1" id="field_line1" data-cy="line1" formControlName="line1" />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" esTranslate="eightStarApp.customer.line2" for="field_line2">Line 2</label>
-          <input type="text" class="form-control" name="line2" id="field_line2" data-cy="line2" formControlName="line2" />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" esTranslate="eightStarApp.customer.city" for="field_city">City</label>
-          <input type="text" class="form-control" name="city" id="field_city" data-cy="city" formControlName="city" />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" esTranslate="eightStarApp.customer.state" for="field_state">State</label>
-          <input type="text" class="form-control" name="state" id="field_state" data-cy="state" formControlName="state" />
-        </div>
-
-        <div class="row mb-3">
-          <label class="form-label" esTranslate="eightStarApp.customer.zipCode" for="field_zipCode">Zip Code</label>
-          <input type="number" class="form-control" name="zipCode" id="field_zipCode" data-cy="zipCode" formControlName="zipCode" />
-        </div>
-      </div>
-
-      <div>
-        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
-          <fa-icon icon="ban"></fa-icon>&nbsp;<span esTranslate="entity.action.cancel">Cancel</span>
-        </button>
-
-        <button
-          type="submit"
-          id="save-entity"
-          data-cy="entityCreateSaveButton"
-          [disabled]="editForm.invalid || isSaving"
-          class="btn btn-primary"
-        >
-          <fa-icon icon="save"></fa-icon>&nbsp;<span esTranslate="entity.action.save">Save</span>
-        </button>
-      </div>
-    </form>
+<!--begin::details View-->
+<div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
+  <!--begin::Card header-->
+  <div class="card-header cursor-pointer">
+    <!--begin::Card title-->
+    <div class="card-title m-0">
+      <h3 class="fw-bold m-0">Edit a Customer</h3>
+    </div>
   </div>
+  <!--begin::Card header-->
+  <!--begin::Card body-->
+  <div class="card-body">
+    <div class="d-flex justify-content-center">
+      <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+          <es-alert-error></es-alert-error>
+          <div>
+            <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+              <label class="form-label" esTranslate="global.field.id" for="field_id">ID</label>
+              <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+            </div>
+
+            <div class="row mb-3">
+              <label class="form-label" esTranslate="eightStarApp.customer.customerId" for="field_customerId">Customer Id</label>
+              <input
+                type="number"
+                class="form-control"
+                name="customerId"
+                id="field_customerId"
+                data-cy="customerId"
+                formControlName="customerId"
+              />
+              <div
+                *ngIf="editForm.get('customerId')!.invalid && (editForm.get('customerId')!.dirty || editForm.get('customerId')!.touched)"
+              >
+                <small
+                  class="form-text text-danger"
+                  *ngIf="editForm.get('customerId')?.errors?.required"
+                  esTranslate="entity.validation.required"
+                >
+                  This field is required.
+                </small>
+                <small
+                  class="form-text text-danger"
+                  [hidden]="!editForm.get('customerId')?.errors?.number"
+                  esTranslate="entity.validation.number"
+                >
+                  This field should be a number.
+                </small>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label class="form-label" esTranslate="eightStarApp.customer.firstName" for="field_firstName">First Name</label>
+              <input
+                type="text"
+                class="form-control"
+                name="firstName"
+                id="field_firstName"
+                data-cy="firstName"
+                formControlName="firstName"
+              />
+            </div>
+
+            <div class="row mb-3">
+              <label class="form-label" esTranslate="eightStarApp.customer.lastName" for="field_lastName">Last Name</label>
+              <input type="text" class="form-control" name="lastName" id="field_lastName" data-cy="lastName" formControlName="lastName" />
+            </div>
+
+            <div class="row mb-3">
+              <label class="form-label" esTranslate="eightStarApp.customer.email" for="field_email">Email</label>
+              <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
+            </div>
+
+            <div class="row mb-3">
+              <label class="form-label" esTranslate="eightStarApp.customer.phoneNumber" for="field_phoneNumber">Phone Number</label>
+              <input
+                type="text"
+                class="form-control"
+                name="phoneNumber"
+                id="field_phoneNumber"
+                data-cy="phoneNumber"
+                formControlName="phoneNumber"
+              />
+            </div>
+
+            <div class="row mb-3">
+              <label class="form-label" esTranslate="eightStarApp.customer.streetAdress" for="field_streetAdress">Street Adress</label>
+              <input
+                type="text"
+                class="form-control"
+                name="streetAdress"
+                id="field_streetAdress"
+                data-cy="streetAdress"
+                formControlName="streetAdress"
+              />
+            </div>
+
+            <div class="row mb-3">
+              <label class="form-label" esTranslate="eightStarApp.customer.line1" for="field_line1">Line 1</label>
+              <input type="text" class="form-control" name="line1" id="field_line1" data-cy="line1" formControlName="line1" />
+            </div>
+
+            <div class="row mb-3">
+              <label class="form-label" esTranslate="eightStarApp.customer.line2" for="field_line2">Line 2</label>
+              <input type="text" class="form-control" name="line2" id="field_line2" data-cy="line2" formControlName="line2" />
+            </div>
+
+            <div class="row mb-3">
+              <label class="form-label" esTranslate="eightStarApp.customer.city" for="field_city">City</label>
+              <input type="text" class="form-control" name="city" id="field_city" data-cy="city" formControlName="city" />
+            </div>
+
+            <div class="row mb-3">
+              <label class="form-label" esTranslate="eightStarApp.customer.state" for="field_state">State</label>
+              <input type="text" class="form-control" name="state" id="field_state" data-cy="state" formControlName="state" />
+            </div>
+
+            <div class="row mb-3">
+              <label class="form-label" esTranslate="eightStarApp.customer.zipCode" for="field_zipCode">Zip Code</label>
+              <input type="number" class="form-control" name="zipCode" id="field_zipCode" data-cy="zipCode" formControlName="zipCode" />
+            </div>
+          </div>
+
+          <div>
+            <button
+              type="button"
+              id="cancel-save"
+              data-cy="entityCreateCancelButton"
+              class="btn btn-sm btn-secondary align-self-center"
+              (click)="previousState()"
+            >
+              <fa-icon icon="ban"></fa-icon>&nbsp;<span esTranslate="entity.action.cancel">Cancel</span>
+            </button>
+
+            <button
+              type="submit"
+              id="save-entity"
+              data-cy="entityCreateSaveButton"
+              [disabled]="editForm.invalid || isSaving"
+              class="btn btn-sm btn-primary align-self-center"
+            >
+              <fa-icon icon="save"></fa-icon>&nbsp;<span esTranslate="entity.action.save">Save</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!--end::Card body-->
 </div>
+<!--end::details View-->

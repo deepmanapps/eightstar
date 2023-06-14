@@ -1,36 +1,71 @@
-<div class="d-flex justify-content-center">
-  <div class="col-8">
-    <div *ngIf="location">
-      <h2 data-cy="locationDetailsHeading"><span esTranslate="eightStarApp.location.detail.title">Location</span></h2>
-
-      <hr />
-
-      <es-alert-error></es-alert-error>
-
-      <es-alert></es-alert>
-
-      <dl class="row-md jh-entity-details">
-        <dt><span esTranslate="eightStarApp.location.id">Id</span></dt>
-        <dd>
-          <span>{{ location.id }}</span>
-        </dd>
-        <dt><span esTranslate="eightStarApp.location.longitude">Longitude</span></dt>
-        <dd>
-          <span>{{ location.longitude }}</span>
-        </dd>
-        <dt><span esTranslate="eightStarApp.location.latitude">Latitude</span></dt>
-        <dd>
-          <span>{{ location.latitude }}</span>
-        </dd>
-      </dl>
-
-      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
-        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span esTranslate="entity.action.back">Back</span>
-      </button>
-
-      <button type="button" [routerLink]="['/location', location.id, 'edit']" class="btn btn-primary">
-        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span esTranslate="entity.action.edit">Edit</span>
-      </button>
+<!--begin::details View-->
+<div class="card mb-5 mb-xl-10" id="kt_profile_details_view">
+  <!--begin::Card header-->
+  <div class="card-header cursor-pointer">
+    <!--begin::Card title-->
+    <div class="card-title m-0">
+      <h3 class="fw-bold m-0"><span esTranslate="eightStarApp.location.detail.title">Location</span></h3>
     </div>
+    <!--end::Card title-->
+    <!--begin::Action-->
+    <a [routerLink]="['/location', location.id, 'edit']" class="btn btn-sm btn-primary align-self-center"
+      ><fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span esTranslate="entity.action.edit">Edit</span></a
+    >
+    <!--end::Action-->
   </div>
+  <!--begin::Card header-->
+  <!--begin::Card body-->
+  <div class="card-body p-9">
+    <es-alert-error></es-alert-error>
+
+    <es-alert></es-alert>
+    <!--begin::Row-->
+    <div class="row mb-7">
+      <!--begin::Label-->
+      <label class="col-lg-4 fw-semibold text-muted"><span esTranslate="eightStarApp.location.id">Id</span></label>
+      <!--end::Label-->
+      <!--begin::Col-->
+      <div class="col-lg-8">
+        <span class="fw-bold fs-6 text-gray-800"
+          ><span>{{ location.id }}</span></span
+        >
+      </div>
+      <!--end::Col-->
+    </div>
+    <!--end::Row-->
+    <!--begin::Input group-->
+    <div class="row mb-7">
+      <!--begin::Label-->
+      <label class="col-lg-4 fw-semibold text-muted"><span esTranslate="eightStarApp.location.longitude">Longitude</span></label>
+      <!--end::Label-->
+      <!--begin::Col-->
+      <div class="col-lg-8 fv-row">
+        <span class="fw-semibold text-gray-800 fs-6"
+          ><span>{{ location.longitude }}</span></span
+        >
+      </div>
+      <!--end::Col-->
+    </div>
+    <!--end::Input group-->
+    <!--begin::Input group-->
+    <div class="row mb-7">
+      <!--begin::Label-->
+      <label class="col-lg-4 fw-semibold text-muted"><span esTranslate="eightStarApp.location.latitude">Latitude</span></label>
+      <!--end::Label-->
+      <!--begin::Col-->
+      <div class="col-lg-8">
+        <a class="fw-semibold fs-6 text-gray-800 text-hover-primary"
+          ><span>{{ location.latitude }}</span></a
+        >
+      </div>
+      <!--end::Col-->
+    </div>
+    <!--end::Input group-->
+
+    <button type="submit" (click)="previousState()" class="btn btn-sm btn-info align-self-center" data-cy="entityDetailsBackButton">
+      <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span esTranslate="entity.action.back">Back</span>
+    </button>
+  </div>
+  <!--end::Card body-->
 </div>
+<!--end::details View-->

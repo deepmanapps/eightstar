@@ -16,10 +16,10 @@ export interface IServiceRequest {
   guest?: boolean | null;
   quantity?: number | null;
   totalPrice?: number | null;
-  parkingAll?: Pick<IParkingAll, 'id'> | null;
-  deliveryRequestPlace?: Pick<IDeliveryRequestPlace, 'id'> | null;
-  services?: Pick<IServices, 'id'> | null;
-  checkIn?: Pick<ICheckIn, 'id'> | null;
+  parkingAll?: IParkingAll | null;
+  deliveryRequestPlace?: IDeliveryRequestPlace | null;
+  services?: IServices | null;
+  checkIn?: ICheckIn | null;
 }
 
 export type NewServiceRequest = Omit<IServiceRequest, 'id'> & { id: null };

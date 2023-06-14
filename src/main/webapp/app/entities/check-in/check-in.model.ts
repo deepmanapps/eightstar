@@ -18,9 +18,9 @@ export interface ICheckIn {
   adults?: number | null;
   children?: number | null;
   notes?: string | null;
-  checkOut?: Pick<ICheckOut, 'id'> | null;
-  hotel?: Pick<IHotel, 'id'> | null;
-  customer?: Pick<ICustomer, 'id'> | null;
+  checkOut?: ICheckOut | null;
+  hotel?: IHotel | null;
+  customer?: ICustomer | null;
 }
 
 export type NewCheckIn = Omit<ICheckIn, 'id'> & { id: null };

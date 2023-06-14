@@ -20,10 +20,12 @@ public interface HotelServicesMapper extends EntityMapper<HotelServicesDTO, Hote
     @Named("hotelId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
+    @Mapping(target = "name", source = "name")
     HotelDTO toDtoHotelId(Hotel hotel);
 
     @Named("servicesId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
+    @Mapping(target = "nom", source = "nom")
     ServicesDTO toDtoServicesId(Services services);
 }
