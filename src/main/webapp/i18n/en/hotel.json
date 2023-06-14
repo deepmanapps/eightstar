@@ -15,16 +15,17 @@
         "question": "Are you sure you want to delete Hotel {{ id }}?"
       },
       "detail": {
-        "title": "Hotel details"
+        "title": "Hotel"
       },
       "id": "ID",
       "hotelId": "Hotel Id",
       "name": "Name",
-      "description": "Hotel info",
+      "description": "Description",
       "adresse": "Adresse",
       "starsNumber": "Stars Number",
       "emergencyNumber": "Emergency Number",
       "location": "Location",
+      "user": "User",
       "checkIn": "Check In",
       "parkingAll": "Parking All",
       "hotelServices": "Hotel Services",

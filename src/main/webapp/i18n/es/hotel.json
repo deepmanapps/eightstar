@@ -25,6 +25,7 @@
       "starsNumber": "Stars Number",
       "emergencyNumber": "Emergency Number",
       "location": "Location",
+      "user": "User",
       "checkIn": "Check In",
       "parkingAll": "Parking All",
       "hotelServices": "Hotel Services",

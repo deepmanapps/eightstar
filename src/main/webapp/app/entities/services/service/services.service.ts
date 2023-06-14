@@ -5,13 +5,12 @@ import { Observable } from 'rxjs';
 import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { IServices, IServicesAll, NewServices } from '../services.model';
+import { IServices, NewServices } from '../services.model';
 
 export type PartialUpdateServices = Partial<IServices> & Pick<IServices, 'id'>;
 
 export type EntityResponseType = HttpResponse<IServices>;
 export type EntityArrayResponseType = HttpResponse<IServices[]>;
-export type EntityArrayResponseType2 = HttpResponse<IServicesAll[]>;
 
 @Injectable({ providedIn: 'root' })
 export class ServicesService {
@@ -38,11 +37,6 @@ export class ServicesService {
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http.get<IServices[]>(this.resourceUrl, { params: options, observe: 'response' });
-  }
-
-  query2(req?: any): Observable<EntityArrayResponseType2> {
-    const options = createRequestOption(req);
-    return this.http.get<IServicesAll[]>(this.resourceUrl, { params: options, observe: 'response' });
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {

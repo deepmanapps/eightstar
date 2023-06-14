@@ -1,0 +1,154 @@
+/**
+ * The Entity entity.
+ * @author A true hipster
+ */
+entity Hotel {
+    /** Minimum d'info sur l'hotel */
+    hotelId Long,
+    name String,
+    description String,
+    adresse String,
+    starsNumber Integer,
+    emergencyNumber Double
+}
+
+entity Location{
+    id Long,
+    longitude String,
+    latitude String
+}
+
+entity CheckIn{
+    identityPath String, //correlationId , référence de l'image
+    status Status, //A voir
+    depositAmount Double,
+    paymentMethod PaymentMethod,
+    arrivalDate Instant,
+    departureDate Instant,
+    roomType String,
+    smooking Boolean,
+    adults Integer,
+    children Integer,
+    notes String
+}
+
+entity Services{
+
+    id Long,
+    nom String,
+    description String
+
+}
+
+entity ServiceRequest{
+
+    requestDate Instant,
+    requestThruDate Instant, // limit date or LIKE VALLEY BOY resuested date
+    statusRequest RQStatus, // INPROGRESS statut par défaut (cas de transport)
+    rejecttReason String, // en cas de rejet, la raison
+    requestDescription String,// optionnelle pour des infos supplémentaires (cas de transport)
+    objectNumber String, // le cas de valley boy , numéro de la plaque
+    guest Boolean,
+    quantity Float,
+    totalPrice Float
+}
+
+entity ProductRequest{
+    productName String,
+    productUnitPrice Float,
+    productTotalPrice Float,
+    requestedQuantity Float
+}
+
+entity ParkingAll{
+    name String
+}
+
+entity DeliveryRequestPlace{
+    name String
+}
+
+
+
+
+entity Customer{
+
+    customerId Long required,
+    firstName String,
+    lastName String,
+    email String,
+    phoneNumber String,
+    streetAdress String,
+    Line1 String,
+    Line2 String,
+    city String,
+    state String,
+    zipCode Long
+}
+
+entity CheckOut{
+
+    roomClearance TextBlob,
+    customerReview TextBlob, // checkout satisfaction form
+    miniBarClearance TextBlob,
+    lateCheckOut Instant,
+    isLate Boolean,
+    isCollectedDepositAmount Boolean,
+    collectedAmount Double
+}
+
+entity HotelServices{
+    active Boolean,
+    forGuest Boolean, // indique qu'un guest peut prendre ce service, flase (service ne doit pas à la disposition du guest)
+    servicePrice Float
+    }
+
+enum PaymentMethod{
+    CCARD,CASH,BCHECK,EWALLET
+}
+
+enum RQStatus{
+    OK,NOK,INPROGRESS
+}
+
+
+enum Status{
+    CONFIRMED,CANCELLED,COMPLETED
+}
+
+/**
+ * One to many relationship.
+ */
+relationship OneToMany {
+    CheckIn to ServiceRequest
+    Hotel to CheckIn
+    Services{childService} to Services{parentService} // ceci résoudre le problème des services spécifiques légés
+    ServiceRequest to ProductRequest
+    Hotel to ParkingAll
+    Customer to CheckIn
+    Hotel to HotelServices
+    Services to HotelServices
+    Hotel to DeliveryRequestPlace
+
+}
+
+relationship ManyToOne {
+    ServiceRequest to Services
+
+}
+
+/**
+ * One to many relationship.
+ */
+relationship OneToOne {
+    Hotel to Location
+    ParkingAll to Location
+    ServiceRequest to ParkingAll
+    CheckIn to CheckOut
+    ServiceRequest to DeliveryRequestPlace
+    Hotel to User
+}
+
+service all with serviceImpl
+dto * with mapstruct
+paginate HotelServices,CheckOut,Customer,Hotel,Location,CheckIn,Services,ServiceRequest,ProductRequest,ParkingAll,DeliveryRequestPlace with pagination

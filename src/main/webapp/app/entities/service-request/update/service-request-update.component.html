@@ -153,7 +153,7 @@
               >
                 <option [ngValue]="null"></option>
                 <option [ngValue]="parkingAllOption" *ngFor="let parkingAllOption of parkingAllsCollection">
-                  {{ parkingAllOption.id }}
+                  {{ parkingAllOption.name }}
                 </option>
               </select>
             </div>
@@ -188,7 +188,7 @@
                 [compareWith]="compareServices"
               >
                 <option [ngValue]="null"></option>
-                <option [ngValue]="servicesOption" *ngFor="let servicesOption of servicesSharedCollection">{{ servicesOption.id }}</option>
+                <option [ngValue]="servicesOption" *ngFor="let servicesOption of servicesSharedCollection">{{ servicesOption.nom }}</option>
               </select>
             </div>
 

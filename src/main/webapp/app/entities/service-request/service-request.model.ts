@@ -17,7 +17,7 @@ export interface IServiceRequest {
   quantity?: number | null;
   totalPrice?: number | null;
   parkingAll?: IParkingAll | null;
-  deliveryRequestPlace?: IDeliveryRequestPlace | null;
+  deliveryRequestPlace?: Pick<IDeliveryRequestPlace, 'id'> | null;
   services?: IServices | null;
   checkIn?: ICheckIn | null;
 }

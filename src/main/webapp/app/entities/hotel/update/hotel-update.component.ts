@@ -9,6 +9,8 @@ import { IHotel } from '../hotel.model';
 import { HotelService } from '../service/hotel.service';
 import { ILocation } from 'app/entities/location/location.model';
 import { LocationService } from 'app/entities/location/service/location.service';
+import { IUser } from 'app/entities/user/user.model';
+import { UserService } from 'app/entities/user/user.service';
 
 @Component({
   selector: 'es-hotel-update',
@@ -19,6 +21,7 @@ export class HotelUpdateComponent implements OnInit {
   hotel: IHotel | null = null;
 
   locationsCollection: ILocation[] = [];
+  usersSharedCollection: IUser[] = [];
 
   editForm: HotelFormGroup = this.hotelFormService.createHotelFormGroup();
 
@@ -26,10 +29,13 @@ export class HotelUpdateComponent implements OnInit {
     protected hotelService: HotelService,
     protected hotelFormService: HotelFormService,
     protected locationService: LocationService,
+    protected userService: UserService,
     protected activatedRoute: ActivatedRoute
   ) {}
 
   compareLocation = (o1: ILocation | null, o2: ILocation | null): boolean => this.locationService.compareLocation(o1, o2);
+
+  compareUser = (o1: IUser | null, o2: IUser | null): boolean => this.userService.compareUser(o1, o2);
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ hotel }) => {
@@ -82,6 +88,7 @@ export class HotelUpdateComponent implements OnInit {
     this.hotelFormService.resetForm(this.editForm, hotel);
 
     this.locationsCollection = this.locationService.addLocationToCollectionIfMissing<ILocation>(this.locationsCollection, hotel.location);
+    this.usersSharedCollection = this.userService.addUserToCollectionIfMissing<IUser>(this.usersSharedCollection, hotel.user);
   }
 
   protected loadRelationshipsOptions(): void {
@@ -92,5 +99,11 @@ export class HotelUpdateComponent implements OnInit {
         map((locations: ILocation[]) => this.locationService.addLocationToCollectionIfMissing<ILocation>(locations, this.hotel?.location))
       )
       .subscribe((locations: ILocation[]) => (this.locationsCollection = locations));
+
+    this.userService
+      .query()
+      .pipe(map((res: HttpResponse<IUser[]>) => res.body ?? []))
+      .pipe(map((users: IUser[]) => this.userService.addUserToCollectionIfMissing<IUser>(users, this.hotel?.user)))
+      .subscribe((users: IUser[]) => (this.usersSharedCollection = users));
   }
 }

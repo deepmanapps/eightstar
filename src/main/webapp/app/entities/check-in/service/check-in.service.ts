@@ -28,6 +28,7 @@ export type EntityArrayResponseType = HttpResponse<ICheckIn[]>;
 @Injectable({ providedIn: 'root' })
 export class CheckInService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/check-ins');
+  protected resourceUrl2 = this.applicationConfigService.getEndpointFor('api/check-ins-user');
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
@@ -58,10 +59,10 @@ export class CheckInService {
       .pipe(map(res => this.convertResponseFromServer(res)));
   }
 
-  query(req?: any): Observable<EntityArrayResponseType> {
+  query(req?: any, login?: string): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http
-      .get<RestCheckIn[]>(this.resourceUrl, { params: options, observe: 'response' })
+      .get<RestCheckIn[]>(`${this.resourceUrl2}/${login}`, { params: options, observe: 'response' })
       .pipe(map(res => this.convertResponseArrayFromServer(res)));
   }
 

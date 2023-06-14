@@ -53,7 +53,6 @@ export class ServiceRequestUpdateComponent implements OnInit {
   compareCheckIn = (o1: ICheckIn | null, o2: ICheckIn | null): boolean => this.checkInService.compareCheckIn(o1, o2);
 
   ngOnInit(): void {
-    // @ts-ignore
     this.activatedRoute.data.subscribe(({ serviceRequest }) => {
       this.serviceRequest = serviceRequest;
       if (serviceRequest) {

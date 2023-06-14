@@ -151,6 +151,23 @@ public class CheckInResource {
     }
 
     /**
+     * {@code GET  /check-ins} : get all the checkIns.
+     *
+     * @param pageable the pagination information.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of checkIns in body.
+     */
+    @GetMapping("/check-ins-user/{id}")
+    public ResponseEntity<List<CheckInDTO>> getCheckInsUser(
+        @org.springdoc.api.annotations.ParameterObject Pageable pageable,
+        @PathVariable String id
+    ) {
+        log.debug("REST request to get a page of CheckIns");
+        Page<CheckInDTO> page = checkInService.findAllUser(id, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
      * {@code GET  /check-ins/:id} : get the "id" checkIn.
      *
      * @param id the id of the checkInDTO to retrieve.

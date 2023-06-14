@@ -41,6 +41,8 @@ public interface CheckInService {
      */
     Page<CheckInDTO> findAll(Pageable pageable);
 
+    Page<CheckInDTO> findAllUser(String userId, Pageable pageable);
+
     /**
      * Get the "id" checkIn.
      *

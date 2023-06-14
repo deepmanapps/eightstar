@@ -150,7 +150,7 @@
                 [compareWith]="compareHotel"
               >
                 <option [ngValue]="null"></option>
-                <option [ngValue]="hotelOption" *ngFor="let hotelOption of hotelsSharedCollection">{{ hotelOption.id }}</option>
+                <option [ngValue]="hotelOption" *ngFor="let hotelOption of hotelsSharedCollection">{{ hotelOption.name }}</option>
               </select>
             </div>
 
@@ -165,7 +165,9 @@
                 [compareWith]="compareCustomer"
               >
                 <option [ngValue]="null"></option>
-                <option [ngValue]="customerOption" *ngFor="let customerOption of customersSharedCollection">{{ customerOption.id }}</option>
+                <option [ngValue]="customerOption" *ngFor="let customerOption of customersSharedCollection">
+                  {{ customerOption.firstName }}
+                </option>
               </select>
             </div>
           </div>

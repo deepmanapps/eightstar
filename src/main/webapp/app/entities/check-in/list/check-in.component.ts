@@ -9,7 +9,11 @@ import { ICheckIn } from '../check-in.model';
 import { ITEMS_PER_PAGE, PAGE_HEADER, TOTAL_COUNT_RESPONSE_HEADER } from 'app/config/pagination.constants';
 import { ASC, DESC, SORT, ITEM_DELETED_EVENT, DEFAULT_SORT_DATA } from 'app/config/navigation.constants';
 import { EntityArrayResponseType, CheckInService } from '../service/check-in.service';
+import { UserManagementService } from '../../../admin/user-management/service/user-management.service';
 import { CheckInDeleteDialogComponent } from '../delete/check-in-delete-dialog.component';
+//import { Account } from '../../../core/auth/account.service';
+import { AccountService } from 'app/core/auth/account.service';
+import { Account } from 'app/core/auth/account.model';
 
 @Component({
   selector: 'es-check-in',
@@ -25,8 +29,9 @@ export class CheckInComponent implements OnInit {
   itemsPerPage = ITEMS_PER_PAGE;
   totalItems = 0;
   page = 1;
-
+  myAccount?: Account;
   constructor(
+    protected accountService: AccountService,
     protected checkInService: CheckInService,
     protected activatedRoute: ActivatedRoute,
     public router: Router,
@@ -37,6 +42,13 @@ export class CheckInComponent implements OnInit {
 
   ngOnInit(): void {
     this.load();
+    this.accountService.identity().subscribe(account => (this.myAccount = account));
+    console.log(this.myAccount);
+  }
+
+  getCurrentUser(): String {
+    this.accountService.identity().subscribe(account => (this.myAccount = account));
+    return this.myAccount.login;
   }
 
   delete(checkIn: ICheckIn): void {
@@ -74,7 +86,7 @@ export class CheckInComponent implements OnInit {
   protected loadFromBackendWithRouteInformations(): Observable<EntityArrayResponseType> {
     return combineLatest([this.activatedRoute.queryParamMap, this.activatedRoute.data]).pipe(
       tap(([params, data]) => this.fillComponentAttributeFromRoute(params, data)),
-      switchMap(() => this.queryBackend(this.page, this.predicate, this.ascending))
+      switchMap(() => this.queryBackend(this.page, this.predicate, this.ascending, this.myAccount.login))
     );
   }
 
@@ -100,7 +112,7 @@ export class CheckInComponent implements OnInit {
     this.totalItems = Number(headers.get(TOTAL_COUNT_RESPONSE_HEADER));
   }
 
-  protected queryBackend(page?: number, predicate?: string, ascending?: boolean): Observable<EntityArrayResponseType> {
+  protected queryBackend(page?: number, predicate?: string, ascending?: boolean, login?: string): Observable<EntityArrayResponseType> {
     this.isLoading = true;
     const pageToLoad: number = page ?? 1;
     const queryObject = {
@@ -108,7 +120,7 @@ export class CheckInComponent implements OnInit {
       size: this.itemsPerPage,
       sort: this.getSortQueryParam(predicate, ascending),
     };
-    return this.checkInService.query(queryObject).pipe(tap(() => (this.isLoading = false)));
+    return this.checkInService.query(queryObject, login).pipe(tap(() => (this.isLoading = false)));
   }
 
   protected handleNavigation(page = this.page, predicate?: string, ascending?: boolean): void {

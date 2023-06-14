@@ -56,17 +56,17 @@
             class="text-start text-muted fw-bold fs-7 text-uppercase gs-0"
           >
             <!--   <th scope="col" esSortBy="id">
-            <div class="d-flex">
-              <span esTranslate="global.field.id">ID</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>
-          <th scope="col" esSortBy="hotelId">
-            <div class="d-flex">
-              <span esTranslate="eightStarApp.hotel.hotelId">Hotel Id</span>
-              <fa-icon class="p-1" icon="sort"></fa-icon>
-            </div>
-          </th>-->
+          <div class="d-flex">
+            <span esTranslate="global.field.id">ID</span>
+            <fa-icon class="p-1" icon="sort"></fa-icon>
+          </div>
+        </th>
+        <th scope="col" esSortBy="hotelId">
+          <div class="d-flex">
+            <span esTranslate="eightStarApp.hotel.hotelId">Hotel Id</span>
+            <fa-icon class="p-1" icon="sort"></fa-icon>
+          </div>
+        </th>-->
             <th scope="col" esSortBy="name">
               <div class="d-flex">
                 <span esTranslate="eightStarApp.hotel.name">Name</span>
@@ -86,17 +86,17 @@
               </div>
             </th>
             <!-- <th scope="col" esSortBy="starsNumber">
-             <div class="d-flex">
-               <span esTranslate="eightStarApp.hotel.starsNumber">Stars Number</span>
-               <fa-icon class="p-1" icon="sort"></fa-icon>
-             </div>
-           </th>
-           <th scope="col" esSortBy="emergencyNumber">
-             <div class="d-flex">
-               <span esTranslate="eightStarApp.hotel.emergencyNumber">Emergency Number</span>
-               <fa-icon class="p-1" icon="sort"></fa-icon>
-             </div>
-           </th>-->
+           <div class="d-flex">
+             <span esTranslate="eightStarApp.hotel.starsNumber">Stars Number</span>
+             <fa-icon class="p-1" icon="sort"></fa-icon>
+           </div>
+         </th>
+         <th scope="col" esSortBy="emergencyNumber">
+           <div class="d-flex">
+             <span esTranslate="eightStarApp.hotel.emergencyNumber">Emergency Number</span>
+             <fa-icon class="p-1" icon="sort"></fa-icon>
+           </div>
+         </th>-->
             <th scope="col" esSortBy="location.id">
               <div class="d-flex">
                 <span esTranslate="eightStarApp.hotel.location">Location</span>
@@ -112,11 +112,11 @@
               <a class="text-info" [routerLink]="['/hotel', hotel.id, 'view']">{{ hotel.name }}</a>
             </td>
             <!--<td>{{ hotel.hotelId }}</td>
-          <td>{{ hotel.name }}</td>-->
+        <td>{{ hotel.name }}</td>-->
             <td>{{ hotel.description }}</td>
             <td>{{ hotel.adresse }}</td>
             <!-- <td>{{ hotel.starsNumber }}</td>
-          <td>{{ hotel.emergencyNumber }}</td>-->
+        <td>{{ hotel.emergencyNumber }}</td>-->
             <td>
               <div *ngIf="hotel.location">
                 <a [routerLink]="['/location', hotel.location.id, 'view']">{{ hotel.location.id }}</a>

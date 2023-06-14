@@ -27,7 +27,10 @@ public class DeliveryRequestPlace implements Serializable {
     private ServiceRequest serviceRequest;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "location", "checkIns", "parkingAlls", "hotelServices", "deliveryRequestPlaces" }, allowSetters = true)
+    @JsonIgnoreProperties(
+        value = { "location", "user", "checkIns", "parkingAlls", "hotelServices", "deliveryRequestPlaces" },
+        allowSetters = true
+    )
     private Hotel hotel;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

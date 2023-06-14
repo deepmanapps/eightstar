@@ -27,6 +27,7 @@ describe('Hotel Form Service', () => {
             starsNumber: expect.any(Object),
             emergencyNumber: expect.any(Object),
             location: expect.any(Object),
+            user: expect.any(Object),
           })
         );
       });
@@ -44,6 +45,7 @@ describe('Hotel Form Service', () => {
             starsNumber: expect.any(Object),
             emergencyNumber: expect.any(Object),
             location: expect.any(Object),
+            user: expect.any(Object),
           })
         );
       });

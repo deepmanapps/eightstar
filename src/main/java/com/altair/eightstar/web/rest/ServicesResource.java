@@ -147,12 +147,17 @@ public class ServicesResource {
         log.debug("REST request to get a page of Services");
         Page<ServicesDTO> page = servicesService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-        System.out.println(page.getContent());
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
-    @GetMapping("/servicesAll")
-    public ResponseEntity<List<ServicesDTO>> getAllServicesAll(@org.springdoc.api.annotations.ParameterObject Pageable pageable) {
+    /**
+     * {@code GET  /services} : get all the services.
+     *
+     * @param pageable the pagination information.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of services in body.
+     */
+    @GetMapping("/servicesUser")
+    public ResponseEntity<List<ServicesDTO>> getAllServicesWithUser(@org.springdoc.api.annotations.ParameterObject Pageable pageable) {
         log.debug("REST request to get a page of Services");
         Page<ServicesDTO> page = servicesService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);

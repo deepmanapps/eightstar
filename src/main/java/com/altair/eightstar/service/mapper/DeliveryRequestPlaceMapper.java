@@ -17,5 +17,6 @@ public interface DeliveryRequestPlaceMapper extends EntityMapper<DeliveryRequest
     @Named("hotelId")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", source = "id")
+    @Mapping(target = "name", source = "name")
     HotelDTO toDtoHotelId(Hotel hotel);
 }

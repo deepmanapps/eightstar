@@ -25,7 +25,10 @@ public class Location implements Serializable {
     @Column(name = "latitude")
     private String latitude;
 
-    @JsonIgnoreProperties(value = { "location", "checkIns", "parkingAlls", "hotelServices", "deliveryRequestPlaces" }, allowSetters = true)
+    @JsonIgnoreProperties(
+        value = { "location", "user", "checkIns", "parkingAlls", "hotelServices", "deliveryRequestPlaces" },
+        allowSetters = true
+    )
     @OneToOne(mappedBy = "location")
     private Hotel hotel;
 

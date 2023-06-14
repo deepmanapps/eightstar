@@ -29,7 +29,10 @@ public class HotelServices implements Serializable {
     private Float servicePrice;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "location", "checkIns", "parkingAlls", "hotelServices", "deliveryRequestPlaces" }, allowSetters = true)
+    @JsonIgnoreProperties(
+        value = { "location", "user", "checkIns", "parkingAlls", "hotelServices", "deliveryRequestPlaces" },
+        allowSetters = true
+    )
     private Hotel hotel;
 
     @ManyToOne

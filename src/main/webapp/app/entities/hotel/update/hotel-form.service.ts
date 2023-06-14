@@ -25,6 +25,7 @@ type HotelFormGroupContent = {
   starsNumber: FormControl<IHotel['starsNumber']>;
   emergencyNumber: FormControl<IHotel['emergencyNumber']>;
   location: FormControl<IHotel['location']>;
+  user: FormControl<IHotel['user']>;
 };
 
 export type HotelFormGroup = FormGroup<HotelFormGroupContent>;
@@ -51,6 +52,7 @@ export class HotelFormService {
       starsNumber: new FormControl(hotelRawValue.starsNumber),
       emergencyNumber: new FormControl(hotelRawValue.emergencyNumber),
       location: new FormControl(hotelRawValue.location),
+      user: new FormControl(hotelRawValue.user),
     });
   }
 

@@ -58,7 +58,7 @@
         >
           <th scope="col" esSortBy="id">
             <div class="d-flex">
-              <span esTranslate="eightStarApp.serviceRequest.home.id">ID</span>
+              <span>ID</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
@@ -81,11 +81,11 @@
             </div>
           </th>
           <!--<th scope="col" esSortBy="rejecttReason">
-             <div class="d-flex">
-               <span esTranslate="eightStarApp.serviceRequest.rejecttReason">Rejectt Reason</span>
-               <fa-icon class="p-1" icon="sort"></fa-icon>
-             </div>
-           </th>-->
+           <div class="d-flex">
+             <span esTranslate="eightStarApp.serviceRequest.rejecttReason">Rejectt Reason</span>
+             <fa-icon class="p-1" icon="sort"></fa-icon>
+           </div>
+         </th>-->
           <th scope="col" esSortBy="requestDescription">
             <div class="d-flex">
               <span esTranslate="eightStarApp.serviceRequest.requestDescription">Request Description</span>
@@ -191,31 +191,31 @@
           </td>
           <td class="text-end">
             <!--<div class="btn-group">
-               <button
-                 type="submit"
-                 [routerLink]="['/service-request', serviceRequest.id, 'view']"
-                 class="btn btn-info btn-sm"
-                 data-cy="entityDetailsButton"
-               >
-                 <fa-icon icon="eye"></fa-icon>
-                 <span class="d-none d-md-inline" esTranslate="entity.action.view">View</span>
-               </button>
+             <button
+               type="submit"
+               [routerLink]="['/service-request', serviceRequest.id, 'view']"
+               class="btn btn-info btn-sm"
+               data-cy="entityDetailsButton"
+             >
+               <fa-icon icon="eye"></fa-icon>
+               <span class="d-none d-md-inline" esTranslate="entity.action.view">View</span>
+             </button>
 
-               <button
-                 type="submit"
-                 [routerLink]="['/service-request', serviceRequest.id, 'edit']"
-                 class="btn btn-primary btn-sm"
-                 data-cy="entityEditButton"
-               >
-                 <fa-icon icon="pencil-alt"></fa-icon>
-                 <span class="d-none d-md-inline" esTranslate="entity.action.edit">Edit</span>
-               </button>
+             <button
+               type="submit"
+               [routerLink]="['/service-request', serviceRequest.id, 'edit']"
+               class="btn btn-primary btn-sm"
+               data-cy="entityEditButton"
+             >
+               <fa-icon icon="pencil-alt"></fa-icon>
+               <span class="d-none d-md-inline" esTranslate="entity.action.edit">Edit</span>
+             </button>
 
-               <button type="submit" (click)="delete(serviceRequest)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
-                 <fa-icon icon="times"></fa-icon>
-                 <span class="d-none d-md-inline" esTranslate="entity.action.delete">Delete</span>
-               </button>
-             </div>-->
+             <button type="submit" (click)="delete(serviceRequest)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+               <fa-icon icon="times"></fa-icon>
+               <span class="d-none d-md-inline" esTranslate="entity.action.delete">Delete</span>
+             </button>
+           </div>-->
 
             <div ngbDropdown>
               <button type="button" class="btn btn-bg-light btn-color-primary" id="dropdownForm1" ngbDropdownToggle>

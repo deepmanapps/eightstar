@@ -70,6 +70,11 @@ public class CheckInServiceImpl implements CheckInService {
     }
 
     @Override
+    public Page<CheckInDTO> findAllUser(String userId, Pageable pageable) {
+        return checkInRepository.getCheckInsWithUser(userId, pageable).map(checkInMapper::toDto);
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public Optional<CheckInDTO> findOne(Long id) {
         log.debug("Request to get CheckIn : {}", id);

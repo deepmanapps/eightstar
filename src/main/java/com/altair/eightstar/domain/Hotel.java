@@ -47,6 +47,10 @@ public class Hotel implements Serializable {
     @JoinColumn(unique = true)
     private Location location;
 
+    @OneToOne
+    @JoinColumn(unique = true)
+    private User user;
+
     @OneToMany(mappedBy = "hotel")
     @JsonIgnoreProperties(value = { "checkOut", "serviceRequests", "hotel", "customer" }, allowSetters = true)
     private Set<CheckIn> checkIns = new HashSet<>();
@@ -166,6 +170,19 @@ public class Hotel implements Serializable {
 
     public Hotel location(Location location) {
         this.setLocation(location);
+        return this;
+    }
+
+    public User getUser() {
+        return this.user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Hotel user(User user) {
+        this.setUser(user);
         return this;
     }
 

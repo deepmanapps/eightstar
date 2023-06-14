@@ -13,5 +13,11 @@
                                  constraintName="fk_hotel__location_id"
                                  referencedColumnNames="id"
                                  referencedTableName="location"/>
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="hotel"
+                                 constraintName="fk_hotel__user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="es_user"/>
     </changeSet>
 </databaseChangeLog>

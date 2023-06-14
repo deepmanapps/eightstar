@@ -14,9 +14,7 @@ public interface ServicesMapper extends EntityMapper<ServicesDTO, Services> {
 
     @Named("servicesId")
     @BeanMapping(ignoreByDefault = true)
-    @Mapping(target = "nom", source = "nom")
     @Mapping(target = "id", source = "id")
-    @Mapping(target = "description", source = "description")
-    @Mapping(target = "parentService", source = "parentService")
+    @Mapping(target = "nom", source = "nom")
     ServicesDTO toDtoServicesId(Services services);
 }

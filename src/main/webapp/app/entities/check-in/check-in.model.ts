@@ -18,7 +18,7 @@ export interface ICheckIn {
   adults?: number | null;
   children?: number | null;
   notes?: string | null;
-  checkOut?: ICheckOut | null;
+  checkOut?: Pick<ICheckOut, 'id'> | null;
   hotel?: IHotel | null;
   customer?: ICustomer | null;
 }

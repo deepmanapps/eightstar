@@ -12,6 +12,9 @@ import { IHotel } from '../hotel.model';
 import { ILocation } from 'app/entities/location/location.model';
 import { LocationService } from 'app/entities/location/service/location.service';
 
+import { IUser } from 'app/entities/user/user.model';
+import { UserService } from 'app/entities/user/user.service';
+
 import { HotelUpdateComponent } from './hotel-update.component';
 
 describe('Hotel Management Update Component', () => {
@@ -21,6 +24,7 @@ describe('Hotel Management Update Component', () => {
   let hotelFormService: HotelFormService;
   let hotelService: HotelService;
   let locationService: LocationService;
+  let userService: UserService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -44,6 +48,7 @@ describe('Hotel Management Update Component', () => {
     hotelFormService = TestBed.inject(HotelFormService);
     hotelService = TestBed.inject(HotelService);
     locationService = TestBed.inject(LocationService);
+    userService = TestBed.inject(UserService);
 
     comp = fixture.componentInstance;
   });
@@ -67,15 +72,40 @@ describe('Hotel Management Update Component', () => {
       expect(comp.locationsCollection).toEqual(expectedCollection);
     });
 
+    it('Should call User query and add missing value', () => {
+      const hotel: IHotel = { id: 456 };
+      const user: IUser = { id: 75402 };
+      hotel.user = user;
+
+      const userCollection: IUser[] = [{ id: 39802 }];
+      jest.spyOn(userService, 'query').mockReturnValue(of(new HttpResponse({ body: userCollection })));
+      const additionalUsers = [user];
+      const expectedCollection: IUser[] = [...additionalUsers, ...userCollection];
+      jest.spyOn(userService, 'addUserToCollectionIfMissing').mockReturnValue(expectedCollection);
+
+      activatedRoute.data = of({ hotel });
+      comp.ngOnInit();
+
+      expect(userService.query).toHaveBeenCalled();
+      expect(userService.addUserToCollectionIfMissing).toHaveBeenCalledWith(
+        userCollection,
+        ...additionalUsers.map(expect.objectContaining)
+      );
+      expect(comp.usersSharedCollection).toEqual(expectedCollection);
+    });
+
     it('Should update editForm', () => {
       const hotel: IHotel = { id: 456 };
       const location: ILocation = { id: 8058 };
       hotel.location = location;
+      const user: IUser = { id: 14482 };
+      hotel.user = user;
 
       activatedRoute.data = of({ hotel });
       comp.ngOnInit();
 
       expect(comp.locationsCollection).toContain(location);
+      expect(comp.usersSharedCollection).toContain(user);
       expect(comp.hotel).toEqual(hotel);
     });
   });
@@ -156,6 +186,16 @@ describe('Hotel Management Update Component', () => {
         jest.spyOn(locationService, 'compareLocation');
         comp.compareLocation(entity, entity2);
         expect(locationService.compareLocation).toHaveBeenCalledWith(entity, entity2);
+      });
+    });
+
+    describe('compareUser', () => {
+      it('Should forward to userService', () => {
+        const entity = { id: 123 };
+        const entity2 = { id: 456 };
+        jest.spyOn(userService, 'compareUser');
+        comp.compareUser(entity, entity2);
+        expect(userService.compareUser).toHaveBeenCalledWith(entity, entity2);
       });
     });
   });

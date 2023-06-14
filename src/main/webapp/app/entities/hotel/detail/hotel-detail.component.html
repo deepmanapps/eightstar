@@ -116,6 +116,22 @@
       <!--begin::Label-->
     </div>
     <!--end::Input group-->
+    <!--begin::Input group-->
+    <div class="row mb-10">
+      <!--begin::Label-->
+      <label class="col-lg-4 fw-semibold text-muted"><span esTranslate="eightStarApp.hotel.user">User</span></label>
+      <!--begin::Label-->
+      <!--begin::Label-->
+      <div class="col-lg-8">
+        <span class="fw-semibold fs-6 text-gray-800"
+          ><div *ngIf="hotel.location">
+            <a [routerLink]="['/admin/user-management', hotel.user.login, 'view']">{{ hotel.user?.login }}</a>
+          </div></span
+        >
+      </div>
+      <!--begin::Label-->
+    </div>
+    <!--end::Input group-->
     <button type="submit" (click)="previousState()" class="btn btn-sm btn-info align-self-center" data-cy="entityDetailsBackButton">
       <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span esTranslate="entity.action.back">Back</span>
     </button>
